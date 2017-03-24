@@ -1,0 +1,4 @@
+<?
+define("IS_CORE_CLI", TRUE);
+@require __DIR__. '/../../../../skytells';
+exit;

@@ -1,0 +1,14 @@
+{
+    "name": "skytells/framework",
+    "description": "Skytells Framework is a free and open source framework for PHP.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dr. Hazem Ali",
+            "email": "hazem@skytells.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

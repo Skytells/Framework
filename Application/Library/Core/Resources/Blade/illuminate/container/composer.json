@@ -1,0 +1,34 @@
+{
+    "name": "illuminate/container",
+    "description": "The Illuminate Container package.",
+    "license": "MIT",
+    "homepage": "https://Skytells.com",
+    "support": {
+        "issues": "https://github.com/Skytells/framework/issues",
+        "source": "https://github.com/Skytells/framework"
+    },
+    "authors": [
+        {
+            "name": "Taylor Otwell",
+            "email": "taylor@Skytells.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/contracts": "5.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Illuminate\\Container\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.4-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,42 @@
+<?php
+/**
+ * Skytells PHP Framework --------------------------------------------------*
+ * @category   Web Development ( Programming )
+ * @package    Skytells PHP Framework
+ * @version 2.1.0
+ * @license Freeware
+ * @copyright  2007-2017 Skytells, Inc. All rights reserved.
+ * @license    https://www.skytells.net/us/terms  Freeware.
+ * @author Dr. Hazem Ali ( fb.com/Haz4m )
+ * @see The Framework's changelog to be always up to date.
+ */
+   define("IS_CORE_CLI", TRUE);
+   define('BASEPATH', __DIR__);
+   require(__DIR__."/Application/Library/Core/Units/Console.Boot.php");
+   require(__DIR__."/Application/Global.php");
+   //Kernel::Import('Console.Boot.php');
+   use ConsoleKit\Console,
+       ConsoleKit\Command,
+       ConsoleKit\Colors,
+       ConsoleKit\Utils,
+       ConsoleKit\Widgets\Dialog,
+       ConsoleKit\Widgets\ProgressBar;
+
+       $files = glob(__DIR__.'/Application/Library/Core/Resources/ConsoleKit/Seeds/*.php');
+
+       if (count($files) > 0){
+         foreach($files as $file) {
+           require_once $file;
+         }
+       }
+
+    $CLI = new Console();
+
+    require(__DIR__."/Application/Misc/Config/CLI.php");
+
+    global $_CLI_COMMANDS;
+    foreach ($_CLI_COMMANDS as $Key => $value) {
+    $CLI->addCommand($value, $Key); // alternative when using a closure
+    }
+
+    $CLI->run();
