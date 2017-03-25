@@ -117,7 +117,8 @@
    color:orange;
    }
    DevToolsfooter {
-   position: absolute;
+
+   position: fixed;
    left: 0;
    right: 0;
    bottom: 0;
@@ -132,7 +133,10 @@
    font-size: 12px;
    }
    .DevToolsfTab {
-   position: absolute;
+
+
+   position: fixed;
+
    left: 0;
    bottom: 0;
    padding: 0.5rem 1.7rem;
@@ -145,9 +149,13 @@
    cursor: pointer;
    }
    .DevToolsfTab.active {
+
+     position: fixed;
+     padding: 0.5rem 1.7rem;
+     background-color: #fafafa;
      bottom: 114px;
       height: 10px;
-   z-index: 4;
+   z-index: 9994;
    padding: 0.9rem 2rem;
 
    }
@@ -159,6 +167,8 @@
    padding: 1.0rem;
    padding-left: 1px;
    padding-top:3px;
+   position: fixed;
+
    display:inline-block;
    -webkit-transition: max-height 0.2s;
    transition: max-height 0.2s;
@@ -389,7 +399,15 @@
       }
    </script>
 </DevToolsfooter>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+if(typeof jQuery == 'undefined'){
+        document.write('<script type="text/javascript" src="<?= SITEBASE; ?>/Application/Library/System/js/jquery-1.7.1.min.js"></'+'script>');
+  }
+
+</script>
+
+
 <script>
    jQuery(function($){
        $('.DevToolsfTab').on('click', function(){
