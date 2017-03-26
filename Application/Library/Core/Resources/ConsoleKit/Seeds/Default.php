@@ -9,6 +9,7 @@ global $console;
 Kernel::addCLICommand("init", "init");
 Kernel::addCLICommand("install", "install");
 Kernel::addCLICommand("version", "version");
+Kernel::addCLICommand("cf", "cf");
 /**
  * @method Seeds Starts here
  */
@@ -17,9 +18,9 @@ Kernel::addCLICommand("version", "version");
 
 
     if ($options["help"] == true){
-      $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --getpkg option used for getting Skytells packages");
+      $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --getpkg option used for getting Skytells packages\n cf --dir To analyze your code.");
     }else{
-      $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --help for displying Help! this is help");
+      $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --help for displying Help!");
     }
     $box->write();
   }
@@ -73,4 +74,30 @@ Kernel::addCLICommand("version", "version");
 
       }
     }
+  }
+
+
+  function cf($args, $options, $console) {
+    echo $options[1];
+    if (!isset($options["dir"])){
+      $l = Colors::colorize('CANNOT USE THIS METHOD WITHOUT --dir OPTION', 'red');
+          $console->writeln($l);
+      exit;
+    }
+    if (!empty($options["target"]) && !empty($options["max-size"])){
+    echo system("php " . CORE_RESOURCES_DIR ."Analysis/bin/phpcf " . $options["dir"] ." --target=". $options["target"]." --max-size=". $options["max-size"]);
+    exit;
+    }
+
+    if (!empty($options["target"])){
+    echo system("php " . CORE_RESOURCES_DIR ."Analysis/bin/phpcf " . $options["dir"] ." --target=". $options["target"]);
+    exit;
+    }
+
+    if (!empty($options["max-size"])){
+    echo system("php " . CORE_RESOURCES_DIR ."Analysis/bin/phpcf " . $options["dir"] ." --max-size=". $options["max-size"]);
+    exit;
+    }
+    echo system("php " . CORE_RESOURCES_DIR ."Analysis/bin/phpcf " . $options["dir"]);
+
   }

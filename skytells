@@ -13,8 +13,9 @@
    define("IS_CORE_CLI", TRUE);
    define('BASEPATH', __DIR__);
    require(__DIR__."/Application/Library/Core/Units/Console.Boot.php");
+   require(__DIR__."/Application/Library/Core/Resources/Analysis/autoload.php");
    require(__DIR__."/Application/Global.php");
-   //Kernel::Import('Console.Boot.php');
+
    use ConsoleKit\Console,
        ConsoleKit\Command,
        ConsoleKit\Colors,

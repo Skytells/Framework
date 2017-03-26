@@ -68,11 +68,11 @@ Class Viewer extends Controller
           }
 
 
-        if (Contains($File, ".ui.php")) {
+        if (Contains($File, ".".TEMPLATE_FILE_EXTENSION.".php")) {
           if (strtolower(TEMPLATE_ENGINE) == "oxygen") {
-          Kernel::Import('Blade');
-          $filename = str_replace(".ui.php", "", $File);
-          $blade = new BladeInstance(VW_DIR, CACHE_DIR."/Views/");
+          Kernel::Import('Oxygen');
+          $filename = str_replace(".".TEMPLATE_FILE_EXTENSION.".php", "", $File);
+          $blade = new OxygenInstance(VW_DIR, CACHE_DIR."/Views/");
 
           global $lang;
           $TParses = array_merge($lang, $Parses);

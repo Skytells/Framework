@@ -21,3 +21,11 @@
   * The Default Template Engine is Oxygen  ----------*/
 
   $Settings["TEMPLATE_ENGINE"] = "Oxygen"; // Warning (Case-Sensitive)
+
+
+  /**
+   * @var TEMPLATE_FILE_EXTENSION : Here you can change the default extention
+   * for template files, this option is (ui) by default.
+   * PLEASE DO NOT USE (.) OR (.PHP) WITH THE EXTENTION.
+   */
+  $Settings["TEMPLATE_FILE_EXTENSION"] = "ui";

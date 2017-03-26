@@ -8,31 +8,31 @@ use Illuminate\View\View;
 /**
  * Standalone class for generating text using blade templates.
  */
-class Blade
+class Oxygen
 {
     /**
-     * @var BladeInstance $instance The internal cache of the BladeInstance to only instantiate it once
+     * @var OxygenInstance $instance The internal cache of the OxygenInstance to only instantiate it once
      */
     protected static $instance;
 
 
     /**
-     * Set the BladeInstance object to use.
+     * Set the OxygenInstance object to use.
      *
-     * @param BladeInstance $instance The instance to use
+     * @param OxygenInstance $instance The instance to use
      *
      * @return void
      */
-    public static function setInstance(BladeInstance $instance)
+    public static function setInstance(OxygenInstance $instance)
     {
         static::$instance = $instance;
     }
 
 
     /**
-     * Get the BladeInstance object.
+     * Get the OxygenInstance object.
      *
-     * @return BladeInstance
+     * @return OxygenInstance
      */
     public static function getInstance()
     {
@@ -43,7 +43,7 @@ class Blade
                 throw new \RuntimeException("Unable to locate the root directory: {$path}");
             }
 
-            static::$instance = new BladeInstance("{$path}/views", "{$path}/cache/views");
+            static::$instance = new OxygenInstance("{$path}/views", "{$path}/cache/views");
         }
 
         return static::$instance;
@@ -51,7 +51,7 @@ class Blade
 
 
     /**
-     * Allow all the methods of BladeInstance to be called.
+     * Allow all the methods of OxygenInstance to be called.
      *
      * @param string $name The name of the method to run
      * @param array $arguments The parameters to pass to the method

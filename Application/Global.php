@@ -31,7 +31,7 @@
 
 
     require __DIR__."/Library/Constants.php";
-
+    require_once("Library/Functions/Exceptions.php");
     if (IS_CORE_CLI == FALSE) {
     //define('TEMPLATES_DIR',MAINDIR . 'Templates/');
     $lang = array();
@@ -55,33 +55,34 @@
           \php_error\reportErrors();
       }
 
-    }
-  }
-}
-    require_once("Library/Autoloader.php");
-    require_once("Library/Functions/Core.php");
-    require_once("Library/Functions/Exceptions.php");
-    DefSettings();
-    $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
-    define('SITEBASE', $protocol.BASE_URL."/");
-    //LoadFunctions();
-    if (INTELLISENSE_DEBUGGER === FALSE){
-    set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
-        // error was suppressed with the @-operator
+    }else{
+      set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
         if (0 === error_reporting()) {
             return false;
         }
-        $_Content = file_get_contents(SYS_VIEWS."html/debug_log.html");
-        $_Content = str_replace("{MSG}", $errstr, $_Content);
-        $_Content = str_replace("{ERR_LINE}", $errline, $_Content);
-        $_Content = str_replace("{ERR_NO}", $errno, $_Content);
-        $_Content = str_replace("{ERR_FILE}", $errfile, $_Content);
+          $_Content = file_get_contents(SYS_VIEWS."html/debug_log.html");
+          $_Content = str_replace("{MSG}", $errstr, $_Content);
+          $_Content = str_replace("{ERR_LINE}", $errline, $_Content);
+          $_Content = str_replace("{ERR_NO}", $errno, $_Content);
+          $_Content = str_replace("{ERR_FILE}", $errfile, $_Content);
 
-        exit($_Content);
-        throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-    });
-    set_exception_handler("default_exception_handler");
+          exit($_Content);
+          throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+      });
+      set_exception_handler("default_exception_handler");
+
+    }
   }
+}
+
+    require_once("Library/Autoloader.php");
+    require_once("Library/Functions/Core.php");
+
+    DefSettings();
+    $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
+    define('SITEBASE', $protocol.BASE_URL."/");
+
+
     global $_SESSION;
     $_SESSION["DEV_LOADED_PAGES"] = array();
     $_SESSION["DEV_LOADED_CONTROLLERS"] = array();
@@ -101,7 +102,7 @@
     static $_CONSOLE_OUTPUT   = array();
     static $_FILES_AUTOLOADED = array();
     static $_CLI_COMMANDS = array();
-    static $_FRAMEWORK_VER = "2.1.0 Beta";
+    static $_FRAMEWORK_VER = "2.1.0";
     $db = ($Settings["USE_SQL"]) ? new mysqli($DBCONFIG["DB_HOST"], $DBCONFIG["DB_USER"], $DBCONFIG["DB_PASS"], $DBCONFIG["DB_NAME"]) : false;
 
 
@@ -119,11 +120,7 @@
 
       // For Debugging, We can print the output.
       $_AUTOLOADED = Autoloader();
-      // print array of class autoload paths:
-      //  print_r($_AUTOLOADED);
 
-      // -----------------------------------
 
     $Core = new  Controller();
       $Core->Init();
-      global $router;

@@ -164,20 +164,6 @@
               $this->Debugger = $debugger;
                 $this->CheckCoreRequirements();
                 $this->checkExtentions();
-                if (INTELLISENSE_DEBUGGER === FALSE){
-                set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
-                    // error was suppressed with the @-operator
-                    if (0 === error_reporting()) {
-                        return false;
-                    }
-                    $this->Debugger->ShowError($errno, $errstr, $errfile, $errline, $errcontext);
-                    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-                });
-              }
-
-
-
-
 
 
             //  if (USE_SQL) { $this->Database = new Database(); }

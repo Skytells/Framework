@@ -15,7 +15,7 @@ use Illuminate\View\View;
 /**
  * Standalone class for generating text using blade templates.
  */
-class BladeInstance implements FactoryContract
+class OxygenInstance implements FactoryContract
 {
     /**
      * @var string $path The default path for views.
@@ -84,7 +84,7 @@ class BladeInstance implements FactoryContract
 
             $blade = new BladeCompiler(new Filesystem, $this->cache);
 
-            Blade::registerDirectives($blade);
+            Oxygen::registerDirectives($blade);
 
             return new CompilerEngine($blade);
         });

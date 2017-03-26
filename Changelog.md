@@ -2,18 +2,8 @@
 ## Changelog
 Please READ this changelog before performing the update on your current Framework Version.
 
-## Versions
-- 1.4.0 ( This Version | Stable )
-- 1.3.2
-- 1.3.1
-- 1.3.0
-- 1.2.2
-- 1.2.1
-- 1.2.0
-- 1.0.1 [ Beta ]
-- 1.0.0 [ Beta ]
 
-In order to update the your Framework Version from ( 1.0.* 1.2.* ) to ( 1.3.0 ) you're subject to read the following doc.
+In order to update the your Framework Version from ( 1.0.* 1.2.* 2.0.0 ) to ( The Current Version ) you're subject to read the following doc.
 - This update has a brand new features and improvments.
 - This update is not beta.
 
@@ -23,7 +13,7 @@ Each Version of this Framework may require new modules or extensions to be avail
 - Server
     - If localhost ( Please install Ampps or AppServ )
 - PHP
-    - Version 5.5 or Newer
+    - Version 5.6 or Newer
     - Tokenizer ( PHP Module )
 - Apache
     - Mode_Rewrite ( Apache Module )
@@ -61,7 +51,7 @@ Each Version of this Framework may require new modules or extensions to be avail
 
 Each change between versions will be shown here.
 
-### Version 1.4.0
+### Version 2.1.0
 
 Global Updates :
   * Firewall Whitelisted URLs Feature Added.
@@ -87,9 +77,7 @@ Core :
 
 
 
-#### Changes from version 1.3.2 to 1.4.0
-
-Before performing an update from 1.3.2 to 1.4.0, Please take a look of the changes in this release.
+#### Changes
 
 FILES & FOLDERS :
   * New Settings folder - (Application/Misc/Config)
@@ -107,5 +95,5 @@ THINGS TO DO :
 Using your browser or Git.
 
 ```sh
- $git clone https://github.com/DrHazemAli/Skytells-PHP-Framework.git
+ $ git clone https://github.com/Skytells/Framework.git
 ```
