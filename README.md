@@ -6,8 +6,8 @@ Skytells Framework is an Application Development Framework - a toolkit - for peo
 Powered by : Skytells, Inc.
 
 ![Inch-CI](https://inch-ci.org/assets/badge-example-b71f9e833318f66f64b3f23877113051.svg)  [![Build Status](https://travis-ci.org/dwyl/esta.svg?branch=master)](https://travis-ci.org/) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Skytells/Framework/issues) 
-![NSP Status](https://nodesecurity.io/orgs/dwyl/projects/1047e39b-0d4a-45ff-af65-c04afc41fc20/badge) [![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/dwyl/hapi-auth-jwt2.svg?maxAge=2592000)]
-[![Dependency Status](https://david-dm.org/dwyl/esta.svg)]
+![NSP Status](https://nodesecurity.io/orgs/dwyl/projects/1047e39b-0d4a-45ff-af65-c04afc41fc20/badge) ![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/dwyl/hapi-auth-jwt2.svg?maxAge=2592000)
+![Dependency Status](https://david-dm.org/dwyl/esta.svg)
 
 ## Important
 
