@@ -18,48 +18,48 @@ Also, Please see the ( Framework Manual ) to learn how to use it.
 
 ## Features!
 
-  - Fast, Powerful and Easy to use!
-  - URLs Routing ( Supports Multiqueries URLs )
-  - Built-in Very Useful Functions ( up to date )
-  - Built-in Ready HTML5 ( 404, 505, 403 ) Pages.
-  - MySQL(i) Support ( Objective & Static )
-  - Social Plugins Support  ( Facebook Login )
-  - Smart Debugger & Console ( DevMode )
-  - Development Tools ( For Debugging )
-  - Multi-Languages Support
-  - IntelliSense Debugging Console
-  - Advanced ( MVC ) - ( MVHC ) Support.
-  - Super-fast Template Engine
-  - GZIP Module ( For Ultra-fast Performance )
-  - Super great libraries
-  - Powerful Engines for DB, etc.
-  - Built-in Advanced Firewall
-    - SQL Injection Protection
-    - XSS Protection
-    - Local & Remote File Include Protection
-    - CSRF Tokens ( Forms Protection )
-    - Session & Cookies Protection
-    - Functions & Classes Protection
-    - SQL Queries Protection
-    - DDoS Attacks Protection
-  - Caching Support.
-  - Modules System
-  - URLs Router
-  - Powerful performance
-  - Debugger & Development Tools
-  - 290+ Features..
+- Fast, Powerful and Easy to use!
+- URLs Routing ( Supports Multiqueries URLs )
+- Built-in Very Useful Functions ( up to date )
+- Built-in Ready HTML5 ( 404, 505, 403 ) Pages.
+- MySQL(i) Support ( Objective & Static )
+- Social Plugins Support  ( Facebook Login )
+- Smart Debugger & Console ( DevMode )
+- Development Tools ( For Debugging )
+- Multi-Languages Support
+- IntelliSense Debugging Console
+- Advanced ( MVC ) - ( MVHC ) Support.
+- Super-fast Template Engine
+- GZIP Module ( For Ultra-fast Performance )
+- Super great libraries
+- Powerful Engines for DB, etc.
+- Built-in Advanced Firewall
+- SQL Injection Protection
+- XSS Protection
+- Local & Remote File Include Protection
+- CSRF Tokens ( Forms Protection )
+- Session & Cookies Protection
+- Functions & Classes Protection
+- SQL Queries Protection
+- DDoS Attacks Protection
+- Caching Support.
+- Modules System
+- URLs Router
+- Powerful performance
+- Debugger & Development Tools
+- 290+ Features..
 
 ### Requirements
 
 Each Version of this Framework may require a new modules or extensions to be available on your server.
 
 - Server
-    - If localhost ( Please install Ampps or AppServ )
+- If localhost ( Please install Ampps or AppServ )
 - PHP
-    - Version 5.6 or Newer
-    - Tokenizer ( PHP Module )
+- Version 5.6 or Newer
+- Tokenizer ( PHP Module )
 - Apache
-    - Mode_Rewrite ( Apache Module )
+- Mode_Rewrite ( Apache Module )
 
 ### Installation
 The Installation is too easy!
@@ -68,7 +68,7 @@ The Installation is too easy!
 Using your browser or Git.
 
 ```sh
- $ git clone https://github.com/Skytells/Framework.git
+$ git clone https://github.com/Skytells/Framework.git
 ```
 
 ##### Configuring Framework.
