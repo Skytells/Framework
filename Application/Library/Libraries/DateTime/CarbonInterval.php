@@ -1,5 +1,5 @@
 <?php
-
+namespace Skytells\Components\DateTime;
 /**
  * A simple API extension for DateInterval.
  * The implementation provides helpers to handle weeks but only days are saved.
@@ -15,38 +15,38 @@
  * @property-read int $dayzExcludeWeeks Total days remaining in the final week of the current instance (days % 7).
  * @property-read int $daysExcludeWeeks alias of dayzExcludeWeeks
  *
- * @method static IDateTimeInterval years($years = 1) Create instance specifying a number of years.
- * @method static IDateTimeInterval year($years = 1) Alias for years()
- * @method static IDateTimeInterval months($months = 1) Create instance specifying a number of months.
- * @method static IDateTimeInterval month($months = 1) Alias for months()
- * @method static IDateTimeInterval weeks($weeks = 1) Create instance specifying a number of weeks.
- * @method static IDateTimeInterval week($weeks = 1) Alias for weeks()
- * @method static IDateTimeInterval days($days = 1) Create instance specifying a number of days.
- * @method static IDateTimeInterval dayz($days = 1) Alias for days()
- * @method static IDateTimeInterval day($days = 1) Alias for days()
- * @method static IDateTimeInterval hours($hours = 1) Create instance specifying a number of hours.
- * @method static IDateTimeInterval hour($hours = 1) Alias for hours()
- * @method static IDateTimeInterval minutes($minutes = 1) Create instance specifying a number of minutes.
- * @method static IDateTimeInterval minute($minutes = 1) Alias for minutes()
- * @method static IDateTimeInterval seconds($seconds = 1) Create instance specifying a number of seconds.
- * @method static IDateTimeInterval second($seconds = 1) Alias for seconds()
- * @method IDateTimeInterval years() years($years = 1) Set the years portion of the current interval.
- * @method IDateTimeInterval year() year($years = 1) Alias for years().
- * @method IDateTimeInterval months() months($months = 1) Set the months portion of the current interval.
- * @method IDateTimeInterval month() month($months = 1) Alias for months().
- * @method IDateTimeInterval weeks() weeks($weeks = 1) Set the weeks portion of the current interval.  Will overwrite dayz value.
- * @method IDateTimeInterval week() week($weeks = 1) Alias for weeks().
- * @method IDateTimeInterval days() days($days = 1) Set the days portion of the current interval.
- * @method IDateTimeInterval dayz() dayz($days = 1) Alias for days().
- * @method IDateTimeInterval day() day($days = 1) Alias for days().
- * @method IDateTimeInterval hours() hours($hours = 1) Set the hours portion of the current interval.
- * @method IDateTimeInterval hour() hour($hours = 1) Alias for hours().
- * @method IDateTimeInterval minutes() minutes($minutes = 1) Set the minutes portion of the current interval.
- * @method IDateTimeInterval minute() minute($minutes = 1) Alias for minutes().
- * @method IDateTimeInterval seconds() seconds($seconds = 1) Set the seconds portion of the current interval.
- * @method IDateTimeInterval second() second($seconds = 1) Alias for seconds().
+ * @method static CarbonInterval years($years = 1) Create instance specifying a number of years.
+ * @method static CarbonInterval year($years = 1) Alias for years()
+ * @method static CarbonInterval months($months = 1) Create instance specifying a number of months.
+ * @method static CarbonInterval month($months = 1) Alias for months()
+ * @method static CarbonInterval weeks($weeks = 1) Create instance specifying a number of weeks.
+ * @method static CarbonInterval week($weeks = 1) Alias for weeks()
+ * @method static CarbonInterval days($days = 1) Create instance specifying a number of days.
+ * @method static CarbonInterval dayz($days = 1) Alias for days()
+ * @method static CarbonInterval day($days = 1) Alias for days()
+ * @method static CarbonInterval hours($hours = 1) Create instance specifying a number of hours.
+ * @method static CarbonInterval hour($hours = 1) Alias for hours()
+ * @method static CarbonInterval minutes($minutes = 1) Create instance specifying a number of minutes.
+ * @method static CarbonInterval minute($minutes = 1) Alias for minutes()
+ * @method static CarbonInterval seconds($seconds = 1) Create instance specifying a number of seconds.
+ * @method static CarbonInterval second($seconds = 1) Alias for seconds()
+ * @method CarbonInterval years() years($years = 1) Set the years portion of the current interval.
+ * @method CarbonInterval year() year($years = 1) Alias for years().
+ * @method CarbonInterval months() months($months = 1) Set the months portion of the current interval.
+ * @method CarbonInterval month() month($months = 1) Alias for months().
+ * @method CarbonInterval weeks() weeks($weeks = 1) Set the weeks portion of the current interval.  Will overwrite dayz value.
+ * @method CarbonInterval week() week($weeks = 1) Alias for weeks().
+ * @method CarbonInterval days() days($days = 1) Set the days portion of the current interval.
+ * @method CarbonInterval dayz() dayz($days = 1) Alias for days().
+ * @method CarbonInterval day() day($days = 1) Alias for days().
+ * @method CarbonInterval hours() hours($hours = 1) Set the hours portion of the current interval.
+ * @method CarbonInterval hour() hour($hours = 1) Alias for hours().
+ * @method CarbonInterval minutes() minutes($minutes = 1) Set the minutes portion of the current interval.
+ * @method CarbonInterval minute() minute($minutes = 1) Alias for minutes().
+ * @method CarbonInterval seconds() seconds($seconds = 1) Set the seconds portion of the current interval.
+ * @method CarbonInterval second() second($seconds = 1) Alias for seconds().
  */
-class IDateTimeInterval extends DateInterval
+class CarbonInterval extends \DateInterval
 {
     /**
      * Interval spec period designators
@@ -90,7 +90,7 @@ class IDateTimeInterval extends DateInterval
     ///////////////////////////////////////////////////////////////////
 
     /**
-     * Create a new IDateTimeInterval instance.
+     * Create a new CarbonInterval instance.
      *
      * @param int $years
      * @param int $months
@@ -108,7 +108,7 @@ class IDateTimeInterval extends DateInterval
         $spec .= $months > 0 ? $months.static::PERIOD_MONTHS : '';
 
         $specDays = 0;
-        $specDays += $weeks > 0 ? $weeks * IDateTime::DAYS_PER_WEEK : 0;
+        $specDays += $weeks > 0 ? $weeks * Carbon::DAYS_PER_WEEK : 0;
         $specDays += $days > 0 ? $days : 0;
 
         $spec .= $specDays > 0 ? $specDays.static::PERIOD_DAYS : '';
@@ -129,10 +129,10 @@ class IDateTimeInterval extends DateInterval
     }
 
     /**
-     * Create a new IDateTimeInterval instance from specific values.
+     * Create a new CarbonInterval instance from specific values.
      * This is an alias for the constructor that allows better fluent
-     * syntax as it allows you to do IDateTimeInterval::create(1)->fn() rather than
-     * (new IDateTimeInterval(1))->fn().
+     * syntax as it allows you to do CarbonInterval::create(1)->fn() rather than
+     * (new CarbonInterval(1))->fn().
      *
      * @param int $years
      * @param int $months
@@ -150,7 +150,7 @@ class IDateTimeInterval extends DateInterval
     }
 
     /**
-     * Provide static helpers to create instances.  Allows IDateTimeInterval::years(3).
+     * Provide static helpers to create instances.  Allows CarbonInterval::years(3).
      *
      * Note: This is done using the magic method to allow static and instance methods to
      *       have the same names.
@@ -197,7 +197,7 @@ class IDateTimeInterval extends DateInterval
     }
 
     /**
-     * Create a IDateTimeInterval instance from a DateInterval one.  Can not instance
+     * Create a CarbonInterval instance from a DateInterval one.  Can not instance
      * DateInterval objects created from DateTime::diff() as you can't externally
      * set the $days field.
      *
@@ -292,7 +292,7 @@ class IDateTimeInterval extends DateInterval
     ///////////////////////////////////////////////////////////////////
 
     /**
-     * Get a part of the IDateTimeInterval object
+     * Get a part of the CarbonInterval object
      *
      * @param string $name
      *
@@ -322,11 +322,11 @@ class IDateTimeInterval extends DateInterval
                 return $this->s;
 
             case 'weeks':
-                return (int) floor($this->d / IDateTime::DAYS_PER_WEEK);
+                return (int) floor($this->d / Carbon::DAYS_PER_WEEK);
 
             case 'daysExcludeWeeks':
             case 'dayzExcludeWeeks':
-                return $this->d % IDateTime::DAYS_PER_WEEK;
+                return $this->d % Carbon::DAYS_PER_WEEK;
 
             default:
                 throw new InvalidArgumentException(sprintf("Unknown getter '%s'", $name));
@@ -334,7 +334,7 @@ class IDateTimeInterval extends DateInterval
     }
 
     /**
-     * Set a part of the IDateTimeInterval object
+     * Set a part of the CarbonInterval object
      *
      * @param string $name
      * @param int    $val
@@ -353,7 +353,7 @@ class IDateTimeInterval extends DateInterval
                 break;
 
             case 'weeks':
-                $this->d = $val * IDateTime::DAYS_PER_WEEK;
+                $this->d = $val * Carbon::DAYS_PER_WEEK;
                 break;
 
             case 'dayz':
@@ -384,13 +384,13 @@ class IDateTimeInterval extends DateInterval
      */
     public function weeksAndDays($weeks, $days)
     {
-        $this->dayz = ($weeks * IDateTime::DAYS_PER_WEEK) + $days;
+        $this->dayz = ($weeks * Carbon::DAYS_PER_WEEK) + $days;
 
         return $this;
     }
 
     /**
-     * Allow fluent calls on the setters... IDateTimeInterval::years(3)->months(5)->day().
+     * Allow fluent calls on the setters... CarbonInterval::years(3)->months(5)->day().
      *
      * Note: This is done using the magic method to allow static and instance methods to
      *       have the same names.
@@ -417,7 +417,7 @@ class IDateTimeInterval extends DateInterval
 
             case 'weeks':
             case 'week':
-                $this->dayz = $arg * IDateTime::DAYS_PER_WEEK;
+                $this->dayz = $arg * Carbon::DAYS_PER_WEEK;
                 break;
 
             case 'days':

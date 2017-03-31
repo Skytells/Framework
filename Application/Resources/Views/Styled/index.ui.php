@@ -92,7 +92,7 @@
                     <a href="https://developers.skytells.net/framework/overview">Overview</a>
                     <a href="https://developers.skytells.net/framework/Packages">Packages</a>
                     <a href="https://developers.skytells.net/framework/License">License</a>
-                    <a href="https://github.com/DrHazemAli/Skytells-PHP-Framework">GitHub</a>
+                    <a href="https://github.com/Skytells/Framework">GitHub</a>
                 </div>
 
 								<br>

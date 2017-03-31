@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.1.0
+ * @version 2.2.0
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -13,7 +13,13 @@
 
   Class Home extends Controller
     {
-
+      /**
+       * @method __construct function.
+       * Classes which have a constructor method call this method on each newly-created object,
+       * so it is suitable for any initialization that the object may need before it is used.
+       * @var PLEASE USE ( parent::__construct ) for each controller in your project.
+       * This is important in order to Initialize the Framework System.
+       */
       public function __construct($ref = "Core")
         {
           // This is important to include in __construct function for each controller you create.
@@ -22,41 +28,21 @@
 
           // Log some text in the Console.
           //$this->console->log("HomeController has been called from ". $ref);
-
-          // --------- TemplateEngine Library ( Optional )
-          /* Please refere to the Docs. to learn how to use it.
-           * $this->load->engine("TemplateEngine");
-
-
-          // --------- Sessions Handling.
-          /*
-          Session::set("testSessionKey", "Value");
-          $Val = Session::get("testSessionKey");
-          if ($Val != false)
-          {
-            // If Session Key is exist.
-            t($Val);
-          }
-          */
-
-          // --------- Reporting Controller.
-          /* $this->Runtime = new Runtime();
-          $this->Runtime->ReportController(__FILE__); */
-
-
-          
-          // -------- Displaying Index when Controller being called.
-
         }
 
       /**
        * @method Index function.
        * This function cannot be deleted.
+       * This function is responsible for rendering the view, Each controller must
+       * have this public function.
        */
       public function index()
         {
-          // Access this function from ( http://www.domain.com/{Framework_FOLDER}/HomeController/index/ )
-        $this->view->render("index.php");
+          // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )
+          // Full URL : http://www.domain.com/{Framework_FOLDER}/Home/index/
+
+          // Rendering the View.
+          $this->view->render("index.php");
 
         }
 

@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.1.0
+ * @version 2.2.0
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -165,8 +165,6 @@
                 $this->CheckCoreRequirements();
                 $this->checkExtentions();
 
-
-            //  if (USE_SQL) { $this->Database = new Database(); }
               $this->Mail = new Mail();
 
               $this->Encryption = new Encryption(ENC_METHOD, ENC_KEY, ENC_IV, ENC_SALT);
@@ -235,7 +233,7 @@
             }
               $files = scandir(FN_DIR);
               foreach($files as $file) {
-                if (strpos($file, '.php') !== false && strpos($file, 'Core.php') !== true && strpos($file, 'Controller.php') !== true)
+                if (strpos($file, '.php') !== false)
                   {
 
                     require_once(FN_DIR.$file);
@@ -256,15 +254,14 @@
             }
             $files = scandir(CL_DIR);
             foreach($files as $file) {
-              if (strpos($file, '.php') !== false)
-                {
+
                   $class_name = str_replace(".php", "", $file);
-                  $Excluded = array('controller.php', 'core.php');
-                  if (!in_array(strtolower($file), $Excluded) && !class_exists($class_name)){
+
+                  if (!class_exists($class_name)){
                   set_include_path(CL_DIR);
                   spl_autoload_extensions('.php');
                   spl_autoload($class_name);
-                }
+
                   //include_once(CL_DIR.$file);
 
                 }
@@ -278,7 +275,7 @@
         */
         public function LoadControllers($Excluded = array(""))
           {
-              $path = BASEPATH.'/Application/Controllers/';
+              $path = BASEPATH.'/Application/Resources/Controllers/';
               if (!is_dir($path)){
                 throw new Exception("The Controllers Folder does not exist in the main Application dir.", 90);
                 return false;
@@ -349,7 +346,7 @@
           {
             try
             {
-                  $path = BASEPATH.'/Application/Controllers/';
+                  $path = BASEPATH.'/Application/Resources/Controllers/';
               if (!file_exists($path."$File.php"))
                 {
                   exit($this->Debugger->ShowError("90", "Unable to load the Controller [$File] from [".CONTROLLERS_DIR."]"));
@@ -638,4 +635,6 @@
 
           }
 
+
+          function __destruct() { }
     }

@@ -1,27 +1,19 @@
 # Skytells Framework for PHP
-Version 2.1.0 ( Current Version )
+Version 2.2.0 ( Current Version )
 
-<br>
-Skytells Framework is a free and open source framework for PHP.
-<br>
+Skytells Framework is an Application Development Framework - a toolkit - for people who build web sites using PHP. Its goal is to enable you to develop projects much faster than you could if you were writing code from scratch, by providing a rich set of libraries for commonly needed tasks, as well as a simple interface and logical structure to access these libraries. Skytells Framework lets you creatively focus on your project by minimizing the amount of code needed for a given task.
+
 Powered by : Skytells, Inc.
+
+![Inch-CI](https://inch-ci.org/assets/badge-example-b71f9e833318f66f64b3f23877113051.svg)  [![Build Status](https://travis-ci.org/dwyl/esta.svg?branch=master)](https://travis-ci.org/) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Skytells/Framework/issues)
+![NSP Status](https://nodesecurity.io/orgs/dwyl/projects/1047e39b-0d4a-45ff-af65-c04afc41fc20/badge) ![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/dwyl/hapi-auth-jwt2.svg?maxAge=2592000)
+![Dependency Status](https://david-dm.org/dwyl/esta.svg)
 
 ## Important
 
 Please refer to the Changelog.md for any future updates.
 Also, Please see the ( Framework Manual ) to learn how to use it.
 
-#### Versions
-- 2.1.0 ( This Version | Beta )
-- 2.0.0 ( Stable )
-- 1.4.0 ( Stable )
-- 1.3.2
-- 1.3.1
-- 1.3.0
-- 1.2.2
-- 1.2.1
-- 1.0.1
-- 1.0.0
 
 
 ## Features!

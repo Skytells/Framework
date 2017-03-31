@@ -1,5 +1,11 @@
 <?php
-
+namespace Skytells\Components\DateTime;
+use Carbon\Exceptions\InvalidDateException;
+use Closure;
+use DatePeriod;
+use DateTime;
+use DateTimeZone;
+use InvalidArgumentException;
 
 /**
  * A simple API extension for DateTime
@@ -30,7 +36,7 @@
  * @property-read string $timezoneName
  * @property-read string $tzName
  */
-class IDateTime extends DateTime
+class Carbon extends \DateTime
 {
     /**
      * The day constants.
@@ -130,9 +136,9 @@ class IDateTime extends DateTime
     );
 
     /**
-     * A test IDateTime instance to be returned when now instances are created.
+     * A test Carbon instance to be returned when now instances are created.
      *
-     * @var \IDateTime\IDateTime
+     * @var \Carbon\Carbon
      */
     protected static $testNow;
 
@@ -240,7 +246,7 @@ class IDateTime extends DateTime
     ///////////////////////////////////////////////////////////////////
 
     /**
-     * Create a new IDateTime instance.
+     * Create a new Carbon instance.
      *
      * Please see the testing aids section (specifically static::setTestNow())
      * for more on the possibility of this constructor returning a test instance.
@@ -272,7 +278,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance from a DateTime one.
+     * Create a Carbon instance from a DateTime one.
      *
      * @param \DateTime $dt
      *
@@ -288,11 +294,11 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance from a string.
+     * Create a Carbon instance from a string.
      *
      * This is an alias for the constructor that allows better fluent syntax
-     * as it allows you to do IDateTime::parse('Monday next week')->fn() rather
-     * than (new IDateTime('Monday next week'))->fn().
+     * as it allows you to do Carbon::parse('Monday next week')->fn() rather
+     * than (new Carbon('Monday next week'))->fn().
      *
      * @param string|null               $time
      * @param \DateTimeZone|string|null $tz
@@ -305,7 +311,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Get a IDateTime instance for the current date and time.
+     * Get a Carbon instance for the current date and time.
      *
      * @param \DateTimeZone|string|null $tz
      *
@@ -317,7 +323,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance for today.
+     * Create a Carbon instance for today.
      *
      * @param \DateTimeZone|string|null $tz
      *
@@ -329,7 +335,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance for tomorrow.
+     * Create a Carbon instance for tomorrow.
      *
      * @param \DateTimeZone|string|null $tz
      *
@@ -341,7 +347,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance for yesterday.
+     * Create a Carbon instance for yesterday.
      *
      * @param \DateTimeZone|string|null $tz
      *
@@ -353,7 +359,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance for the greatest supported date.
+     * Create a Carbon instance for the greatest supported date.
      *
      * @return static
      */
@@ -369,7 +375,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance for the lowest supported date.
+     * Create a Carbon instance for the lowest supported date.
      *
      * @return static
      */
@@ -385,7 +391,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a new IDateTime instance from a specific date and time.
+     * Create a new Carbon instance from a specific date and time.
      *
      * If any of $year, $month or $day are set to null their now() values will
      * be used.
@@ -452,7 +458,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a new safe IDateTime instance from a specific date and time.
+     * Create a new safe Carbon instance from a specific date and time.
      *
      * If any of $year, $month or $day are set to null their now() values will
      * be used.
@@ -474,7 +480,7 @@ class IDateTime extends DateTime
      * @param int|null                  $second
      * @param \DateTimeZone|string|null $tz
      *
-     * @throws \IDateTime\Exceptions\InvalidDateException
+     * @throws \Carbon\Exceptions\InvalidDateException
      *
      * @return static
      */
@@ -505,7 +511,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance from just a date. The time portion is set to now.
+     * Create a Carbon instance from just a date. The time portion is set to now.
      *
      * @param int|null                  $year
      * @param int|null                  $month
@@ -520,7 +526,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance from just a time. The date portion is set to today.
+     * Create a Carbon instance from just a time. The date portion is set to today.
      *
      * @param int|null                  $hour
      * @param int|null                  $minute
@@ -535,7 +541,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance from a specific format.
+     * Create a Carbon instance from a specific format.
      *
      * @param string                    $format
      * @param string                    $time
@@ -583,7 +589,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance from a timestamp.
+     * Create a Carbon instance from a timestamp.
      *
      * @param int                       $timestamp
      * @param \DateTimeZone|string|null $tz
@@ -596,7 +602,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Create a IDateTime instance from an UTC timestamp.
+     * Create a Carbon instance from an UTC timestamp.
      *
      * @param int $timestamp
      *
@@ -622,7 +628,7 @@ class IDateTime extends DateTime
     ///////////////////////////////////////////////////////////////////
 
     /**
-     * Get a part of the IDateTime object
+     * Get a part of the Carbon object
      *
      * @param string $name
      *
@@ -704,7 +710,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Set a part of the IDateTime object
+     * Set a part of the Carbon object
      *
      * @param string                   $name
      * @param string|int|\DateTimeZone $value
@@ -833,7 +839,7 @@ class IDateTime extends DateTime
      *
      * @return static
      *
-     * @see https://github.com/briannesbitt/IDateTime/issues/539
+     * @see https://github.com/briannesbitt/Carbon/issues/539
      * @see https://bugs.php.net/bug.php?id=63863
      */
     public function setDate($year, $month, $day)
@@ -1005,13 +1011,13 @@ class IDateTime extends DateTime
     ///////////////////////////////////////////////////////////////////
 
     /**
-     * Set a IDateTime instance (real or mock) to be returned when a "now"
+     * Set a Carbon instance (real or mock) to be returned when a "now"
      * instance is created.  The provided instance will be returned
      * specifically under the following conditions:
-     *   - A call to the static now() method, ex. IDateTime::now()
-     *   - When a null (or blank string) is passed to the constructor or parse(), ex. new IDateTime(null)
-     *   - When the string "now" is passed to the constructor or parse(), ex. new IDateTime('now')
-     *   - When a string containing the desired time is passed to IDateTime::parse().
+     *   - A call to the static now() method, ex. Carbon::now()
+     *   - When a null (or blank string) is passed to the constructor or parse(), ex. new Carbon(null)
+     *   - When the string "now" is passed to the constructor or parse(), ex. new Carbon('now')
+     *   - When a string containing the desired time is passed to Carbon::parse().
      *
      * Note the timezone parameter was left out of the examples above and
      * has no affect as the mock value will be returned regardless of its value.
@@ -1019,7 +1025,7 @@ class IDateTime extends DateTime
      * To clear the test instance call this method using the default
      * parameter of null.
      *
-     * @param \IDateTime\IDateTime|string|null $testNow
+     * @param \Carbon\Carbon|string|null $testNow
      */
     public static function setTestNow($testNow = null)
     {
@@ -1027,7 +1033,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Get the IDateTime instance (real or mock) to be returned when a "now"
+     * Get the Carbon instance (real or mock) to be returned when a "now"
      * instance is created.
      *
      * @return static the current instance used for testing
@@ -1185,7 +1191,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Reset the format used to the default when type juggling a IDateTime instance to a string
+     * Reset the format used to the default when type juggling a Carbon instance to a string
      */
     public static function resetToStringFormat()
     {
@@ -1193,7 +1199,7 @@ class IDateTime extends DateTime
     }
 
     /**
-     * Set the default format used when type juggling a IDateTime instance to a string
+     * Set the default format used when type juggling a Carbon instance to a string
      *
      * @param string $format
      */
@@ -1379,11 +1385,11 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is equal to another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @return bool
      */
-    public function eq(IDateTime $dt)
+    public function eq(Carbon $dt)
     {
         return $this == $dt;
     }
@@ -1391,13 +1397,13 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is equal to another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @see eq()
      *
      * @return bool
      */
-    public function equalTo(IDateTime $dt)
+    public function equalTo(Carbon $dt)
     {
         return $this->eq($dt);
     }
@@ -1405,11 +1411,11 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is not equal to another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @return bool
      */
-    public function ne(IDateTime $dt)
+    public function ne(Carbon $dt)
     {
         return !$this->eq($dt);
     }
@@ -1417,13 +1423,13 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is not equal to another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @see ne()
      *
      * @return bool
      */
-    public function notEqualTo(IDateTime $dt)
+    public function notEqualTo(Carbon $dt)
     {
         return $this->ne($dt);
     }
@@ -1431,11 +1437,11 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is greater (after) than another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @return bool
      */
-    public function gt(IDateTime $dt)
+    public function gt(Carbon $dt)
     {
         return $this > $dt;
     }
@@ -1443,13 +1449,13 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is greater (after) than another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @see gt()
      *
      * @return bool
      */
-    public function greaterThan(IDateTime $dt)
+    public function greaterThan(Carbon $dt)
     {
         return $this->gt($dt);
     }
@@ -1457,11 +1463,11 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is greater (after) than or equal to another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @return bool
      */
-    public function gte(IDateTime $dt)
+    public function gte(Carbon $dt)
     {
         return $this >= $dt;
     }
@@ -1469,13 +1475,13 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is greater (after) than or equal to another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @see gte()
      *
      * @return bool
      */
-    public function greaterThanOrEqualTo(IDateTime $dt)
+    public function greaterThanOrEqualTo(Carbon $dt)
     {
         return $this->gte($dt);
     }
@@ -1483,11 +1489,11 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is less (before) than another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @return bool
      */
-    public function lt(IDateTime $dt)
+    public function lt(Carbon $dt)
     {
         return $this < $dt;
     }
@@ -1495,13 +1501,13 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is less (before) than another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @see lt()
      *
      * @return bool
      */
-    public function lessThan(IDateTime $dt)
+    public function lessThan(Carbon $dt)
     {
         return $this->lt($dt);
     }
@@ -1509,11 +1515,11 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is less (before) or equal to another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @return bool
      */
-    public function lte(IDateTime $dt)
+    public function lte(Carbon $dt)
     {
         return $this <= $dt;
     }
@@ -1521,13 +1527,13 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is less (before) or equal to another
      *
-     * @param IDateTime $dt
+     * @param Carbon $dt
      *
      * @see lte()
      *
      * @return bool
      */
-    public function lessThanOrEqualTo(IDateTime $dt)
+    public function lessThanOrEqualTo(Carbon $dt)
     {
         return $this->lte($dt);
     }
@@ -1535,13 +1541,13 @@ class IDateTime extends DateTime
     /**
      * Determines if the instance is between two others
      *
-     * @param IDateTime $dt1
-     * @param IDateTime $dt2
+     * @param Carbon $dt1
+     * @param Carbon $dt2
      * @param bool   $equal Indicates if a > and < comparison should be used or <= or >=
      *
      * @return bool
      */
-    public function between(IDateTime $dt1, IDateTime $dt2, $equal = true)
+    public function between(Carbon $dt1, Carbon $dt2, $equal = true)
     {
         if ($dt1->gt($dt2)) {
             $temp = $dt1;
@@ -1559,12 +1565,12 @@ class IDateTime extends DateTime
     /**
      * Get the closest date from the instance.
      *
-     * @param IDateTime $dt1
-     * @param IDateTime $dt2
+     * @param Carbon $dt1
+     * @param Carbon $dt2
      *
      * @return static
      */
-    public function closest(IDateTime $dt1, IDateTime $dt2)
+    public function closest(Carbon $dt1, Carbon $dt2)
     {
         return $this->diffInSeconds($dt1) < $this->diffInSeconds($dt2) ? $dt1 : $dt2;
     }
@@ -1572,12 +1578,12 @@ class IDateTime extends DateTime
     /**
      * Get the farthest date from the instance.
      *
-     * @param IDateTime $dt1
-     * @param IDateTime $dt2
+     * @param Carbon $dt1
+     * @param Carbon $dt2
      *
      * @return static
      */
-    public function farthest(IDateTime $dt1, IDateTime $dt2)
+    public function farthest(Carbon $dt1, Carbon $dt2)
     {
         return $this->diffInSeconds($dt1) > $this->diffInSeconds($dt2) ? $dt1 : $dt2;
     }
@@ -1585,11 +1591,11 @@ class IDateTime extends DateTime
     /**
      * Get the minimum instance between a given instance (default now) and the current instance.
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      *
      * @return static
      */
-    public function min(IDateTime $dt = null)
+    public function min(Carbon $dt = null)
     {
         $dt = $dt ?: static::now($this->getTimezone());
 
@@ -1599,13 +1605,13 @@ class IDateTime extends DateTime
     /**
      * Get the minimum instance between a given instance (default now) and the current instance.
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      *
      * @see min()
      *
      * @return static
      */
-    public function minimum(IDateTime $dt = null)
+    public function minimum(Carbon $dt = null)
     {
         return $this->min($dt);
     }
@@ -1613,11 +1619,11 @@ class IDateTime extends DateTime
     /**
      * Get the maximum instance between a given instance (default now) and the current instance.
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      *
      * @return static
      */
-    public function max(IDateTime $dt = null)
+    public function max(Carbon $dt = null)
     {
         $dt = $dt ?: static::now($this->getTimezone());
 
@@ -1627,13 +1633,13 @@ class IDateTime extends DateTime
     /**
      * Get the maximum instance between a given instance (default now) and the current instance.
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      *
      * @see max()
      *
      * @return static
      */
-    public function maximum(IDateTime $dt = null)
+    public function maximum(Carbon $dt = null)
     {
         return $this->max($dt);
     }
@@ -1794,11 +1800,11 @@ class IDateTime extends DateTime
      * Compares the formatted values of the two dates.
      *
      * @param string              $format The date formats to compare.
-     * @param \IDateTime\IDateTime|null $dt     The instance to compare with or null to use current day.
+     * @param \Carbon\Carbon|null $dt     The instance to compare with or null to use current day.
      *
      * @return bool
      */
-    public function isSameAs($format, IDateTime $dt = null)
+    public function isSameAs($format, Carbon $dt = null)
     {
         $dt = $dt ?: static::now($this->tz);
 
@@ -1818,11 +1824,11 @@ class IDateTime extends DateTime
     /**
      * Checks if the passed in date is in the same year as the instance year.
      *
-     * @param \IDateTime\IDateTime|null $dt The instance to compare with or null to use current day.
+     * @param \Carbon\Carbon|null $dt The instance to compare with or null to use current day.
      *
      * @return bool
      */
-    public function isSameYear(IDateTime $dt = null)
+    public function isSameYear(Carbon $dt = null)
     {
         return $this->isSameAs('Y', $dt);
     }
@@ -1840,12 +1846,12 @@ class IDateTime extends DateTime
     /**
      * Checks if the passed in date is in the same month as the instance month (and year if needed).
      *
-     * @param \IDateTime\IDateTime|null $dt         The instance to compare with or null to use current day.
+     * @param \Carbon\Carbon|null $dt         The instance to compare with or null to use current day.
      * @param bool                $ofSameYear Check if it is the same month in the same year.
      *
      * @return bool
      */
-    public function isSameMonth(IDateTime $dt = null, $ofSameYear = false)
+    public function isSameMonth(Carbon $dt = null, $ofSameYear = false)
     {
         $format = $ofSameYear ? 'Y-m' : 'm';
 
@@ -1855,11 +1861,11 @@ class IDateTime extends DateTime
     /**
      * Checks if the passed in date is the same day as the instance current day.
      *
-     * @param \IDateTime\IDateTime $dt
+     * @param \Carbon\Carbon $dt
      *
      * @return bool
      */
-    public function isSameDay(IDateTime $dt)
+    public function isSameDay(Carbon $dt)
     {
         return $this->toDateString() === $dt->toDateString();
     }
@@ -2549,12 +2555,12 @@ class IDateTime extends DateTime
     /**
      * Get the difference in years
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInYears(IDateTime $dt = null, $abs = true)
+    public function diffInYears(Carbon $dt = null, $abs = true)
     {
         $dt = $dt ?: static::now($this->getTimezone());
 
@@ -2564,12 +2570,12 @@ class IDateTime extends DateTime
     /**
      * Get the difference in months
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInMonths(IDateTime $dt = null, $abs = true)
+    public function diffInMonths(Carbon $dt = null, $abs = true)
     {
         $dt = $dt ?: static::now($this->getTimezone());
 
@@ -2579,12 +2585,12 @@ class IDateTime extends DateTime
     /**
      * Get the difference in weeks
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInWeeks(IDateTime $dt = null, $abs = true)
+    public function diffInWeeks(Carbon $dt = null, $abs = true)
     {
         return (int) ($this->diffInDays($dt, $abs) / static::DAYS_PER_WEEK);
     }
@@ -2592,12 +2598,12 @@ class IDateTime extends DateTime
     /**
      * Get the difference in days
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInDays(IDateTime $dt = null, $abs = true)
+    public function diffInDays(Carbon $dt = null, $abs = true)
     {
         $dt = $dt ?: static::now($this->getTimezone());
 
@@ -2608,41 +2614,41 @@ class IDateTime extends DateTime
      * Get the difference in days using a filter closure
      *
      * @param Closure             $callback
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs      Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInDaysFiltered(Closure $callback, IDateTime $dt = null, $abs = true)
+    public function diffInDaysFiltered(Closure $callback, Carbon $dt = null, $abs = true)
     {
-        return $this->diffFiltered(IDateTimeInterval::day(), $callback, $dt, $abs);
+        return $this->diffFiltered(CarbonInterval::day(), $callback, $dt, $abs);
     }
 
     /**
      * Get the difference in hours using a filter closure
      *
      * @param Closure             $callback
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs      Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInHoursFiltered(Closure $callback, IDateTime $dt = null, $abs = true)
+    public function diffInHoursFiltered(Closure $callback, Carbon $dt = null, $abs = true)
     {
-        return $this->diffFiltered(IDateTimeInterval::hour(), $callback, $dt, $abs);
+        return $this->diffFiltered(CarbonInterval::hour(), $callback, $dt, $abs);
     }
 
     /**
      * Get the difference by the given interval using a filter closure
      *
-     * @param IDateTimeInterval $ci       An interval to traverse by
+     * @param CarbonInterval $ci       An interval to traverse by
      * @param Closure        $callback
-     * @param IDateTime|null    $dt
+     * @param Carbon|null    $dt
      * @param bool           $abs      Get the absolute of the difference
      *
      * @return int
      */
-    public function diffFiltered(IDateTimeInterval $ci, Closure $callback, IDateTime $dt = null, $abs = true)
+    public function diffFiltered(CarbonInterval $ci, Closure $callback, Carbon $dt = null, $abs = true)
     {
         $start = $this;
         $end = $dt ?: static::now($this->getTimezone());
@@ -2656,7 +2662,7 @@ class IDateTime extends DateTime
 
         $period = new DatePeriod($start, $ci, $end);
         $vals = array_filter(iterator_to_array($period), function (DateTime $date) use ($callback) {
-            return call_user_func($callback, IDateTime::instance($date));
+            return call_user_func($callback, Carbon::instance($date));
         });
 
         $diff = count($vals);
@@ -2667,14 +2673,14 @@ class IDateTime extends DateTime
     /**
      * Get the difference in weekdays
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInWeekdays(IDateTime $dt = null, $abs = true)
+    public function diffInWeekdays(Carbon $dt = null, $abs = true)
     {
-        return $this->diffInDaysFiltered(function (IDateTime $date) {
+        return $this->diffInDaysFiltered(function (Carbon $date) {
             return $date->isWeekday();
         }, $dt, $abs);
     }
@@ -2682,14 +2688,14 @@ class IDateTime extends DateTime
     /**
      * Get the difference in weekend days using a filter
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInWeekendDays(IDateTime $dt = null, $abs = true)
+    public function diffInWeekendDays(Carbon $dt = null, $abs = true)
     {
-        return $this->diffInDaysFiltered(function (IDateTime $date) {
+        return $this->diffInDaysFiltered(function (Carbon $date) {
             return $date->isWeekend();
         }, $dt, $abs);
     }
@@ -2697,12 +2703,12 @@ class IDateTime extends DateTime
     /**
      * Get the difference in hours
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInHours(IDateTime $dt = null, $abs = true)
+    public function diffInHours(Carbon $dt = null, $abs = true)
     {
         return (int) ($this->diffInSeconds($dt, $abs) / static::SECONDS_PER_MINUTE / static::MINUTES_PER_HOUR);
     }
@@ -2710,12 +2716,12 @@ class IDateTime extends DateTime
     /**
      * Get the difference in minutes
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInMinutes(IDateTime $dt = null, $abs = true)
+    public function diffInMinutes(Carbon $dt = null, $abs = true)
     {
         return (int) ($this->diffInSeconds($dt, $abs) / static::SECONDS_PER_MINUTE);
     }
@@ -2723,12 +2729,12 @@ class IDateTime extends DateTime
     /**
      * Get the difference in seconds
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
      *
      * @return int
      */
-    public function diffInSeconds(IDateTime $dt = null, $abs = true)
+    public function diffInSeconds(Carbon $dt = null, $abs = true)
     {
         $dt = $dt ?: static::now($this->getTimezone());
         $value = $dt->getTimestamp() - $this->getTimestamp();
@@ -2775,13 +2781,13 @@ class IDateTime extends DateTime
      * 1 hour after
      * 5 months after
      *
-     * @param IDateTime|null $other
+     * @param Carbon|null $other
      * @param bool        $absolute removes time difference modifiers ago, after, etc
      * @param bool        $short    displays short format of time units
      *
      * @return string
      */
-    public function diffForHumans(IDateTime $other = null, $absolute = false, $short = false)
+    public function diffForHumans(Carbon $other = null, $absolute = false, $short = false)
     {
         $isNow = $other === null;
 
@@ -3274,11 +3280,11 @@ class IDateTime extends DateTime
     /**
      * Modify the current instance to the average of a given instance (default now) and the current instance.
      *
-     * @param \IDateTime\IDateTime|null $dt
+     * @param \Carbon\Carbon|null $dt
      *
      * @return static
      */
-    public function average(IDateTime $dt = null)
+    public function average(Carbon $dt = null)
     {
         $dt = $dt ?: static::now($this->getTimezone());
 
@@ -3288,11 +3294,11 @@ class IDateTime extends DateTime
     /**
      * Check if its the birthday. Compares the date/month values of the two dates.
      *
-     * @param \IDateTime\IDateTime|null $dt The instance to compare with or null to use current day.
+     * @param \Carbon\Carbon|null $dt The instance to compare with or null to use current day.
      *
      * @return bool
      */
-    public function isBirthday(IDateTime $dt = null)
+    public function isBirthday(Carbon $dt = null)
     {
         return $this->isSameAs('md', $dt);
     }

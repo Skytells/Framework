@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.1.0
+ * @version 2.2.0
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -102,11 +102,11 @@
     static $_CONSOLE_OUTPUT   = array();
     static $_FILES_AUTOLOADED = array();
     static $_CLI_COMMANDS = array();
-    static $_FRAMEWORK_VER = "2.1.0";
+    static $_FRAMEWORK_VER = "2.2.0";
     $db = ($Settings["USE_SQL"]) ? new mysqli($DBCONFIG["DB_HOST"], $DBCONFIG["DB_USER"], $DBCONFIG["DB_PASS"], $DBCONFIG["DB_NAME"]) : false;
 
 
-    $L_MDL = (AUTO_LOAD_MODELS && AUTO_LOAD_MODELS === true) ? MDL_DIR : "";
+    $L_MDL = (AUTO_LOAD_MODELS === true) ? MDL_DIR : "";
      Autoloader(array(
             MVC_BS,
             CL_DIR,

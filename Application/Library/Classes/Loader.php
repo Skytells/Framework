@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.1.0
+ * @version 2.2.0
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -165,6 +165,10 @@
                   }
           }
 
+
+      static public function autoload($name) {
+            require_once $name;
+      }
       /**
       * @method Initializing a Single Lib
       * - Models Stored in ( Models ) Folder
@@ -183,8 +187,9 @@
               if (file_exists($path.$File)){
                 $class_name = str_replace(".php", "", $File);
 
-                      require_once $path.$File;
 
+                    require $path.$File;
+                    
                       //-------------------------------------------------------------------
                       if ($setOwner != false && is_object($setOwner)){
                        if (!is_array($args) && $args != false && $args != true){ $newName = $args; $args = false; }
