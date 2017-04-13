@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -27,11 +27,16 @@ Class XSSProtection extends Controller
       }
     public function Run()
       {
-        if (AUTO_SECURE_GET) { $this->secureGet(); }
-        if (AUTO_SECURE_POST) { $this->securePost(); }
-        if (AUTO_SECURE_REQUEST) { $this->secureRequest(); }
-        if (AUTO_SECURE_COOKIES) { $this->secureCookies(); }
-        if (AUTO_SECURE_SESSIONS) { $this->secureSessions(); }
+        global $_REQUEST;
+        global $_GET;
+        global $_POST;
+        global $_COOKIE;
+        global $_SESSION;
+        if (AUTO_SECURE_GET === TRUE && !empty($_GET)) { $this->secureGet(); }
+        if (AUTO_SECURE_POST === TRUE && !empty($_POST)) { $this->securePost(); }
+        if (AUTO_SECURE_REQUEST === TRUE && !empty($_REQUEST)) { $this->secureRequest(); }
+        if (AUTO_SECURE_COOKIES === TRUE) { $this->secureCookies(); }
+        if (AUTO_SECURE_SESSIONS === TRUE) { $this->secureSessions(); }
       }
     public function cleanThis($value, $REPLACE_TAGS = TRUE)
       {

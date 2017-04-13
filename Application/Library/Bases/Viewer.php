@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -48,7 +48,7 @@ Class Viewer extends Controller
                   if (strpos($Controller, '.php') !== false) {
 
 
-                   require_once(VW_DIR.$Path[0]."/Controllers/$Controller");
+                   require (VW_DIR.$Path[0]."/Controllers/$Controller");
                     $this->RegController(VW_DIR.$Path[0]."/Controllers/$Controller");
                     $this->Runtime->ReportController(VW_DIR.$Path[0]."/Controllers/".$Controller);
                   }
@@ -100,7 +100,7 @@ Class Viewer extends Controller
 
            }
            else {
-          require_once(VW_DIR.$File);
+          require VW_DIR.$File;
           }
         $this->Runtime->ReportPage(VW_DIR.$File);
 

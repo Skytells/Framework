@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -14,13 +14,17 @@
   * @method Initializing Required Definetions
   * - Drivers, Controllers, Models ..etc
   */
+  if (!function_exists('defineRoutesConfig')) {
   function defineRoutesConfig()
   {
      global $Routes;
     foreach ($Routes["CONFIG"] as $Key => $Val) {
-      if (!defined("ROUTES_CONFIG_". $Key)) { define("ROUTES_CONFIG_". $Key, $Val); }
+      define("ROUTES_CONFIG_". $Key, $Val);
     }
   }
+  }
+
+  if (!function_exists('DefSettings')) {
   function DefSettings()
      {
        try
@@ -32,22 +36,21 @@
 
          foreach ($Settings as $Key => $Val)
            {
-             if (!defined($Key))
-              { define($Key, $Val); }
+             define($Key, $Val);
            }
 
          foreach ($DBCONFIG as $Key => $Val)
            {
-               if (!defined($Key)) { define($Key, $Val); }
+              define($Key, $Val);
            }
 
          foreach ($MODULES as $Key => $Val)
            {
-            if (!defined("MD_". $Key)) { define("MD_". $Key, $Val); }
+            define("MD_". $Key, $Val);
            }
 
          foreach ($CORE_ENGINES as $Key => $Val) {
-           if (!defined("CORE_ENGINE_". $Key)) { define("CORE_ENGINE_". $Key, $Val); }
+          define("CORE_ENGINE_". $Key, $Val);
          }
 
 
@@ -57,10 +60,10 @@
        }
 
      }
-  function getCore()
-    {
-      return include CL_DIR."Core.php";
-    }
+  }
+
+
+  if (!function_exists('Obj')) {
   function Obj($array) {
 
     $object = new stdClass();
@@ -72,8 +75,9 @@
     }
     return $object;
   }
+  }
 
-
+  if (!function_exists('Contains')) {
   function Contains($FullContentString, $strToFind)
     {
       if (strpos($FullContentString, $strToFind) !== false)
@@ -83,7 +87,9 @@
       	  return false;
       	}
     }
+  }
 
+  if (!function_exists('getTotalCached')) {
   function getTotalCached()
    {
      $files = glob("./".CACHE_DIR.'/*');
@@ -94,30 +100,35 @@
        }
        return $i;
    }
+  }
 
+  if (!function_exists('l')) {
   function l($LANG_KEY)
     {
       global $lang;
     //  echo $lang[$LANG_KEY];
       return $lang[$LANG_KEY];
     }
+  }
 
+  if (!function_exists('lang')) {
   function lang($LANG_KEY)
     {
       global $lang;
       echo $lang[$LANG_KEY];
     }
+  }
 
-
+  if (!function_exists('loadController')) {
   function loadController($File, $args = null, $IsNative = false)
     {
       global $Core;
 
       $Core->loadController($File, $args, $IsNative);
     }
+  }
 
-
-
+  if (!function_exists('is_dir_empty')) {
   function is_dir_empty($dir) {
       if (!is_readable($dir)) return NULL;
       $handle = opendir($dir);
@@ -147,12 +158,13 @@
           }
         }
         }
-
+  }
 
   /**
   * @method Initializing Functions
   * - All Functions Stored in ( Functions ) Folder
   */
+  if (!function_exists('LoadFunctions')) {
   function LoadFunctions()
     {
       $files = scandir(FN_DIR);
@@ -165,7 +177,9 @@
           }
 
       }
+  }
 
+  if (!function_exists('base')) {
   function base()
     {
       global $Settings;
@@ -174,7 +188,9 @@
       }
       return $Settings["BASE_URL"];
     }
+  }
 
+  if (!function_exists('t')) {
   function t($string, $check = false)
     {
       if ($check == true){
@@ -184,7 +200,9 @@
       }
 
     }
+  }
 
+  if (!function_exists('d')) {
   function d($array, $json = false)
     {
       if ($json == true){
@@ -193,21 +211,25 @@
       }else {
       var_dump($array); }
     }
+  }
 
+  if (!function_exists('p_array')) {
   function p_array($array)
       {
         print_r($array);
       }
+  }
 
 
-
+  if (!function_exists('stripSlashesDeep')) {
       /** Check for Magic Quotes and remove them **/
 
       function stripSlashesDeep($value) {
           $value = is_array($value) ? array_map('stripSlashesDeep', $value) : stripslashes($value);
           return $value;
       }
-
+    }
+  if (!function_exists('removeMagicQuotes')) {
       function removeMagicQuotes() {
       if ( get_magic_quotes_gpc() ) {
           $_GET    = stripSlashesDeep($_GET   );
@@ -215,9 +237,9 @@
           $_COOKIE = stripSlashesDeep($_COOKIE);
       }
       }
-
+    }
       /** Check register globals and remove them **/
-
+  if (!function_exists('removeMagicQuotes')) {
       function unregisterGlobals() {
           if (ini_get('register_globals')) {
               $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
@@ -230,3 +252,4 @@
               }
           }
       }
+    }

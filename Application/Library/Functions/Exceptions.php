@@ -1,5 +1,6 @@
 <?php
 
+if (!function_exists('default_exception_handler')) {
    function default_exception_handler($errstr='', $errno = '', $errline = "Unknown", $errfile = "Unknown")
     {
       $_Content = file_get_contents(SYS_VIEWS."html/debug_log.html");
@@ -9,3 +10,4 @@
       $_Content = str_replace("{ERR_FILE}", $errfile, $_Content);
       exit($_Content);
     }
+}

@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -20,12 +20,13 @@
     {
 
       public function __construct($_ROUTER = ''){
-        Router::map('GET|POST', "[*:__MVCallback]",  function($__MVCallback){
+
+        Router::map('GET|POST', "[*:".ROUTES_CONFIG_DEFAULT_ROUTE_PARAM."]",  function($__MVCallback){
 
           if (isset($__MVCallback) && !empty($__MVCallback) && $__MVCallback != ""){
             $_MVURI = $__MVCallback;
             $HomePage = getExplosion($_MVURI, 1);
-            if (!isset($HomePage) || is_null($HomePage) || empty($HomePage)){
+            if (is_null($HomePage) || empty($HomePage)){
               $DEFAULT_CONTROLLER = ROUTES_CONFIG_DEFAULT_CONTROLLER;
               $DEFAULT_CONTROLLER_METHOD = ROUTES_CONFIG_DEFAULT_METHOD;
               if (file_exists(CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php") ){

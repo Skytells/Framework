@@ -63,10 +63,10 @@ function isCached($url = null)
 
   function getExplosion($ptr, $id, $trim = true)
     {
-      if (!isset($ptr) || empty($ptr) || $ptr == ""){ return false; }
+      if (empty($ptr) || $ptr == ""){ return false; }
 
       $__MVURI = explode("/", $ptr);
-      if (isset($__MVURI[$id]) && !empty($__MVURI[$id]) && $__MVURI[$id] != ""){
+      if (isset($__MVURI[$id]) && !empty($__MVURI[$id])){
         $value = $__MVURI[$id];
           $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
           $value = strip_tags($value);

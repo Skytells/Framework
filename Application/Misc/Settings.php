@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -187,7 +187,7 @@
    * Here you can put the required modules for your web-application to run
    * By simply adding the module name in the array below, so the framework
    * will check them before performing start-up functions  ----------*/
-   $Settings["CHECK_REQM"] = TRUE;
+   $Settings["CHECK_REQM"] = FALSE;
    // Required Modules Array.
    $_PHP_REQM = Array(
                       "tokenizer" => "Required for the Framework.",

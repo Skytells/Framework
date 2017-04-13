@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -98,7 +98,7 @@ function Autoloader($class_paths = NULL, $use_base_dir = true)
 	{
 		// class with namespaces, ex: 'MyPack\MyClass' => 'MyPack/MyClass' (directories)
 		$class_path = str_replace('\\', DIRECTORY_SEPARATOR, $class_paths);
-			global $_FILES_AUTOLOADED; global $_LOADED_CONTROLLERS; global $_DEV_LOADED_MODELS;
+			global $_FILES_AUTOLOADED; global $_LOADED_CONTROLLERS; global $_DEV_LOADED_MODELS; global $Settings;
 		foreach($paths as $path)
 		{
 			if(!is_array($path)) // do not allow cached 'loaded' paths
@@ -120,10 +120,9 @@ function Autoloader($class_paths = NULL, $use_base_dir = true)
 						$full_file = $path . $class_path . $ext;
 
 						// ------------------------------------------------
-						global $Settings;
-						if ($Settings["DEVELOPMENT_MODE"] == TRUE)
-						{
 
+
+						if (DEVELOPMENT_MODE === TRUE) {
 							array_push($_FILES_AUTOLOADED, $full_file);
 
 
@@ -138,7 +137,7 @@ function Autoloader($class_paths = NULL, $use_base_dir = true)
 									array_push($_DEV_LOADED_MODELS, $full_file);
 
 								}
-						}
+							}
 
 						// ---------------------------------------------------
 						require $path . $class_path . $ext;

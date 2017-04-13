@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -41,7 +41,7 @@
           // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )
           // Full URL : http://www.domain.com/{Framework_FOLDER}/Home/index/
 
-          // Rendering the View.
+          // Rendering the View.        
           $this->view->render("index.php");
 
         }

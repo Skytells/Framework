@@ -10,10 +10,11 @@
  * @author Dr. Hazem Ali ( fb.com/Haz4m )
  * @see The Framework's changelog to be always up to date.
  */
-  namespace Skytells\Interfaces\Controllers;
-  Interface ChildController
-  {
-    function assignto($Owner);
-  }
+  Namespace Skytells\Core;
+  Class AI extends \Controller{
+    function AI() {}
+    function __construct() { }
 
-  
+
+    function __destruct() { }
+  }

@@ -5,8 +5,12 @@
     * By another words, it's the main home page for your MVC project.
     * @param DEFAULT_CONTROLLER : is the main controller name in (Controllers) folder.
     * @param DEFAULT_METHOD : is the default function in your home controller that will
+    * @param DEFAULT_ROUTE_PARAM : This is your default MVC route Callback.
     * be automatically Initialized by default when the controller being called.
     *--------------------------------------------------------------------------------------------*/
+
+    $Routes["CONFIG"]["DEFAULT_ROUTE_PARAM"] = "SYSCALLBACK"; // DO NOT CHANGE THIS.
+
     $Routes["CONFIG"]["DEFAULT_CONTROLLER"] = "Home"; // -> The main controller.
     $Routes["CONFIG"]["DEFAULT_METHOD"] = "index"; // -> the main method.
 
@@ -45,5 +49,5 @@
      .[:format]?          // Match an optional parameter 'format' - a / or . before the block is also optional
      * --------------------------------------------------------------------------------------*/
 
-     
+
      Router::map('GET|POST', "/static_route", function() { $home = new Home(); $home->index(); });

@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -35,7 +35,7 @@
 
   define('STORAGE_DIR', MAINDIR . 'Storage/', TRUE);
   define('LOGS_DIR', MAINDIR . 'Storage/Logs/', TRUE);
-
+  define('AI_STORAGE_DIR', MAINDIR . 'Storage/AI/', TRUE);
   define('RESOURCES_DIR', MAINDIR . 'Resources/', TRUE);
   define('MDL_DIR',RESOURCES_DIR . 'Models/', TRUE);
   define('VW_DIR',RESOURCES_DIR . 'Views/', TRUE);

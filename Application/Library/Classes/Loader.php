@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -189,7 +189,7 @@
 
 
                     require $path.$File;
-                    
+
                       //-------------------------------------------------------------------
                       if ($setOwner != false && is_object($setOwner)){
                        if (!is_array($args) && $args != false && $args != true){ $newName = $args; $args = false; }
@@ -229,7 +229,7 @@
                     if (!Contains($File, '.php')){ $File = $File.".php"; }
 
                     if (file_exists($path.$File)){
-                      require_once $path.$File;
+                      require $path.$File;
                       $this->Runtime->ReportHelper($path.$File);
 
                       //-------------------------------------------------------------------

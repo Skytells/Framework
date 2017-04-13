@@ -4,7 +4,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
@@ -20,7 +20,7 @@
     {
       Router::Init();
       Router::setBasePath(APPDIR.'/');
-      require_once BASEPATH.'/Application/Misc/Config/Routes.php';
+      require BASEPATH.'/Application/Misc/Config/Routes.php';
       defineRoutesConfig();
       $Boot = new Boot();
       $match = Router::match();
@@ -33,5 +33,5 @@
       }
     }
 if (USE_CACHE == TRUE) { $Core->Cache->End(); }
-if (DEVELOPMENT_MODE == TRUE) { require_once(SYS_VIEWS."/php/DevTools.php"); }
+if (DEVELOPMENT_MODE == TRUE) { require (SYS_VIEWS."/php/DevTools.php"); }
 @ob_end_flush();

@@ -3,14 +3,13 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.2.0
+ * @version 2.3
  * @license Freeware
  * @copyright  2007-2017 Skytells, Inc. All rights reserved.
  * @license    https://www.skytells.net/us/terms  Freeware.
  * @author Dr. Hazem Ali ( fb.com/Haz4m )
  * @see The Framework's changelog to be always up to date.
  */
- // Abstract
    Class Controller
     {
       public $_CLASSES;
@@ -18,7 +17,6 @@
       public $_MODULES;
       public $Mail;
       public $Debugger;
-      public $Encryption;
       public $Firewall;
       public $CSRFProtection;
       public $XSSProtection;
@@ -32,9 +30,6 @@
       public $ActiveLanguage = "";
       public $dbConfig;
       public $Viewer;
-
-
-
 
       public function canClassBeAutloaded($className)
         {
@@ -84,7 +79,7 @@
           {
 
             try {
-              if (CHECK_REQM == TRUE) {
+              if (CHECK_REQM === TRUE) {
               global $_PHP_REQM;
               foreach ($_PHP_REQM as $Key => $Val)
                 {
@@ -107,28 +102,17 @@
         */
         public function Init()
           {
-            global $Settings;
-            global $DBCONFIG;
-            global $MODULES;
             global $_SESSION;
-          //  $this->getDatabase();
             $this->LoadFunctions();
-
             $this->InitServices();
-
             $this->InitModules();
-
-          //  $this->InitiCoreEngines();
-
             if(isset($_SESSION['lang']))
               {
               $this->ActiveLanguage = $_SESSION['lang'];
               }
-            if ($this->ActiveLanguage == "" || empty($this->ActiveLanguage)) {
+            if (empty($this->ActiveLanguage)) {
                 $this->AnalyzeLangugage();
             }
-
-
             return true;
           }
 
@@ -142,8 +126,6 @@
           {
             try {
 
-          //    $this->InitiSQLManager();
-          //    $this->InitiDBObject();
             } catch (Exception $e) {
              exit($this->Debugger->ShowError($e->getCode(), $e->getMessage()));
            }
@@ -159,9 +141,9 @@
           {
 
 
-              $debugger = new Debugger();
-              $this->Responder = new Responder();
-              $this->Debugger = $debugger;
+              $this->Debugger = new Debugger();
+
+
                 $this->CheckCoreRequirements();
                 $this->checkExtentions();
 
@@ -202,7 +184,7 @@
         */
         public function LoadModules()
           {
-            if (USE_MODULES)
+            if (USE_MODULES === TRUE)
             {
               if (!is_dir(MD_DIR)){
                 throw new Exception("The Modules Folder does not exist in the main Application/Library dir.", 90);
@@ -214,7 +196,7 @@
                 {
                     if ($MODULES[$Key] == TRUE)
                       {
-                        include_once(MD_DIR.$Key.".php");
+                        require MD_DIR.$Key.".php";
                       }
 
                 }
@@ -227,19 +209,15 @@
         */
         public function LoadFunctions()
           {
-            if (!is_dir(FN_DIR)){
-              throw new Exception("The Functions Folder does not exist in the main Application/Library dir.", 90);
-              return false;
+           if (!is_dir(FN_DIR)){
+                   throw new Exception("The Functions Folder does not exist in the main Application/Library dir.", 90);
+                   return false;
+                 }
+              foreach (new DirectoryIterator(FN_DIR) as $fileInfo) {
+                if($fileInfo->isDot()) continue;
+                $file = $fileInfo->getFilename();
+                require FN_DIR."/".$file;
             }
-              $files = scandir(FN_DIR);
-              foreach($files as $file) {
-                if (strpos($file, '.php') !== false)
-                  {
-
-                    require_once(FN_DIR.$file);
-                  }
-              }
-
           }
 
         /**
@@ -354,7 +332,7 @@
                 if (!class_exists($File) == true) {
 
 
-                require_once ($path."$File.php");
+                require($path."$File.php");
                 $this->RegController($path."$File.php", $args, $Native);
                 $this->Runtime->ReportController($path."$File.php");
 
@@ -578,7 +556,7 @@
 
               }else
               {
-                include_once $realPath;
+                include $realPath;
                 global $db;
                 if (Contains($Path, "/SQLManager")){
                   $this->InitiSQLManager();
