@@ -1,5 +1,6 @@
 # Skytells Framework for PHP
-Version 2.2.0 ( Current Version )
+Version 2.2.0 ( Current Release Version )
+Version 2.3 ( Current Development Version )
 
 Skytells Framework is an Application Development Framework - a toolkit - for people who build web sites using PHP. Its goal is to enable you to develop projects much faster than you could if you were writing code from scratch, by providing a rich set of libraries for commonly needed tasks, as well as a simple interface and logical structure to access these libraries. Skytells Framework lets you creatively focus on your project by minimizing the amount of code needed for a given task.
 
@@ -19,9 +20,11 @@ Also, Please see the ( Framework Manual ) to learn how to use it.
 ## Features!
 
 - Fast, Powerful and Easy to use!
-- URLs Routing ( Supports Multiqueries URLs )
+- URLs Routing ( Supports MultiQueries URLs )
 - Built-in Very Useful Functions ( up to date )
 - Built-in Ready HTML5 ( 404, 505, 403 ) Pages.
+- Built-In Embed System for Social Networks Development.
+- Advanced CLI & Analytical Tools.
 - MySQL(i) Support ( Objective & Static )
 - Social Plugins Support  ( Facebook Login )
 - Smart Debugger & Console ( DevMode )
@@ -55,7 +58,7 @@ Each Version of this Framework may require a new modules or extensions to be ava
 
 - Server
 - If localhost ( Please install Ampps or AppServ )
-- PHP
+- PHP 5.6+
 - Version 5.6 or Newer
 - Tokenizer ( PHP Module )
 - Apache
@@ -80,8 +83,19 @@ Please See <a href='http://developers.skytells.net/framework/Getting_Started/Con
 Please refer to the official manual to use this framework correctly.
 <a href='http://developers.skytells.net/framework/'>Framework Guide</a>
 
+## Websites Built with Skytells Framework.
+
+Since Skytells Framework still a new on a world that full of PHP Frameworks, But it deferent, Powerful, And Dynamic!
+That's why most of the big companies have chosen it as their platform.  
+
+
+#### <a href='https://www.uddit.com'>Uddit, Inc.</a>
+Uddit is a very powerful social network platform built with Skytells Framework.
+
+#### <a href='http://cloud.skytells.me'>Skytells Cloud</a>
+Skytells Cloud is a very powerful cloud system like the iCloud built with Skytells Framework.
 
 
 ## Support
 This framework is a free PHP framework provided by Skytells, Inc.
-For any issues during using the Framework, Please inform us.
+For any issues during using the Framework, Please inform us at developers@skytells.net.
