@@ -63,7 +63,6 @@
 					 }
 			 </style>
 </head>
-<body>
 
 	<body>
         <div class="flex-center position-ref full-height">

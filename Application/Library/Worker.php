@@ -1,8 +1,8 @@
 <?php
 
-    global $Settings;
-    ini_set('zlib.output_compression_level', $Settings['GZIP_COMPRESSION_LEVEL']);
-    if ($Settings['ENABLE_COMPRESSION'] == true) { if(!ob_start("ob_gzhandler")) ob_start(); }else { ob_start(); }
+  global $Settings;
+  ini_set('zlib.output_compression_level', $Settings['GZIP_COMPRESSION_LEVEL']);
+  if ($Settings['ENABLE_COMPRESSION'] == true) { if(!ob_start("ob_gzhandler")) ob_start(); }else { ob_start(); }
 
 DefSettings();
 $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';

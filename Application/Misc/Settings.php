@@ -197,8 +197,6 @@
 
 
 
-
-
   /* Compression Settings --------------------------------------------------
    * Here you can manage the compression settings for your application
    * The framework has a built-in compression Engine using gzip()

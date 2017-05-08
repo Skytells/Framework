@@ -16,8 +16,7 @@
   require(__DIR__."/Application/Global.php");
   global $Core;
   if (USE_CACHE == TRUE) { $Core->Cache->Start(); }
-  if (USE_ROUTER)
-    {
+  if (USE_ROUTER) {
       Router::Init();
       Router::setBasePath(APPDIR.'/');
       require BASEPATH.'/Application/Misc/Config/Routes.php';
