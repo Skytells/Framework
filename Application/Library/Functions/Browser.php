@@ -61,7 +61,6 @@
             return $value;
       }
 
-
   function getCookie($value = null, $REPLACE_TAGS = TRUE)
       {
         global $db;
@@ -80,7 +79,6 @@
         return $value;
       }
 
-
   function ReplaceDBQueries($String)
       {
         $String = str_replace(array('SELECT *', 'SELECT id', 'SELECT password', 'UPDATE users', 'UPDATE messages', 'DROP ', 'DELETE FROM ', '--;', ';--',
@@ -92,14 +90,11 @@
         return $String;
       }
 
-
-
   function getUrl()
     {
       $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
       return $actual_link;
     }
-
 
   function checkBrowser($checkCookies = false, $checkJavascript = false)
     {
@@ -114,10 +109,21 @@
       return true;
     }
 
-
   function show_404()
     {
       header("HTTP/1.0 404 Not Found");
       require SYS_VIEWS.'/html/404.html';
       exit;
     }
+
+  function isAjax() {
+      if( !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || ($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') ) {
+          return false;
+      }
+      return true;
+  }
+
+  function return_json($response = '') {
+    header('Content-Type: application/json');
+    exit(json_encode($response));
+  }

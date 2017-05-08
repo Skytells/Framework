@@ -10,9 +10,10 @@
  * @author Dr. Hazem Ali ( fb.com/Haz4m )
  * @see The Framework's changelog to be always up to date.
  */
-
-  Class Home extends Controller
-    {
+  use Skytells\Core; // This Namespace used for the Skytells Core Libraries.
+  use Skytells\Engines; // This Namespace used for the Skytells Engines.
+  use Skytells\AI; // This Namespace used for the Skytells's AI Controllers.
+  Class Home extends Controller {
       /**
        * @method __construct function.
        * Classes which have a constructor method call this method on each newly-created object,
@@ -20,8 +21,7 @@
        * @var PLEASE USE ( parent::__construct ) for each controller in your project.
        * This is important in order to Initialize the Framework System.
        */
-      public function __construct($ref = "Core")
-        {
+      public function __construct($ref = "Core") {
           // This is important to include in __construct function for each controller you create.
           // To get the required method, functions, engines and etc from the base controller.
           parent::__construct();
@@ -36,14 +36,11 @@
        * This function is responsible for rendering the view, Each controller must
        * have this public function.
        */
-      public function index()
-        {
+      public function index($args = array()) {
           // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )
           // Full URL : http://www.domain.com/{Framework_FOLDER}/Home/index/
-
-          // Rendering the View.        
+          // Rendering the View.
           $this->view->render("index.php");
-
         }
 
 

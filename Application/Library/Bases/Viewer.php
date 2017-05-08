@@ -15,14 +15,33 @@
 Class Viewer extends Controller
 {
   public $view;
-
+  private $OxParses = array ();
   public function __construct()
     {
       $this->load = new Loader();
       $this->Runtime = new Runtime();
     }
 
+  /**
+   * @method assign
+   * @return TRUE.
+   */
+  public function assign($key, $value) {
+    try {
+      if (!isset($key)) { throw new Exception("Error assigning variable: You must bypass the variable.", 1); }
+        if (!isset($value)) { throw new Exception("Error assigning variable: You must bypass the values.", 1); }
+      $this->OxParses = array_merge($this->OxParses, array($key => $value));
+      return true;
+    } catch (Exception $e) {
 
+    }
+
+  }
+
+  /**
+   * @method render
+   * @return Page.
+   */
   public function render($File, $Params = null, $SkipCaching = false, array $Parses = [], $cFilters = null)
     {
       try
@@ -33,14 +52,10 @@ Class Viewer extends Controller
         if (is_array($SkipCaching)) { $Parses = $SkipCaching; $SkipCaching = false; }
         // This will set SkipCaching to True when passed as 2nd param.
         if ($SkipCaching == true) { flushPageCache(); }
-
-          $this->AnalyzeLangugage();
-
+        $this->AnalyzeLangugage();
         $Path = explode('/', $File);
-        if (is_dir(VW_DIR.$Path[0]."/Controllers/"))
-        {
-
-           $Controllers = scandir(VW_DIR.$Path[0]."/Controllers/");
+        if (is_dir(VW_DIR.$Path[0]."/Controllers/")){
+          $Controllers = scandir(VW_DIR.$Path[0]."/Controllers/");
           if (isset($Controllers) && is_array($Controllers))
             {
               foreach ($Controllers as $Controller)
@@ -55,16 +70,8 @@ Class Viewer extends Controller
                 }
             }
         }
-
-         if (!file_exists(VW_DIR.$File)){
-           throw new Exception("Viewer : [ ".VW_DIR."$File ] Doesn't Exists in Views Folder!", 5);
-
-         }
-
-         if (is_array($Params) && !empty($Params) && $Params != null){
-           global $_REQUEST;
-           $_REQUEST = $Params;
-          }
+        if (!file_exists(VW_DIR.$File)){ throw new Exception("Viewer : [ ".VW_DIR."$File ] Doesn't Exists in Views Folder!", 5); }
+        if (is_array($Params) && !empty($Params) && $Params != null){ global $_REQUEST; $_REQUEST = $Params; }
 
 
         if (Contains($File, ".".TEMPLATE_FILE_EXTENSION.".php")) {
@@ -72,12 +79,12 @@ Class Viewer extends Controller
           Kernel::Import('Oxygen');
           $filename = str_replace(".".TEMPLATE_FILE_EXTENSION.".php", "", $File);
           $blade = new OxygenInstance(VW_DIR, CACHE_DIR."/Views/");
-
           global $lang;
           $TParses = array_merge($lang, $Parses);
-          echo $blade->render($filename, $TParses);
-          }else {
 
+          $AssginedVars = array_merge($this->OxParses, $TParses);
+          echo $blade->render($filename, $AssginedVars);
+          }else {
              if (!class_exists("TemplateEngine")) {
                require ENGINES_DIR.'templateengine.php';
                 }
@@ -95,7 +102,8 @@ Class Viewer extends Controller
 
                global $lang;
                $TParses = array_merge($lang, $Parses);
-               echo $te->apply ($TParses);
+               $AssginedVars = array_merge($this->OxParses, $TParses);
+               echo $te->apply ($AssginedVars);
              }
 
            }
