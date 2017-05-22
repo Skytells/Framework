@@ -25,7 +25,6 @@
           // This is important to include in __construct function for each controller you create.
           // To get the required method, functions, engines and etc from the base controller.
           parent::__construct();
-
           // Log some text in the Console.
           //$this->console->log("HomeController has been called from ". $ref);
         }
@@ -42,6 +41,5 @@
           // Rendering the View.
           $this->view->render("index.php");
         }
-
 
     }

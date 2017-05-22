@@ -180,11 +180,12 @@
   }
 
   if (!function_exists('base')) {
-  function base()
+  function base($PROTOCOL = TRUE)
     {
       global $Settings;
-      if (substr($Settings["BASE_URL"], -1) != "/"){
-        return $Settings["BASE_URL"]."/";
+      if ($PROTOCOL === TRUE) {
+        $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
+        return $protocol.$Settings["BASE_URL"];
       }
       return $Settings["BASE_URL"];
     }

@@ -24,7 +24,7 @@
       */
       public function model($File, $setOwner = false, $args = false, $newName = "")
         {
-              $path = BASEPATH.'/Application/Models/';
+              $path = BASEPATH.'/Application/Resources/Models/';
               if (!is_dir($path)){
                 throw new Exception("The Models Folder does not exist in the main Application dir.", 90);
                 return false;
@@ -71,7 +71,7 @@
       */
       public function childModel($File, $setOwner = false, $args = false, $newName = "")
             {
-                  $path = BASEPATH.'/Application/Views/';
+                  $path = BASEPATH.'/Application/Resources/Views/';
                   if (!is_dir($path)){
                     throw new Exception("The Models Folder does not exist in the main Application dir.", 90);
                     return false;

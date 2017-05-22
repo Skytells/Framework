@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="window">
-      <iframe src="http://<?= base(); ?>/Application/Library/System/CLI/index.php" style="min-height: 350px; height:100%; width: 100%; min-width: 700px; border: none; padding:0px; margin:0px;"></iframe>
+      <iframe src="<?= base(); ?>/Application/Library/System/CLI/index.php" style="min-height: 350px; height:100%; width: 100%; min-width: 700px; border: none; padding:0px; margin:0px;"></iframe>
     </div>
   </div>
 
