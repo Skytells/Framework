@@ -1,4 +1,4 @@
-<?
+<?php
     /**
     *-------------------------- [ CONTROLLERS ROUTING ] ------------------------------------------\
     * The default controller is the default controller for your project.
@@ -8,13 +8,9 @@
     * @param DEFAULT_ROUTE_PARAM : This is your default MVC route Callback.
     * be automatically Initialized by default when the controller being called.
     *--------------------------------------------------------------------------------------------*/
-
     $Routes["CONFIG"]["DEFAULT_ROUTE_PARAM"] = "SYSCALLBACK"; // DO NOT CHANGE THIS.
-
     $Routes["CONFIG"]["DEFAULT_CONTROLLER"] = "Home"; // -> The main controller.
     $Routes["CONFIG"]["DEFAULT_METHOD"] = "index"; // -> the main method.
-
-
     /**
      * @param INIT_DEFALUT_METHOD_AUTOMATICALLY
      * If TRUE, The Framework will automatically Initialize the default method which defined in
@@ -24,9 +20,6 @@
      * OR YOU HAVE TO SET THE DEFAULT VALUES FOR YOUR DEFAULT METHOD'S ARGUMENTS.
      */
     $Routes["CONFIG"]["INIT_DEFALUT_METHOD_AUTOMATICALLY"] = TRUE;
-
-
-
     /**
      * ---------------------------- [ Static Routing ] ---------------------------------------------
      * Map a route to a target
@@ -48,6 +41,4 @@
      [**:trailing]        // Catch all (possessive - will match the rest of the URI)
      .[:format]?          // Match an optional parameter 'format' - a / or . before the block is also optional
      * --------------------------------------------------------------------------------------*/
-
-
      Router::map('GET|POST', "/static_route", function() { $home = new Home(); $home->index(); });

@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<!-- {#CACHE:FLUSH!} || {#CACHE:EXCLUDE!}
-	* You can use these tags to disable this page from caching.
-	* Remove (#) from {#CACHE:FLUSH!} to flush cached files if this page requires cache to be cleared.
-	* Remove (#) from {#CACHE:EXCLUDE!} to EXCLUDE this page from caching.
-	* To remove cached files please pass this parameter to any page ( GET: ?Action=FlushCache )
-	-->
 <html>
 <head>
-	<link rel="icon" href="<?= SITEBASE; ?>/favicon.png">
+	<link rel="icon" href="<?= Base(); ?>/favicon.png">
 	<meta charset="utf-8">
 			 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 			 <meta name="viewport" content="width=device-width, initial-scale=1">
-			 <title><?=l('PAGE_TITLE');?></title>
+			 <title><?= l('PAGE_TITLE'); ?></title>
 			 <!-- Fonts -->
 			 <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 			 <!-- Styles -->
@@ -69,10 +63,8 @@
 
                 <div class="top-right links">
 
-                        <a href="<?= SITEBASE; ?>">Home</a>
-
+                        <a href="<?=Base();?>">Home</a>
                         <a href="https://developers.skytells.net/framework">Documentation</a>
-
 
                 </div>
 
@@ -94,14 +86,14 @@
                 </div>
 
 								<br>
-								<small>© 2017 Dr. Hazem Ali, All rights reserved.</small>
+								<small>© <?= gmdate('Y') ?> Dr. Hazem Ali, All rights reserved.</small>
             </div>
 
         </div>
 				<script>
-				var text = ["Hello", "Hola!", "Bonjour!",
-										"Bienvenue!", "Skytells'da Hoşgeldiniz", "Benvenuto en Skytells!", "Skytells へようこそ！", "مرحبآ", "Ласкаво просимо!", "何かダイナミックなものを作ろう！",
-										"Let's Build Somthing Amazing!", "Bringing Data to Life!", "Skytells is Free", "Skytells is Dynamic", "Skytells is Powerful", "Let's Build Somthing Amazing!"];
+				var text = ["Hello", "Hola!", "Bonjour!", "Olá", "Hallo", "Hoi",
+										"Bienvenue!", "Skytells'da Hoşgeldiniz", "Benvenuto en Skytells!", "Skytells へようこそ！", "مرحبآ", "Ласкаво просимо!", "何かダイナミックなものを作ろう！", "Skytells المستقبل",
+										"Let's Build Somthing Amazing!", "Bringing Data to Life!", "Skytells is Free", "Skytells is Dynamic", "Skytells is Powerful", "Skytells is Easy!", "Let's Be Organized", "Code Is Fun!", "Let's Build Something Amazing!"];
 				var counter = 0;
 				var elem = document.getElementById("welcomeText");
 			    var s = setInterval(change, 1800);

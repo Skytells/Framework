@@ -3,19 +3,21 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version 2.3
- * @license Freeware
- * @copyright  2007-2017 Skytells, Inc. All rights reserved.
- * @license    https://www.skytells.net/us/terms  Freeware.
- * @author Dr. Hazem Ali ( fb.com/Haz4m )
- * @see The Framework's changelog to be always up to date.
+ * @version    3.0
+ * @copyright  2007-2018 Skytells, Inc. All rights reserved.
+ * @license    MIT | https://www.skytells.net/us/terms .
+ * @author     Dr. Hazem Ali ( fb.com/Haz4m )
+ * @see        The Framework's changelog to be always up to date.
  */
    define("IS_CORE_CLI", TRUE);
-   define('BASEPATH', __DIR__);
-   require(__DIR__."/Application/Library/Core/Units/Console.Boot.php");
-   require(__DIR__."/Application/Library/Core/Resources/Analysis/autoload.php");
-   require(__DIR__."/Application/Global.php");
+   @define(BASEPATH, __DIR__.'/', TRUE);
+   if (!file_exists(__DIR__.'/.env')) { exit('ENVIRONMENT (.ENV) SYSTEM FILE CANNOT BE FOUND!');}
+   $ENVIRONMENT_CONFIG = parse_ini_file('.env', true);
 
+
+
+   require BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Global.php";
+   require(__DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Kernel/Services/CLI.php");
    use ConsoleKit\Console,
        ConsoleKit\Command,
        ConsoleKit\Colors,
@@ -23,7 +25,7 @@
        ConsoleKit\Widgets\Dialog,
        ConsoleKit\Widgets\ProgressBar;
 
-       $files = glob(__DIR__.'/Application/Library/Core/Resources/ConsoleKit/Seeds/*.php');
+       $files = glob(__DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/Kernel/Units/ConsoleKit/Seeds/*.php');
 
        if (count($files) > 0){
          foreach($files as $file) {
@@ -33,7 +35,7 @@
 
     $CLI = new Console();
 
-    require(__DIR__."/Application/Misc/Config/CLI.php");
+    require(__DIR__.'/'.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/Misc/Config/CLI.php');
 
     global $_CLI_COMMANDS;
     foreach ($_CLI_COMMANDS as $Key => $value) {

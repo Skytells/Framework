@@ -5,4 +5,4 @@
 * a function or class stored in (Application/Core/Resources/ConsoleKit/Seeds).
 *--------------------------------------------------------------------------------------------*/
 
-Kernel::addCLICommand('test', 'test');
+Kernel::addCLICommand('test', function () { echo "This is test!\n"; });

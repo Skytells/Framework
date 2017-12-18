@@ -1,2 +1,0 @@
-<?
-require __DIR__."/../wapmorgan/php-code-fixer/bin/phpcf";
