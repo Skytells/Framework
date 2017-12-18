@@ -79,8 +79,11 @@ class FileCache
      *
      * @return bool
      */
-    public function set($id, $data, $lifetime = 3600)
+    public function set($id, $data, $lifetime = false)
     {
+        if ($lifetime === false) {
+          $lifetime = CACHE_TIME;
+        }
         $dir = $this->getDirectory($id);
         if (!is_dir($dir)) {
             if (!mkdir($dir, 0755, true)) {

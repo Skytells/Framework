@@ -13,21 +13,21 @@
 | -------------------------------------------------------------------
 |
 |	['dsn']      The full DSN string describe a connection to the database.
-|	['hostname'] The hostname of your database server.
+|	['host'] The hostname of your database server.
 |	['username'] The username used to connect to the database
 |	['password'] The password used to connect to the database
 |	['database'] The name of the database you want to connect to
-|	['dbdriver'] The database driver. e.g.: mysqli.
+|	['driver'] The database driver. e.g.: mysqli.
 |			Currently supported:
 |				 cubrid, ibase, mssql, mysql, mysqli, oci8,
 |				 odbc, pdo, postgre, sqlite3, sqlsrv
-|	['dbprefix'] You can add an optional prefix, which will be added
+|	['prefix'] You can add an optional prefix, which will be added
 |				 to the table name when using the  Query Builder class
 |	['pconnect'] TRUE/FALSE - Whether to use a persistent connection
 |	['db_debug'] TRUE/FALSE - Whether database errors should be displayed.
 |	['cache_on'] TRUE/FALSE - Enables/disables query caching
 |	['cachedir'] The path to the folder where cache files should be stored
-|	['char_set'] The character set used in communicating with the database
+|	['charset'] The character set used in communicating with the database
 |	['dbcollat'] The character collation used in communicating with the database
 |				 NOTE: For MySQL and MySQLi databases, this setting is only used
 | 				 as a backup if your server is running PHP < 5.2.3 or MySQL < 5.0.7
@@ -71,33 +71,35 @@
 */
 
 $dbconfig['ACTIVE_GROUP'] = 'Default';
-$dbconfig['QUERYBUILDER'] = TRUE;
+$dbconfig['QUERYBUILDER'] = FALSE;
 
-$dbconfig['Default'] = Array(
-	'dsn'	=> '',
-	'host' => '127.0.0.1',
-	'username' => 'root',
-	'password' => 'mysql',
-	'database' => 'test',
-	'driver' => 'mysqli',
-	'port'		 => 3306,
-	'charset'   => 'utf8',
-  'collation' => 'utf8_unicode_ci',
-  'prefix'    => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE,
-	'raw' => TRUE,
-	'illuminate' => FALSE,
-	'illuminatedriver' => 'mysql'
-);
+
+// Here you can use a multiple databases.
+$DBGroups['Default'] = Array (
+			'dsn'	=> '',
+			'host' => '127.0.0.1',
+			'username' => 'root',
+			'password' => 'mysql',
+			'database' => 'test',
+			'driver' => 'mysqli',
+			'port'		 => 3306,
+			'charset'   => 'utf8',
+		  'collation' => 'utf8_unicode_ci',
+		  'prefix'    => '',
+			'pconnect' => FALSE,
+			'db_debug' => (ENVIRONMENT !== 'production'),
+			'cache_on' => FALSE,
+			'cachedir' => '',
+			'swap_pre' => '',
+			'encrypt' => FALSE,
+			'compress' => FALSE,
+			'stricton' => FALSE,
+			'failover' => array(),
+			'save_queries' => TRUE,
+			'raw' => TRUE,
+			'illuminate' => FALSE,
+			'illuminatedriver' => 'mysql');
+
 
 
 

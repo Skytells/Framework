@@ -30,7 +30,7 @@
      Console::log("The Home Controller has been loaded.");
 
      // Now, We want to load the model.
-     # $this->load->model('HomeModel', $this);
+      # $this->load->model('HomeModel', $this);
 
 
    }

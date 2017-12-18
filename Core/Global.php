@@ -15,6 +15,7 @@
  use Illuminate\Database\Capsule\Manager as Capsule;
  if (!defined(BASEPATH)) {   $ENVIRONMENT_CONFIG = parse_ini_file(__DIR__.'/../.env', true); define('BASEPATH', str_replace('/Core', '/', __DIR__)); }
  static $Framework, $_Autoload, $lang;
+ static $ConnectedDBS = 0;
  $db = null;
  require __DIR__.'/Constants.php';
  require APP_SETTINGS_DIR.'/Settings.php';
@@ -31,22 +32,25 @@
   Payload::Define('SETTINGS');
   Payload::Autoload(Array(ENV_FUNCTIONS_DIR));
   require __DIR__.'/Ecosystem/Loader.php';
+
   error_reporting(0);
   if (DEVELOPMENT_MODE === TRUE && IS_CORE_CLI == FALSE) {
     if (INTELLISENSE_INTERFACE == 'UI' ) {
+      $BMST=microtime(TRUE);
       require __DIR__ .'/Kernel/Units/IntelliSense/vendor/autoload.php';
       ini_set("display_errors", 1);
       error_reporting(E_ALL | E_STRICT);
       $IntelliSense = new \IntelliSense\Run;
       $IntelliSense->pushHandler(new \IntelliSense\Handler\PrettyPageHandler);
       $IntelliSense->register();
+      $BMEND = microtime(true) - $BMST;
     }else {
       require __DIR__ .'/Kernel/Units/IntelliSense/IntelliSense.php';
       ini_set("display_errors", 1);
       error_reporting(E_ALL | E_STRICT);
     }
   }
-
+  require __DIR__ .'/Kernel/Components/vendor/autoload.php';
   // For better performance.
   Load::setReporter(FALSE);
 
@@ -55,20 +59,19 @@
 
   define('HTTP_SERVER_PROTOCOL', (Skytells\Handlers\Http::isSSL()) ? 'https://' : 'http://');
   Skytells\Ecosystem\Payload::Autoload(Array(ENV_EXCEPTIONS_DIR, ENV_BASES_DIR, ENV_INTERFACES_DIR));
-  global $Illuminate;
+  global $Illuminate, $DBGroups;
    if ($Illuminate['ORM'] === TRUE) {
-    require ENV_DRIVERS_DIR.'Database/illuminate/autoload.php';
+    //require ENV_DRIVERS_DIR.'Database/illuminate/autoload.php';
     $Capsule = new Capsule;
-
      $Capsule->addConnection([
-         'driver'    => $dbconfig[$Illuminate['DATABASE']]['illuminatedriver'],
-         'host'      => $dbconfig[$Illuminate['DATABASE']]['host'],
-         'database'  => $dbconfig[$Illuminate['DATABASE']]['database'],
-         'username'  => $dbconfig[$Illuminate['DATABASE']]['username'],
-         'password'  => $dbconfig[$Illuminate['DATABASE']]['password'],
-         'charset'   => $dbconfig[$Illuminate['DATABASE']]['charset'],
-         'collation' => $dbconfig[$Illuminate['DATABASE']]['collation'],
-         'prefix'    => $dbconfig[$Illuminate['DATABASE']]['prefix'],
+         'driver'    => $DBGroups[$Illuminate['DATABASE']]['illuminatedriver'],
+         'host'      => $DBGroups[$Illuminate['DATABASE']]['host'],
+         'database'  => $DBGroups[$Illuminate['DATABASE']]['database'],
+         'username'  => $DBGroups[$Illuminate['DATABASE']]['username'],
+         'password'  => $DBGroups[$Illuminate['DATABASE']]['password'],
+         'charset'   => $DBGroups[$Illuminate['DATABASE']]['charset'],
+         'collation' => $DBGroups[$Illuminate['DATABASE']]['collation'],
+         'prefix'    => $DBGroups[$Illuminate['DATABASE']]['prefix'],
      ]);
      $Capsule->setEventDispatcher(new Illuminate\Events\Dispatcher(new Illuminate\Container\Container));
      $Capsule->setAsGlobal();

@@ -1,13 +1,13 @@
 <?
-global $Framework, $ENV_STARTUP_TIME, $Settings, $db, $dbconfig;
+global $Framework, $ENV_STARTUP_TIME, $Settings, $db, $dbconfig, $BMEND, $ConnectedDBS;
 $time_elapsed_secs = microtime(true) - $ENV_STARTUP_TIME;
-$Framework['benchmark'] = substr($time_elapsed_secs, 0, 10);
+$Framework['benchmark'] = substr($time_elapsed_secs - $BMEND, 0, 10);
 $Framework['language'] = (isset($_SESSION[LANG_SESID])) ? $_SESSION[LANG_SESID] : "en_US";
 $Framework['Settings'] = $Settings;
 $Framework['totalCached'] = getTotalCached();
 $Framework['homebase'] = Base();
 $Framework['dbversion'] = (is_object($db)) ? $db->server_info : 'Unknown';
-$Framework['dbcount'] = count($dbconfig) -2;
+$Framework['dbcount'] = $ConnectedDBS;
 $Datafile = __DIR__.'/data/Framework.json';
 if (file_exists($Datafile)) { unlink($Datafile); }
 file_put_contents($Datafile, json_encode($Framework, JSON_PRETTY_PRINT));

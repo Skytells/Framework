@@ -1,7 +1,7 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 # If you've installed the Framework in sub-dir, USE : RewriteBase /DIRNAME/ instead of RewriteBase /
-RewriteBase /Framework/
+RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteRule ^assets/(.*)$ Application/Resources/Views/assets/$1 [L]
 RewriteCond %{REQUEST_FILENAME} !-f

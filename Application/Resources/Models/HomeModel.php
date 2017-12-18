@@ -20,15 +20,22 @@
       // Connect to Database : (Default)
 
       // If we want to extend this model with an ORM
-      # $this->AddEloquent('Users');
+      // NOTE: That is option requires ORM to be on from Database config file.
+       $this->AddEloquent('Users');
 
 
       // Connecting to the Selected Database Group.
-      $this->Connect('Default');
+       $this->Connect('Default') // Connect to db.1
+            ->Join('Default'); // Joining another DB
+
   }
 
    function getUsers() {
        return $this->SQLManager['Default']->get('users');
+   }
+
+   function getUserByCapsule($ID) {
+     return $this->Capsule['Default']->table('users')->where('id', '=', (int)$ID)->get();
    }
 
 
