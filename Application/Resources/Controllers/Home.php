@@ -32,7 +32,6 @@
      // Now, We want to load the model.
       # $this->load->model('HomeModel', $this);
 
-
    }
 
 

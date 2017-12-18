@@ -119,23 +119,8 @@
           if (file_exists($InternalPath.$File)) { $TruePath = $InternalPath.$File; }else {
         throw new \Exception("Error loading Helper: [$File], The Helper is not found!", 1); }
       }
-
-			$className = Load::getClassNameFromFile($TruePath);
-			if (class_exists($className)){ throw new \Exception("Helper: [$File] is already loaded, Cannot load it twice.", 1); }
 			require $TruePath;
-			//-------------------------------------------------------------------
-      if ($setOwner != false && is_object($setOwner)){
-      if (!is_array($args) && $args != false && $args != true){ $newName = $args; $args = false; }
-      $clName = Load::getClassNameFromFile($TruePath); $OwnerObject = $clName;
-			$namespace = Load::getClassNamespaceFromFile($TruePath);
-			$realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
-      if (!empty($newName)) { $OwnerObject = $newName;  }
-      if ($args != false && is_array($args)){
-      $refClass = new ReflectionClass($clName);
-      $setOwner->$OwnerObject = $refClass->newInstanceArgs($args);
-      } else { $setOwner->$OwnerObject = new $clName; } }
-     // ----------------------------------------------------------------
-		 Runtime::Report('helper', $className, $TruePath);
+		 Runtime::Report('helper', $File, $TruePath);
 		}
 
 
