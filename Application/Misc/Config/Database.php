@@ -69,28 +69,69 @@
 | The $dbconfig['QUERYBUILDER'] variables lets you determine whether or not to load
 | the query builder class.
 */
+
 $dbconfig['ACTIVE_GROUP'] = 'Default';
 $dbconfig['QUERYBUILDER'] = TRUE;
+
 $dbconfig['Default'] = Array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'host' => '127.0.0.1',
 	'username' => 'root',
 	'password' => 'mysql',
 	'database' => 'test',
-	'dbdriver' => 'mysqli',
+	'driver' => 'mysqli',
 	'port'		 => 3306,
-	'dbprefix' => '',
+	'charset'   => 'utf8',
+  'collation' => 'utf8_unicode_ci',
+  'prefix'    => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
-	'charset' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE,
-	'raw' => TRUE
+	'raw' => TRUE,
+	'illuminate' => FALSE,
+	'illuminatedriver' => 'mysql'
 );
+
+
+
+/*
+| -------------------------------------------------------------------
+| ILLUMINATE DATABASES & Eloquents Relationships
+| -------------------------------------------------------------------
+| Database tables are often related to one another.
+| For example, a blog post may have many comments, or an order could be
+| related to the user who placed it. Eloquent makes managing and working
+| with these relationships easy, and supports several different types of
+| relationships:
+| * One To One
+| * One To Many
+| * Many To Many
+| * Has Many Through
+| * Polymorphic Relations
+| * Many To Many Polymorphic Relations
+| Eloquent relationships are defined as methods on your Eloquent model classes.
+| Since, like Eloquent models themselves, relationships also serve as powerful
+| query builders, | defining relationships as methods provides powerful method
+| chaining and querying capabilities
+| -------------------------------------------------------------------
+| EXPLANATION OF VARIABLES
+| -------------------------------------------------------------------
+|
+|	$Illuminate['ORM'] Enables or Disables ORM
+|	$Illuminate['DATABASE'] The Default Database Group which used for creating
+| the first Connection.
+| NOTE: That you can also use a multiple databases.
+| SEE: https://developers.skytells.net/Framework for more info.
+| -------------------------------------------------------------------*/
+
+$Illuminate = [
+	'ORM' => FALSE,
+	'DATABASE' => 'Default',
+];

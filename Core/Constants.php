@@ -34,6 +34,8 @@ define(ENV_DRIVERS_DIR, ENVCORE.'Ecosystem/Drivers/');
 define(APP_SETTINGS_DIR, APPBASE.'Misc/');
 define(APP_CONTROLLERS_DIR, APPBASE.'Resources/Controllers/');
 define(APP_VIEWS_DIR, APPBASE.'Resources/Views/');
+define(APP_MODELS_DIR, APPBASE.'Resources/Models/');
+define(APP_ELOQUENTS_DIR, APPBASE.'Resources/Models/Eloquents/');
 define(APP_LANGS_DIR, APPBASE.'Misc/Languages/');
 define(APP_STORAGE_DIR, APPBASE.'Storage/');
 define(APP_STORAGE_LOGS, APPBASE.'Storage/Logs/');

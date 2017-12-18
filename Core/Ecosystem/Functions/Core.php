@@ -259,3 +259,4 @@
      $lang = include APP_LANGS_DIR.$ACTIVELANG.'.php';
      return $lang;
    }
+   

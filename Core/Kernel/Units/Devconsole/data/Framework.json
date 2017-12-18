@@ -2,106 +2,106 @@
     "Runtime": {
         "All": [
             {
-                "ProccessID": 1145,
+                "ProccessID": 5009,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1513599968.1294
+                "Timestamp": 1513613972.4892
             },
             {
-                "ProccessID": 7431,
+                "ProccessID": 3254,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1513599968.1304
+                "Timestamp": 1513613972.4904
             },
             {
-                "ProccessID": 4480,
+                "ProccessID": 2655,
                 "Type": "cLog",
                 "Message": "Framework Bootstrap Initialized",
-                "Timestamp": 1513599968.1304
+                "Timestamp": 1513613972.4904
             },
             {
-                "ProccessID": 5690,
+                "ProccessID": 3308,
                 "Type": "cLog",
                 "Message": "The Home Controller has been loaded.",
-                "Timestamp": 1513599968.1306
+                "Timestamp": 1513613972.4906
             },
             {
-                "ProccessID": 7538,
+                "ProccessID": 6019,
                 "isLoaded": true,
                 "Name": "Index",
                 "Type": "UI",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1513599968.1308
+                "Timestamp": 1513613972.4908
             },
             {
-                "ProccessID": 2754,
+                "ProccessID": 8756,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1513599968.1308
+                "Timestamp": 1513613972.4908
             }
         ],
         "Handlers": [
             {
-                "ProccessID": 1145,
+                "ProccessID": 5009,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1513599968.1294
+                "Timestamp": 1513613972.4892
             }
         ],
         "Modules": [
             {
-                "ProccessID": 7431,
+                "ProccessID": 3254,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1513599968.1304
+                "Timestamp": 1513613972.4904
             }
         ],
         "Console": [
             {
-                "ProccessID": 4480,
+                "ProccessID": 2655,
                 "Type": "cLog",
                 "Message": "Framework Bootstrap Initialized",
-                "Timestamp": 1513599968.1304
+                "Timestamp": 1513613972.4904
             },
             {
-                "ProccessID": 5690,
+                "ProccessID": 3308,
                 "Type": "cLog",
                 "Message": "The Home Controller has been loaded.",
-                "Timestamp": 1513599968.1306
+                "Timestamp": 1513613972.4906
             }
         ],
         "UIs": [
             {
-                "ProccessID": 7538,
+                "ProccessID": 6019,
                 "isLoaded": true,
                 "Name": "Index",
                 "Type": "UI",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1513599968.1308
+                "Timestamp": 1513613972.4908
             }
         ],
         "Controllers": [
             {
-                "ProccessID": 2754,
+                "ProccessID": 8756,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1513599968.1308
+                "Timestamp": 1513613972.4908
             }
         ]
     },
-    "benchmark": "0.00855302",
+    "benchmark": "0.00882005",
     "language": "en_US",
     "Settings": {
         "ROOT_PATH": "Framework",

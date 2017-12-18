@@ -10,6 +10,9 @@
  * @see        The Framework's changelog to be always up to date.
  */
 global $dbconfig;
- require __DIR__.'/SQLManager.php';
- if ($dbconfig['QUERYBUILDER'] == TRUE) {
+ if (!class_exists('SQLManager')) {
+    require __DIR__.'/SQLManager.php';
+ }
+
+ if ($dbconfig['QUERYBUILDER'] == TRUE && !class_exists('DBObject')) {
  require __DIR__.'/DBObject.php'; }

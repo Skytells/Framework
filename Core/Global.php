@@ -10,6 +10,9 @@
  * @see        The Framework's changelog to be always up to date.
  */
  use Skytells\Ecosystem\Payload;
+ use Illuminate\Events\Dispatcher;
+ use Illuminate\Container\Container;
+ use Illuminate\Database\Capsule\Manager as Capsule;
  if (!defined(BASEPATH)) {   $ENVIRONMENT_CONFIG = parse_ini_file(__DIR__.'/../.env', true); define('BASEPATH', str_replace('/Core', '/', __DIR__)); }
  static $Framework, $_Autoload, $lang;
  $db = null;
@@ -52,7 +55,25 @@
 
   define('HTTP_SERVER_PROTOCOL', (Skytells\Handlers\Http::isSSL()) ? 'https://' : 'http://');
   Skytells\Ecosystem\Payload::Autoload(Array(ENV_EXCEPTIONS_DIR, ENV_BASES_DIR, ENV_INTERFACES_DIR));
+  global $Illuminate;
+   if ($Illuminate['ORM'] === TRUE) {
+    require ENV_DRIVERS_DIR.'Database/illuminate/autoload.php';
+    $Capsule = new Capsule;
 
+     $Capsule->addConnection([
+         'driver'    => $dbconfig[$Illuminate['DATABASE']]['illuminatedriver'],
+         'host'      => $dbconfig[$Illuminate['DATABASE']]['host'],
+         'database'  => $dbconfig[$Illuminate['DATABASE']]['database'],
+         'username'  => $dbconfig[$Illuminate['DATABASE']]['username'],
+         'password'  => $dbconfig[$Illuminate['DATABASE']]['password'],
+         'charset'   => $dbconfig[$Illuminate['DATABASE']]['charset'],
+         'collation' => $dbconfig[$Illuminate['DATABASE']]['collation'],
+         'prefix'    => $dbconfig[$Illuminate['DATABASE']]['prefix'],
+     ]);
+     $Capsule->setEventDispatcher(new Illuminate\Events\Dispatcher(new Illuminate\Container\Container));
+     $Capsule->setAsGlobal();
+     $Capsule->bootEloquent();
+   }
   if (IS_CORE_CLI === FALSE) { Startup(); $Core = new Boot(); }
   $db = null;
   free_memory();
