@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.0
+ * @version    3.1
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -112,6 +112,20 @@
 				}
 			}
 			return;
+		}
+
+		public static function assign($route, $Target, $methodArgs = false, $RequestMethod = 'GET|POST')  {
+			Router::map($RequestMethod, $route, function() use($Target, $methodArgs){
+
+				if (strpos($Target, '@') !== false) {
+					$Target = explode('@', $Target);
+					if ($methodArgs !== false) {
+						Boot::Controller($Target[0], $Target[1], $methodArgs);
+					}
+
+				}
+			});
+
 		}
 		/**
 		 * Reversed routing

@@ -1,0 +1,19 @@
+{
+    "require": {
+        "illuminate/database": "^5.4",
+        "illuminate/config": "^5.4",
+        "illuminate/events": "^5.4",
+        "illuminate/view": "^5.4",
+        "illuminate/filesystem": "^5.4",
+        "symfony/finder": "^3.4",
+        "symfony/debug": "^3.4",
+        "psr/log": "^1.0",
+        "illuminate/translation": "^5.4",
+        "illuminate/cache": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "IntelliSense\\": "vendor/IntelliSense/"
+        }
+    }
+}

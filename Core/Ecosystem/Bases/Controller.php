@@ -3,13 +3,13 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.0
+ * @version    3.1
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
-
+use Skytells\UI\View;
  Class Controller {
 
    public function __construct($args = array()) {
@@ -44,10 +44,30 @@
      if (isset($_GET['action']) && $_GET['action'] == 'flushcache') {
        flush_cache();
      }
+     
 
    }
 
 
+
+
+  public function AddAlliance($File, $to = false, $args = array(), $newName = '') {
+    if (!Contains($File,".php")) { $File = $File.'.php'; }
+    $Path =  APP_CONTROLLERS_DIR.'Alliances/'.$File;
+
+    if (is_object($to)) {
+      require $Path;
+      $clName = Load::getClassNameFromFile($Path);
+      $OwnerObject = $clName;
+      $namespace = Load::getClassNamespaceFromFile($Path);
+      $realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
+      if (!empty($newName)) { $OwnerObject = $newName;  }
+      if ($args != false && is_array($args)){
+      $refClass = new ReflectionClass($realClassName);
+      $to->$OwnerObject = $refClass->newInstanceArgs($args);
+    } else { $to->$OwnerObject = new $realClassName; } }else {require $Path;}
+    return true;
+  }
    /**
     * Grant Database Access
     * @return bool

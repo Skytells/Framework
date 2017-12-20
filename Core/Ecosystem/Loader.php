@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.0
+ * @version    3.1
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -45,9 +45,9 @@
           $realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
           if (!empty($newName)) { $OwnerObject = $newName;  }
           if ($args != false && is_array($args)){
-          $refClass = new ReflectionClass($clName);
+          $refClass = new ReflectionClass($realClassName);
           $setOwner->$OwnerObject = $refClass->newInstanceArgs($args);
-          } else { $setOwner->$OwnerObject = new $clName; } }
+          } else { $setOwner->$OwnerObject = new $realClassName; } }
          // ----------------------------------------------------------------
          Runtime::Report('handler', $className, $TruePath);
         }
@@ -72,9 +72,9 @@
 			$realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
       if (!empty($newName)) { $OwnerObject = $newName;  }
       if ($args != false && is_array($args)){
-      $refClass = new ReflectionClass($clName);
+      $refClass = new ReflectionClass($realClassName);
       $setOwner->$OwnerObject = $refClass->newInstanceArgs($args);
-      } else { $setOwner->$OwnerObject = new $clName; } }
+      } else { $setOwner->$OwnerObject = new $realClassName; } }
      // ----------------------------------------------------------------
 		 Runtime::Report('model', $className, $TruePath);
 		}
@@ -102,9 +102,9 @@
 			$realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
       if (!empty($newName)) { $OwnerObject = $newName;  }
       if ($args != false && is_array($args)){
-      $refClass = new ReflectionClass($clName);
+      $refClass = new ReflectionClass($realClassName);
       $setOwner->$OwnerObject = $refClass->newInstanceArgs($args);
-      } else { $setOwner->$OwnerObject = new $clName; } }
+      } else { $setOwner->$OwnerObject = new $realClassName; } }
      // ----------------------------------------------------------------
 		 Runtime::Report('library', $className, $TruePath);
 		}
@@ -147,9 +147,9 @@
 			$realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
       if (!empty($newName)) { $OwnerObject = $newName;  }
       if ($args != false && is_array($args)){
-      $refClass = new ReflectionClass($clName);
+      $refClass = new ReflectionClass($realClassName);
       $setOwner->$OwnerObject = $refClass->newInstanceArgs($args);
-      } else { $setOwner->$OwnerObject = new $clName; } }
+      } else { $setOwner->$OwnerObject = new $realClassName; } }
      // ----------------------------------------------------------------
 		 Runtime::Report('Driver', $className, $TruePath);
 		}
@@ -176,9 +176,9 @@
 			$realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
       if (!empty($newName)) { $OwnerObject = $newName;  }
       if ($args != false && is_array($args)){
-      $refClass = new ReflectionClass($clName);
+      $refClass = new ReflectionClass($realClassName);
       $setOwner->$OwnerObject = $refClass->newInstanceArgs($args);
-      } else { $setOwner->$OwnerObject = new $clName; } }
+      } else { $setOwner->$OwnerObject = new $realClassName; } }
      // ----------------------------------------------------------------
 		 Runtime::Report('hook', $className, $TruePath);
 		}

@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.0
+ * @version    3.1
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -42,7 +42,7 @@
          Firewall::$DDOS_EXP = $Firewall['FIREWALL_ANTI_DDOS_INTERVAL'];
          Firewall::AntiDDoS();
        }
-       
+
        Firewall::$ALLOWED_CHARS = $Firewall['ALLOWED_CHARS'];
        if (!Firewall::isWhitelisted(getUrl())) {
           Firewall::SecureURI();

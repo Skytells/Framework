@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.0
+ * @version    3.1
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -11,21 +11,21 @@
  */
 
 
-/*
-|-------------------------------------------------------------------------------
-| FRAMEWORK SETTINGS
-|-------------------------------------------------------------------------------
-|
-| These settings needs to be changed before the application being uploaded
-*/
+ /*
+ |-------------------------------------------------------------------------------
+ | FRAMEWORK SETTINGS
+ |-------------------------------------------------------------------------------
+ |
+ | These settings needs to be changed before the application being uploaded
+ */
   // WHERE SKYTELLS FRAMEWORK IS INSTAALLED? IF YOU'RE RUNNING ON THE ROOT
   // FOLDER OR THE MAIN (WWW), PLEASE LEAVE IT EMPTY, OTHERWISE,
   // PLEASE WRITE THE NAME OF THE DIRECTORY YOU INSTALLED SKYTELLS FW ON IT.
-  $Settings["ROOT_PATH"]   = 'Framework';
+  $Settings["ROOT_PATH"]   = '';
 
   // PLEASE WRITE THE BASE URL WITHOUT (HTTP, HTTPS OR WWW) WITHOUT END-SLASHES
   // EXAMPLE: Skytells.org/Framework or Skytells.org
-  $Settings["SITEBASE"]   = 'localhost/Framework';
+  $Settings["SITEBASE"]   = 'localhost';
 
 
   // TURN IT TO (TRUE) TO FORCE USING SECURE PROTOCOL (HTTPS)
@@ -34,17 +34,45 @@
  //-----------------------------------------------------------------------------
 
 
-/*
-|-------------------------------------------------------------------------------
-| DEVELOPMENT ENVIRONMENT
-|-------------------------------------------------------------------------------
-|
-| These settings needs to be changed before the application being uploaded
-| Please do not upload this application into WWW without turning the
-| development environment off, or all of your visitors will be able to
-| see the debug data, such as errors and warnning and sometimes your code.
-|
-*/ // This option is responsible for turning development mode on or off.
+
+
+ /*
+ |-------------------------------------------------------------------------------
+ | APPLICATION SETTINGS.
+ |-------------------------------------------------------------------------------
+ |
+ | These settings needs to be configured as the way you develope your app.
+ | NOTE: That these settings are important.
+ */
+ // The Default Namespace for your App.
+ // NOTE: PLEASE DO NOT INCLUDE (\) In THE END.
+ // If you do not want to work with Namespaces, leave it blank
+ $Settings['APP_NAMESPACE'] = '';
+
+ // APPLICATION INSTANCE
+ // Application instance is the main container of the entire project.
+ $Settings['APP_INSTANCE'] = 'App';
+
+ // If your app is paid, and you're afraid from someone who may steal it
+ // Write a Strong Key to encrypt your app, and prevent it from working on
+ // unauthorized websites.
+ $Settings['APP_CRYPTOKEY'] = '0A8#CR8#9SSW#';
+
+
+
+
+
+ /*
+ |-------------------------------------------------------------------------------
+ | DEVELOPMENT ENVIRONMENT
+ |-------------------------------------------------------------------------------
+ |
+ | These settings needs to be changed before the application being uploaded
+ | Please do not upload this application into WWW without turning the
+ | development environment off, or all of your visitors will be able to
+ | see the debug data, such as errors and warnning and sometimes your code.
+ |
+ */ // This option is responsible for turning development mode on or off.
  $Settings["DEVELOPMENT_MODE"]   = TRUE;
  // The IntelliSense Debugger is responsible for displying errors and
  // Exceptions all with highliting the code, this feature will only
@@ -71,16 +99,33 @@
 
  /*
  |-------------------------------------------------------------------------------
- | Internationalization Settings
+ | Internationalization Settings (BUILT-IN ENGINE) ?
  |-------------------------------------------------------------------------------
  |
+ | Skytells Framework comes with (2) Language Engines.
+ | - Built-In Engine
+ | - Illuminate Engine
  | These settings to allow internationalization for your application by allowing
  | the app to support other languages.
+ | --
+ | MULTILANGS: This var. is required to be set true or false, by enabling this
+ | option, You're giving the Framework the chance to detect the language by
+ | a URL parameter.
+ | USE_BUILTIN_PHRASES: Allows you to use the built in languages.
+ | LANG_SESID: The Session key which responsible for storing langID.
+ | DEFAULTLANG: The default language.
+ | NOTE: That you can use our dynamic Translation Engine also.
+ | How to? you can see our documentation on our website.
  */
  // CHANGE THIS TO TRUE TO ENABLE THIS FEATURE.
  $Settings["MULTILANGS"] = TRUE;
+
+ // Use the BUILT-IN Engine as the primary languages engine?
+ $Settings["USE_BUILTIN_PHRASES"] = TRUE;
+
  // THE SESSION ID TO STORE THE SELECTED LANG.
  $Settings["LANG_SESID"] = "SFW_LANGUAGE";
+
  // THE DEFAULT LANGUAGE FOR YOUR APP ( MUST BE IN THE LANGUAGES DIR. )
  $Settings["DEFAULTLANG"] = "en_US";
 

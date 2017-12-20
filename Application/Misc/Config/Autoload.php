@@ -15,3 +15,4 @@
 */
 
  $_Autoload = Array();
+ // NOTE: Please remove the (#) Sign from (Core/Global.php) After filling out the array.

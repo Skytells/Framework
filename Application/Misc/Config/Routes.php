@@ -41,4 +41,5 @@
      [**:trailing]        // Catch all (possessive - will match the rest of the URI)
      .[:format]?          // Match an optional parameter 'format' - a / or . before the block is also optional
      * --------------------------------------------------------------------------------------*/
-     Router::map('GET|POST', "/static_route", function() { $home = new Home(); $home->index(); });
+     Router::map('GET|POST', "/new_route", function() { Boot::Controller('Home', 'index', ['arg1', 'arg2']); });
+     Router::assign('/testAssignment', 'Home@index', ['arg1', 'arg2']);
