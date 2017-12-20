@@ -14,7 +14,8 @@ Powered by : Skytells, Inc.
 ## Important
 
 Please refer to the Changelog.md for any future updates.
-Also, Please see the ( Framework Manual ) to learn how to use it.
+
+Also, Please see the ( <a href='http://developers.skytells.net/framework/'>Framework Guide</a> ) to learn how to use Skytells FW.
 
 
 
@@ -33,7 +34,7 @@ Also, Please see the ( Framework Manual ) to learn how to use it.
 - Development Tools ( For Debugging )
 - Multi-Languages Support
 - IntelliSense Debugging Console
-- Advanced ( MVC ) - ( MVHC ) Support.
+- Advanced ( MVC ) - ( HMVC ) Support.
 - Super-fast Template Engine
 - GZIP Module ( For Ultra-fast Performance )
 - Super great libraries
@@ -60,8 +61,7 @@ Each Version of this Framework may require a new modules or extensions to be ava
 
 - Server
 - If localhost ( Please install Ampps or AppServ )
-- PHP 5.6+
-- Version 5.6 or Newer
+- PHP 5.6+ ( > 7 Recommended )
 - Tokenizer ( PHP Module )
 - Apache
 - Mode_Rewrite ( Apache Module )
@@ -69,11 +69,20 @@ Each Version of this Framework may require a new modules or extensions to be ava
 ### Installation
 The Installation is too easy!
 
+Just download the last release of the framework, and install it on your server and you're ready to go.
+
 ##### Download or Clone the Skytells PHP Framework
 Using your browser or Git.
 
 ```sh
-$ git clone https://github.com/Skytells/Framework.git
+$ > git clone https://github.com/Skytells/Framework.git
+```
+
+##### Composer ?
+Perform the following command to install it using Composer
+
+```sh
+$ > composer require skytells/framework
 ```
 
 ##### Configuring Framework.
@@ -97,7 +106,13 @@ Uddit is a very powerful social network platform built with Skytells Framework.
 #### <a href='http://cloud.skytells.me'>Skytells Cloud</a>
 Skytells Cloud is a very powerful cloud system like the iCloud built with Skytells Framework.
 
+#### <a href='http://cloud.skytells.me'>Oxgram, Inc.</a>
+Oxgram is a Powerful financial platform for cryptocurrencies.
 
 ## Support
 This framework is a free PHP framework provided by Skytells, Inc.
 For any issues during using the Framework, Please inform us at developers@skytells.net.
+
+## Donations Are Welcomed! 
+BTC : 172mnQHvCuQHh1sgo3i4MesBvV9SKECcMr
+
