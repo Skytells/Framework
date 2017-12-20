@@ -1,5 +1,5 @@
 # Skytells Framework for PHP
-Version 2.4 ( Last Release Version )
+Version 3.0 ( Last Release Version )
 
 Version 3.1 ( Current Development Version )
 
