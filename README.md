@@ -25,6 +25,7 @@ Also, Please see the ( Framework Manual ) to learn how to use it.
 - Built-in Very Useful Functions ( up to date )
 - Built-in Ready HTML5 ( 404, 505, 403 ) Pages.
 - Built-In Embed System for Social Networks Development.
+- Built-In ORM System ( With Over 4 Supported Drivers )
 - Advanced CLI & Analytical Tools.
 - MySQL(i) Support ( Objective & Static )
 - Social Plugins Support  ( Facebook Login )
