@@ -106,13 +106,12 @@ Uddit is a very powerful social network platform built with Skytells Framework.
 #### <a href='http://cloud.skytells.me'>Skytells Cloud</a>
 Skytells Cloud is a very powerful cloud system like the iCloud built with Skytells Framework.
 
-#### <a href='http://cloud.skytells.me'>Oxgram, Inc.</a>
+#### <a href='https://www.oxgram.com'>Oxgram, Inc.</a>
 Oxgram is a Powerful financial platform for cryptocurrencies.
 
 ## Support
 This framework is a free PHP framework provided by Skytells, Inc.
 For any issues during using the Framework, Please inform us at developers@skytells.net.
 
-## Donations Are Welcomed! 
+## Donations Are Welcomed!
 BTC : 172mnQHvCuQHh1sgo3i4MesBvV9SKECcMr
-
