@@ -9,9 +9,8 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
+ Namespace Skytells\Database;
  use Skytells\Core\Runtime;
- use Illuminate\Events\Dispatcher;
- use Illuminate\Container\Container;
  use Illuminate\Database\Capsule\Manager as Capsule;
  Class Model {
    public  $SQLManager;
@@ -20,10 +19,9 @@
 
    }
 
-
    public function Connect($GroupID = 'Default', $args = array()) {
      try {
-       global $dbconfig, $Settings, $db, $DBGroups, $ConnectedDBS;
+       global $dbconfig, $Settings, $db, $DBGroups;
        $DriverName = $DBGroups[$GroupID]['driver'];
        if (!isset($args['join'])) {
          $driver = ENV_DRIVERS_DIR.'Database/'.$DBGroups[$GroupID]['driver'].'/Init.php';
@@ -32,45 +30,36 @@
        }
        $DB_ACTIVE_GROUP = $GroupID;
 
-       if ($DBGroups[$GroupID]['illuminate'] === TRUE) {
+       if ($DBGroups[$GroupID]['ORM']['illuminate'] === TRUE) {
          $this->Capsule[$GroupID] = new Capsule;
-          $this->Capsule[$GroupID]->addConnection([
-              'driver'    => $DBGroups[$GroupID]['illuminatedriver'],
-              'host'      => $DBGroups[$GroupID]['host'],
-              'database'  => $DBGroups[$GroupID]['database'],
-              'username'  => $DBGroups[$GroupID]['username'],
-              'password'  => $DBGroups[$GroupID]['password'],
-              'charset'   => $DBGroups[$GroupID]['charset'],
-              'collation' => $DBGroups[$GroupID]['collation'],
-              'prefix'    => $DBGroups[$GroupID]['prefix'],
+          $this->Capsule[$GroupID]->addConnection(['driver' => $DBGroups[$GroupID]['ORM']['illuminatedriver'],'host' => $DBGroups[$GroupID]['host'],
+              'database'  => $DBGroups[$GroupID]['database'], 'username' => $DBGroups[$GroupID]['username'], 'password' => $DBGroups[$GroupID]['password'],
+              'charset' => $DBGroups[$GroupID]['charset'], 'collation' => $DBGroups[$GroupID]['collation'], 'prefix' => $DBGroups[$GroupID]['prefix'],
           ]);
-          $this->Capsule[$GroupID]->setEventDispatcher(new Illuminate\Events\Dispatcher(new Illuminate\Container\Container));
+          $this->Capsule[$GroupID]->setEventDispatcher(new \Illuminate\Events\Dispatcher(new \Illuminate\Container\Container));
           $this->Capsule[$GroupID]->setAsGlobal();
           $this->Capsule[$GroupID]->bootEloquent();
        }
        if ($DBGroups[$GroupID]['driver'] === 'mysqli') {
-         $db_data = array ('host' => $DBGroups[$GroupID]['host'],
-                            'username' => $DBGroups[$GroupID]['username'],
-                            'password' => $DBGroups[$GroupID]['password'],
-                            'db'=> $DBGroups[$GroupID]['database'],
-                            'port' => $DBGroups[$GroupID]['port'],
-                            'prefix' => $DBGroups[$GroupID]['prefix'],
-                            'charset' => $DBGroups[$GroupID]['charset']);
-         $this->SQLManager[$GroupID] = new SQLManager($db_data);
+         $db_data = array ('host' => $DBGroups[$GroupID]['host'], 'username' => $DBGroups[$GroupID]['username'], 'password' => $DBGroups[$GroupID]['password'],
+                            'db'=> $DBGroups[$GroupID]['database'], 'port' => $DBGroups[$GroupID]['port'], 'prefix' => $DBGroups[$GroupID]['prefix'], 'charset' => $DBGroups[$GroupID]['charset']);
          if ($dbconfig['QUERYBUILDER'] === TRUE) {
-           $this->DBObject[$GroupID] = new DBObject();
+           $this->SQLManager[$GroupID] = new \SQLManager($db_data);
+           if ($dbconfig['DBOBJECT'] === TRUE) {
+           $this->DBObject[$GroupID] = new \DBObject();
+           }
           }
          $this->db[$GroupID] = ($DBGroups[$GroupID]['raw'] == TRUE) ?
-         new mysqli( $DBGroups[$GroupID]['host'], $DBGroups[$GroupID]['username'], $DBGroups[$GroupID]['password'], $DBGroups[$GroupID]['database']) : NULL;
+         new \mysqli( $DBGroups[$GroupID]['host'], $DBGroups[$GroupID]['username'], $DBGroups[$GroupID]['password'], $DBGroups[$GroupID]['database']) : NULL;
          $db = $this->db[$GroupID];
        }
        if (DEVELOPMENT_MODE === TRUE) {
-         global $Framework;
+         global $Framework, $ConnectedDBS;
          $Framework['db_connection'] = true;
          $Framework['db_drivers'][] = $DBGroups[$GroupID]['driver'];
          $Framework['dbs'][] = $DBGroups[$GroupID]['database'];
+         $ConnectedDBS++;
        }
-       $ConnectedDBS++;
        return $this;
      } catch (Exception $e) {
       throw new \Exception($e->getMessage(), 1);
@@ -92,7 +81,6 @@
     }
    }
 
-
    public function AddEloquent($File) {
      try {
        if (!is_dir(APP_ELOQUENTS_DIR)) {
@@ -102,7 +90,7 @@
        $TruePath = APP_ELOQUENTS_DIR.$File;
        if (!file_exists($TruePath)){
          throw new \Exception("Error loading Eloquent: [$File], The Eloquent is not found!", 1); }
-      $className = Load::getClassNameFromFile($TruePath);
+      $className = \Load::getClassNameFromFile($TruePath);
       if (class_exists($className)){ throw new \Exception("Eloquent: [$File] is already loaded, Cannot load it twice.", 1); }
          require $TruePath;
       Runtime::Report('model', $className, $TruePath);
@@ -112,5 +100,23 @@
      }
    }
 
+   public function AddMigration($File) {
+     try {
+       if (!is_dir(APP_MIGRATIONS_DIR)) {
+         throw new \ErrorException("Eloquent dir is not exists.", 1);
+       }
+       if (!Contains($File, '.php')){ $File = $File.".php"; }
+       $TruePath = APP_MIGRATIONS_DIR.$File;
+       if (!file_exists($TruePath)){
+         throw new \Exception("Error loading Migration: [$File], The Migration is not found!", 1); }
+      $className = \Load::getClassNameFromFile($TruePath);
+      if (class_exists($className)){ throw new \Exception("Migration: [$File] is already loaded, Cannot load it twice.", 1); }
+         require $TruePath;
+      Runtime::Report('model', $className, $TruePath);
+      return $this;
+     } catch (Exception $e) {
+       throw new \Exception($e->getMessage(), 1);
+     }
+   }
 
  }

@@ -25,3 +25,9 @@
    * PLEASE DO NOT USE (.) OR (.PHP) WITH THE EXTENTION.
    */
   $Settings["TEMPLATE_FILE_EXTENSION"] = "ui";
+
+  /**
+   * @var TEMPLATE_CACHE_DIR :
+   * the cache path of the template cache that will be stored on.
+   */
+  $Settings["TEMPLATE_CACHE_DIR"] = "Storage/Cache/Views";

@@ -10,7 +10,7 @@
  * @see        The Framework's changelog to be always up to date.
  */
 
-define(FRAMEWORK_VERSION, '3.1');
+const FRAMEWORK_VERSION = '3.1';
 define(ENVCORE, BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/');
 define(ENV_DIR, BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/');
 define(APPBASE, BASEPATH.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/');
@@ -38,6 +38,7 @@ define(APP_VIEWS_DIR, APPBASE.'Resources/Views/');
 define(APP_MODELS_DIR, APPBASE.'Resources/Models/');
 define(APP_LANGUAGES_DIR, APPBASE.'Resources/Languages/');
 define(APP_ELOQUENTS_DIR, APPBASE.'Resources/Models/Eloquents/');
+define(APP_MIGRATIONS_DIR, APPBASE.'Resources/Models/Migrations/');
 define(APP_BUILTINLANGS_DIR, APPBASE.'Misc/Phrases/');
 define(APP_STORAGE_DIR, APPBASE.'Storage/');
 define(APP_STORAGE_LOGS, APPBASE.'Storage/Logs/');

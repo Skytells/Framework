@@ -121,8 +121,9 @@
 					$Target = explode('@', $Target);
 					if ($methodArgs !== false) {
 						Boot::Controller($Target[0], $Target[1], $methodArgs);
+					}else {
+						Boot::Controller($Target[0], $Target[1]);
 					}
-
 				}
 			});
 

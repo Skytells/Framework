@@ -54,7 +54,7 @@ Use Skytells\Core\Runtime;
       if (strtolower(TEMPLATE_ENGINE) == "oxygen") {
         \Kernel::Import('Oxygen');
         $filename = str_replace(".".TEMPLATE_FILE_EXTENSION.".php", "", $view);
-        $Oxygen = new \OxygenInstance(APP_VIEWS_DIR, APPBASE."/".CACHE_DIR."/Views/");
+        $Oxygen = new \OxygenInstance(APP_VIEWS_DIR, APPBASE."/".TEMPLATE_CACHE_DIR.'/');
         echo $Oxygen->render($filename, $variables);
         }
         else if (!class_exists("TemplateEngine")) {

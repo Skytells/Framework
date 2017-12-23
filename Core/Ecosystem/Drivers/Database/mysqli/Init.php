@@ -14,5 +14,5 @@ global $dbconfig;
     require __DIR__.'/SQLManager.php';
  }
 
- if ($dbconfig['QUERYBUILDER'] == TRUE && !class_exists('DBObject')) {
+ if ($dbconfig['DBOBJECT'] == TRUE && !class_exists('DBObject')) {
  require __DIR__.'/DBObject.php'; }

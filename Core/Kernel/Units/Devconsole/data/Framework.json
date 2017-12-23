@@ -2,94 +2,80 @@
     "Runtime": {
         "All": [
             {
-                "ProccessID": 9536,
+                "ProccessID": 8732,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1513742073.8569729
+                "Timestamp": 1514071233.4779871
             },
             {
-                "ProccessID": 5376,
+                "ProccessID": 2802,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1513742073.858052
+                "Timestamp": 1514071233.479203
             },
             {
-                "ProccessID": 3182,
-                "Type": "cLog",
-                "Message": "The Home Controller has been loaded.",
-                "Timestamp": 1513742073.859587
-            },
-            {
-                "ProccessID": 2744,
+                "ProccessID": 5832,
                 "isLoaded": true,
                 "Name": "Index",
                 "Type": "UI",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1513742073.859719
+                "Timestamp": 1514071233.4803729
             },
             {
-                "ProccessID": 2908,
+                "ProccessID": 1740,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1513742073.8597231
+                "Timestamp": 1514071233.480376
             }
         ],
         "Handlers": [
             {
-                "ProccessID": 9536,
+                "ProccessID": 8732,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1513742073.8569751
+                "Timestamp": 1514071233.4779911
             }
         ],
         "Modules": [
             {
-                "ProccessID": 5376,
+                "ProccessID": 2802,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1513742073.858053
-            }
-        ],
-        "Console": [
-            {
-                "ProccessID": 3182,
-                "Type": "cLog",
-                "Message": "The Home Controller has been loaded.",
-                "Timestamp": 1513742073.859587
+                "Timestamp": 1514071233.4792039
             }
         ],
         "UIs": [
             {
-                "ProccessID": 2744,
+                "ProccessID": 5832,
                 "isLoaded": true,
                 "Name": "Index",
                 "Type": "UI",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1513742073.85972
+                "Timestamp": 1514071233.4803741
             }
         ],
         "Controllers": [
             {
-                "ProccessID": 2908,
+                "ProccessID": 1740,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1513742073.8597231
+                "Timestamp": 1514071233.480377
             }
         ]
     },
-    "benchmark": "0.00882697",
+    "benchmark": "0.00853013",
     "language": "en_US",
     "Settings": {
         "ROOT_PATH": "Framework",
@@ -101,8 +87,8 @@
         "DEVELOPMENT_MODE": true,
         "INTELLISENSE_DEBUGGER": true,
         "INTELLISENSE_INTERFACE": "UI",
-        "MULTILANGS": true,
-        "USE_BUILTIN_PHRASES": true,
+        "MULTILANGS_DETECTION": true,
+        "USE_BUILTIN_PHRASES": false,
         "LANG_SESID": "SFW_LANGUAGE",
         "DEFAULTLANG": "en_US",
         "ENC_METHOD": "AES-256-CBC",
@@ -117,9 +103,10 @@
         "USE_MODULES": true,
         "LOG_DT_FORMAT": "Y-m-d H:i:s",
         "CHECK_EXTENTIONS": true,
-        "ALLOW_TERMINAL": true,
         "TEMPLATE_ENGINE": "Oxygen",
-        "TEMPLATE_FILE_EXTENSION": "ui"
+        "TEMPLATE_FILE_EXTENSION": "ui",
+        "TEMPLATE_CACHE_DIR": "Storage\/Cache\/Views",
+        "ALLOW_TERMINAL": true
     },
     "totalCached": 0,
     "homebase": "http:\/\/localhost\/Framework",

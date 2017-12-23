@@ -8,6 +8,9 @@ Class Payload {
           }
       }
   }
+  public static function loadConfigManager() {
+    require COREDIRNAME.'/Kernel/Config.php';
+  }
   public static function isClassExist($ClassName, $ReturnType = "Page")
       {
         if ( !class_exists($ClassName) )

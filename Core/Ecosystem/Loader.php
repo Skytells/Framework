@@ -56,6 +56,7 @@
 
 
 		public static function model($File, $setOwner = false, $args = false, $newName = "") {
+    
 			$path = BASEPATH.'/Application/Resources/Models/';
       if (!is_dir($path)){ throw new \Exception("The Models Folder does not exist in the main Application dir.", 90); return false; }
       if (!Contains($File, '.php')){ $File = $File.".php"; }

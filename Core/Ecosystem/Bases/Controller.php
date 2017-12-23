@@ -9,7 +9,7 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
-use Skytells\UI\View;
+ use Skytells\UI\View;
  Class Controller {
 
    public function __construct($args = array()) {
@@ -19,11 +19,11 @@ use Skytells\UI\View;
          if (!extension_loaded($ex)) { show_error('Woops!', 'The [ '. $ex .' ] extention is missing out<br>This Extention is required for this web application, Please install it on your PHP.'); }
        }
      }
-     $this->load = new Load();
+     $this->load = new \Load();
      $this->view = new View();
 
      // Handling Languages.
-     if (MULTILANGS === TRUE) {
+     if (MULTILANGS_DETECTION === TRUE) {
        $SISID = (empty(LANG_SESID)) ? 'SFW_LANGUAGE' : LANG_SESID;
        $LANG = (empty(DEFAULTLANG)) ? 'en_US' : DEFAULTLANG;
        if (!isset($_SESSION[$SISID]) || empty($_SESSION[$SISID])) {
@@ -44,7 +44,7 @@ use Skytells\UI\View;
      if (isset($_GET['action']) && $_GET['action'] == 'flushcache') {
        flush_cache();
      }
-     
+
 
    }
 

@@ -9,13 +9,9 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
- use Skytells\Core;
- use Skytells\Core\Console;
  use Skytells\UI\View;
  use Skytells\Runtime;
- use Illuminate\Config\Repository;
-
- Class Home extends \Controller implements \IController {
+ Class Home extends Controller implements \IController {
 
    /**
     * @method __construct function.
@@ -30,14 +26,11 @@
      parent::__construct();
 
      // Log some text in the Console (YOU MUST USE 'Skytells\Core\Console' NAMESPACE.)
-     Console::log("The Home Controller has been loaded.");
-     //$configPath = $basePath . 'config';
-
-//     $loader = new Illuminate\Config\FileLoader(new Illuminate\Filesystem\Filesystem, __DIR__);
-
+     # Console::log("The Home Controller has been loaded.");
 
      // Now, We want to load the model.
       # $this->load->model('HomeModel', $this);
+      # d(Skytells\Elquents\Users::all());
 
    }
 
@@ -56,7 +49,7 @@
 
     // Assigning Vars :
     # $this->view->assign('foo', 'bar');
-  
+
     // OR : View::render('index.php', array("foo"=>'bar'));
      View::render('index.php', array("foo"=>'bar'));
    }

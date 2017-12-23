@@ -21,11 +21,11 @@
   // WHERE SKYTELLS FRAMEWORK IS INSTAALLED? IF YOU'RE RUNNING ON THE ROOT
   // FOLDER OR THE MAIN (WWW), PLEASE LEAVE IT EMPTY, OTHERWISE,
   // PLEASE WRITE THE NAME OF THE DIRECTORY YOU INSTALLED SKYTELLS FW ON IT.
-  $Settings["ROOT_PATH"]   = '';
+  $Settings["ROOT_PATH"]   = 'Framework';
 
   // PLEASE WRITE THE BASE URL WITHOUT (HTTP, HTTPS OR WWW) WITHOUT END-SLASHES
   // EXAMPLE: Skytells.org/Framework or Skytells.org
-  $Settings["SITEBASE"]   = 'localhost';
+  $Settings["SITEBASE"]   = 'localhost/Framework';
 
 
   // TURN IT TO (TRUE) TO FORCE USING SECURE PROTOCOL (HTTPS)
@@ -108,8 +108,9 @@
  | These settings to allow internationalization for your application by allowing
  | the app to support other languages.
  | --
- | MULTILANGS: This var. is required to be set true or false, by enabling this
- | option, You're giving the Framework the chance to detect the language by
+ | MULTILANGS_DETECTION_DETECTION: This var. is required to be set true or false,
+ | by enabling this option, You're giving the Framework the chance to detect
+ | the language by
  | a URL parameter.
  | USE_BUILTIN_PHRASES: Allows you to use the built in languages.
  | LANG_SESID: The Session key which responsible for storing langID.
@@ -118,10 +119,10 @@
  | How to? you can see our documentation on our website.
  */
  // CHANGE THIS TO TRUE TO ENABLE THIS FEATURE.
- $Settings["MULTILANGS"] = TRUE;
+ $Settings["MULTILANGS_DETECTION"] = TRUE;
 
  // Use the BUILT-IN Engine as the primary languages engine?
- $Settings["USE_BUILTIN_PHRASES"] = TRUE;
+ $Settings["USE_BUILTIN_PHRASES"] = FALSE;
 
  // THE SESSION ID TO STORE THE SELECTED LANG.
  $Settings["LANG_SESID"] = "SFW_LANGUAGE";

@@ -9,7 +9,6 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
-use Skytells\Core;
 use Skytells\Core\Runtime;
 use Skytells\Core\Console;
 use Skytells\Ecosystem\Payload;
@@ -109,7 +108,7 @@ Class Boot {
      if ($Illuminate['ORM'] === TRUE) {
       $Capsule = new Capsule;
        $Capsule->addConnection([
-           'driver'    => $DBGroups[$Illuminate['DATABASE']]['illuminatedriver'],
+           'driver'    => $DBGroups[$Illuminate['DATABASE']]['ORM']['illuminatedriver'],
            'host'      => $DBGroups[$Illuminate['DATABASE']]['host'],
            'database'  => $DBGroups[$Illuminate['DATABASE']]['database'],
            'username'  => $DBGroups[$Illuminate['DATABASE']]['username'],
@@ -142,5 +141,24 @@ Class Boot {
     $Home->$m();
     }
     Runtime::Report('Controller', $Name, APP_CONTROLLERS_DIR.$Name.".php");
+  }
+
+  public static function Migration($File) {
+    try {
+      if (!is_dir(APP_MIGRATIONS_DIR)) {
+        throw new \ErrorException("Eloquent dir is not exists.", 1);
+      }
+      if (!Contains($File, '.php')){ $File = $File.".php"; }
+      $TruePath = APP_MIGRATIONS_DIR.$File;
+      if (!file_exists($TruePath)){
+        throw new \Exception("Error loading Migration: [$File], The Migration is not found!", 1); }
+     $className = Load::getClassNameFromFile($TruePath);
+     if (class_exists($className)){ throw new \Exception("Migration: [$File] is already loaded, Cannot load it twice.", 1); }
+        require $TruePath;
+     Runtime::Report('model', $className, $TruePath);
+     return $this;
+    } catch (Exception $e) {
+      throw new \Exception($e->getMessage(), 1);
+    }
   }
 }
