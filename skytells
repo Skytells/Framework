@@ -27,7 +27,7 @@
          }
        }
     $CLI = new Console();
-    require(__DIR__.'/'.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/Misc/Config/CLI.php');
+    require(__DIR__.'/'.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/Misc/Config/Terminal.php');
     global $_CLI_COMMANDS;
     foreach ($_CLI_COMMANDS as $Key => $value) {
     $CLI->addCommand($value, $Key); // alternative when using a closure
