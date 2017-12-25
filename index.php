@@ -4,7 +4,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.2
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -23,4 +23,5 @@
   $match = Router::match();
   if( $match && is_callable( $match['target'] ) ) { call_user_func_array( $match['target'], $match['params'] ); }
   else { show_404(); }
+  $ENV_END_TIME = microtime(true) - $ENV_STARTUP_TIME;
   DevTools();

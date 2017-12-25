@@ -5,6 +5,10 @@ use ConsoleKit\Console,
     ConsoleKit\Utils,
     ConsoleKit\Widgets\Dialog,
     ConsoleKit\Widgets\ProgressBar;
+    use Illuminate\Support\Facades\Schema;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Capsule\Manager as Capsule;
 global $console;
 Kernel::addCLICommand("init", "init");
 Kernel::addCLICommand("install", "install");
@@ -13,6 +17,11 @@ Kernel::addCLICommand("flushcache", "flushcache");
 Kernel::addCLICommand("excheck", "excheck");
 Kernel::addCLICommand("check-for-update", "checkforupdate");
 Kernel::addCLICommand("perform", "perform");
+Kernel::addCLICommand("mkroutes", "makeRoutes");
+Kernel::addCLICommand("make", "make");
+Kernel::addCLICommand("serve", "serve");
+
+
 /**
  * @method Seeds Starts here
  */
@@ -24,6 +33,24 @@ Kernel::addCLICommand("perform", "perform");
       $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --help for displying Help!");
     }
     $box->write();
+  }
+
+
+  function serve($args, $options, $console) {
+    $port = 8000;
+    $path = "";
+    if (isset($options['p']) && !empty($options['p']) && is_string($options['p'])) {
+      $port = $options['p'];
+    }
+
+    if (isset($options['t']) && !empty($options['t']) && is_string($options['t'])) {
+      $path = $options['t'];
+    }
+
+    $box = new ConsoleKit\Widgets\Box($console, "Skytells Built-in server started!\nServing on: http://localhost:$port");
+    $box->write();
+
+    echo system('php -S localhost:'.$port. ' '.$path);
   }
 
   function flushcache($args, $options, $console) {
@@ -83,6 +110,48 @@ Kernel::addCLICommand("perform", "perform");
       $progress->stop();
   }
 
+
+  function make($args, $options, $console) {
+
+    if (!isset($args[0])) {
+      throw new \ErrorException("Cannot perform make() function without an argement ", 1);
+    }
+
+    switch ($args[0]) {
+      case 'migration':
+        require COREDIRNAME .'/Kernel/Composer/vendor/autoload.php';
+        if (!isset($args[1])) { throw new \ErrorException("Cannot perform database migration function on an empty argement.", 1); }
+        $file = APP_MIGRATIONS_DIR.$args[1].".php";
+        require $file;
+        if (!isset($args[2])) { throw new \ErrorException("Cannot perform database migration function with an empty run argement.", 1); }
+        $l = Colors::colorize('Performing commands on Database...', 'yellow');
+        $console->writeln($l);
+        cliprogress($args, $options, $console);
+        global $DBGroups, $dbconfig; $GroupID = $dbconfig['ACTIVE_GROUP'];
+        $Capsule = new Capsule;
+         $Capsule->addConnection(['driver' => $DBGroups[$GroupID]['ORM']['illuminatedriver'],'host' => $DBGroups[$GroupID]['host'],
+             'database'  => $DBGroups[$GroupID]['database'], 'username' => $DBGroups[$GroupID]['username'], 'password' => $DBGroups[$GroupID]['password'],
+             'charset' => $DBGroups[$GroupID]['charset'], 'collation' => $DBGroups[$GroupID]['collation'], 'prefix' => $DBGroups[$GroupID]['prefix'],
+         ]);
+         $Capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher(new \Illuminate\Container\Container));
+         $Capsule->setAsGlobal();
+         $Capsule->bootEloquent();
+        $args[1]::$args[2]();
+        $l = Colors::colorize('Database Migration: Operation finished. [SUCESS]', 'green');
+        $console->writeln($l);
+        break;
+
+      case 'routes':
+      $args[0] = $args[1];
+      $args[0] = $args[1];
+      makeRoutes($args, $options, $console);
+      break;
+      default:
+      $l = Colors::colorize('Make reported empty response.', 'red');
+      $console->writeln($l);
+      break;
+    }
+  }
   function version($args, $options, $console) {
     global $_FRAMEWORK_VER;
     $console->writeln("This version : " . FRAMEWORK_VERSION);
@@ -212,4 +281,97 @@ Kernel::addCLICommand("perform", "perform");
       $l = Colors::colorize('ENV File fixed.', 'green');
       $console->writeln($l);
     }
+  }
+
+
+
+  function makeRoutes($args, $options, $console) {
+      if (!isset($args)) {
+        $l = Colors::colorize('ERROR: Please write an argument with a class name.', 'red');
+        $console->writeln($l);
+      }
+      foreach ([APP_CONTROLLERS_DIR, APP_CONTROLLERS_DIR.'/Alliances/'] as $dir) {
+          foreach(glob($dir .'*.php') as $class) {
+              require $class;
+          }
+      }
+      $className = $args[0];
+
+      if (isset($options['regen'])) {
+        @unlink(APP_MISC_DIR.'Config/Autorouting.php');
+      }
+      if (!file_exists(APP_MISC_DIR.'Config/Autorouting.php')) {
+        file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', "<?php\r\n/**\n* @package: Auto Routing System for Skytells Framework\n* @copyright: (C) 2018 Skytells, Inc, All rights reserved. \n* @license: MIT\n* @see: https://developers.skytells.net for more info.\n*/\n\n", FILE_APPEND);
+      }
+      require ENV_UNITS_DIR.'DocBlock.php';
+      $box = new ConsoleKit\Widgets\Box($console, 'Skytells Framework Routes Generator');
+      $box->write();
+    if ($className == 'all') {
+      foreach(glob($dir .'*.php') as $class) {
+        $className = \Load::getClassNameFromFile($class);
+        $console->writeln('Making Routes for ' . $className .'..');
+        $reflector = new ReflectionClass($className);
+        $console->writeln('Getting ['.$className.'] Methods..');
+        $methods = get_class_methods($className);
+        $console->writeln('Generating Routes..');
+        file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', "\n/**\n * @category: $className (Controller)\n */\n", FILE_APPEND);
+      foreach ($methods as $fn) {
+        $r = new ReflectionMethod($className, $fn);
+        $block = $r->getDocComment();
+        $block = str_replace('@Route', '@route', $block);
+        $block = str_replace('@Arguments', '@arguments', $block);
+        if (strpos($block, '@route') !== false) {
+            $block = new DocBlock($block);
+            $summary = "\n/**\n * @date : ".gmdate(LOG_DT_FORMAT)."\n * @URL : ".Base().$block->route."\n */\n";
+            $endsummary = "\n// -------------------------------- \n";
+            $blockArgs = $block->arguments;
+            if (strpos($block, '@arguments') !== false && !empty($blockArgs)) {
+              file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', $summary."Router::assign('$block->route', '$className@$fn', $block->arguments);".$endsummary, FILE_APPEND);
+            }else{
+              file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', $summary."Router::assign('$block->route', '$className@$fn');".$endsummary, FILE_APPEND);
+            }
+            $l = Colors::colorize('Routing ['.$fn.'] to '.Base().$block->route .' [OK]', 'yellow');
+            $console->writeln($l);
+        }
+        sleep(0.3);
+      }
+      $l = Colors::colorize('All Routes has been generated [SUCCESS]', 'green');
+      $console->writeln($l);
+    }
+    }else {
+      if (!class_exists($className)) {
+        $l = Colors::colorize("Class $className is not exists.", 'red');
+        $console->writeln($l); exit;
+      }
+      $console->writeln('Making Routes for ' . $className .'..');
+      $reflector = new ReflectionClass($className);
+      $console->writeln('Getting Methods..');
+      $methods = get_class_methods($className);
+        $console->writeln('Generating Routes..');
+        file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', "\n/**\n * @category: $className (Controller)\n */\n", FILE_APPEND);
+      foreach ($methods as $fn) {
+        $r = new ReflectionMethod($className, $fn);
+        $block = $r->getDocComment();
+        $block = str_replace('@Route', '@route', $block);
+        $block = str_replace('@Arguments', '@arguments', $block);
+        if (strpos($block, '@route') !== false) {
+            $block = new DocBlock($block);
+            $summary = "\n/**\n * @date : ".gmdate(LOG_DT_FORMAT)."\n * @URL : ".Base().$block->route."\n */\n";
+            $endsummary = "\n// -------------------------------- \n";
+            $blockArgs = $block->arguments;
+            if (strpos($block, '@arguments') !== false && !empty($blockArgs)) {
+              file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', $summary."Router::assign('$block->route', '$className@$fn', $block->arguments);".$endsummary, FILE_APPEND);
+            }else{
+              file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', $summary."Router::assign('$block->route', '$className@$fn');".$endsummary, FILE_APPEND);
+            }
+            $l = Colors::colorize('Routing ['.$fn.'] to '.Base().$block->route .' [OK]', 'yellow');
+            $console->writeln($l);
+        }
+        sleep(0.3);
+      }
+      $l = Colors::colorize('All Routes has been generated [SUCCESS]', 'green');
+      $console->writeln($l);
+      $console->writeln($l);
+    }
+
   }

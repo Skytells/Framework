@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.2
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -89,6 +89,10 @@
    @mkdir(APP_STORAGE_DIR.'Cache/FileCache/');
    @mkdir(APP_STORAGE_DIR.'Cache/Views/');
    @mkdir(APP_STORAGE_DIR.'Cache/Sessions/');
+   @file_put_contents(APP_STORAGE_DIR.'Cache/index.html', '');
+   @file_put_contents(APP_STORAGE_DIR.'Cache/FileCache/index.html', '');
+   @file_put_contents(APP_STORAGE_DIR.'Cache/Views/index.html', '');
+   @file_put_contents(APP_STORAGE_DIR.'Cache/Sessions/index.html', '');
  }
 
  function deleteDirectory($dir) {

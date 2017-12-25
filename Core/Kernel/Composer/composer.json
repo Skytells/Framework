@@ -15,5 +15,7 @@
         "psr-4": {
             "IntelliSense\\": "vendor/IntelliSense/"
         }
-    }
+    },
+    "optimize-autoloader": true,
+    "classmap-authoritative": true
 }

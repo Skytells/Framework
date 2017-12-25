@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.2
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -39,6 +39,7 @@
     * This function cannot be deleted.
     * This function is responsible for rendering the view, Each controller must
     * have this public function.
+    * @route /index
     */
    public function index($args = '') {
     // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )
@@ -54,6 +55,11 @@
      View::render('index.php', array("foo"=>'bar'));
    }
 
+   /**
+     * for fast routing creation, use (@route {URI_PATH})
+     * @route /Hello
+     * @arguments ['arg1' => 'test']
+     */
    public function Hello() {
       // This function created for demo only.
       // Did you know that you can extend you controller with other child controllers?

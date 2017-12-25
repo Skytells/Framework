@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.2
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -123,6 +123,8 @@ Class Boot {
      }
      return true;
   }
+
+
 
   public static function Controller($Controller, $method = false, $args = false) {
     $Controller = str_replace('.php', '', $Controller);
