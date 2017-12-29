@@ -38,7 +38,7 @@
     * This function cannot be deleted.
     * This function is responsible for rendering the view, Each controller must
     * have this public function.
-    * @route /{CTRL_NAME}/index
+    * @route /{OBJECTNAME}/index
     */
    public function index($args = '') {
     // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )
