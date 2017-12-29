@@ -11,7 +11,7 @@
  */
  use Illuminate\Database\Capsule\Manager as Capsule;
  use Skytells\Database\Model as Model;
- Class HomeModel extends Model {
+ Class {OBJECTNAME} extends Model {
 
   function __construct($Ref = '') {
      parent::__construct();
@@ -22,24 +22,24 @@
       # $this->AddEloquent('Users');
 
       // Connecting to the Selected Database Group.
-       $this->Connect('Default'); // Connect to db.1
+      # $this->Connect('Default'); // Connect to db.1
       //      ->Join('Default'); // Joining another DB
 
   }
 
    function getUsers() {
-       return $this->SQLManager['Default']->get('users');
+    #   return $this->SQLManager['Default']->get('users');
    }
 
    function getUserByCapsule($ID = '') {
      // Requires [ORM][illuminate] to be TRUE from Database config file.
-     return $this->Capsule['Default']->table('users')->get();
+     # return $this->Capsule['Default']->table('users')->get();
    }
 
    function buildUsersTable() {
      // Requires [ORM][illuminate] to be TRUE from Database config file.
-     $this->AddMigration('CreateUsersTable');
-     CreateUsersTable::run();
+     # $this->AddMigration('CreateUsersTable');
+     # CreateUsersTable::run();
    }
 
 

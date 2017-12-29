@@ -1,8 +1,7 @@
 <?
 $Datafile = __DIR__.'/data/Framework.json';
 $Data = file_get_contents($Datafile);
-$Data = trim($Data, "\x0\xEF\xBB\xBF");
-$Data = json_decode( stripslashes($Data) );
+$Data = json_decode($Data);
 
 function micro_to_hrs($time) {
 

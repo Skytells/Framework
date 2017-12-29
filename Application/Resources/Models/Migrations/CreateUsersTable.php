@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.2
+ * @version    3.3
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -22,7 +22,7 @@ Class CreateUsersTable extends Migration {
      */
     public static function run()
     {
-        Capsule::schema()->create('users', function (Blueprint $table) {
+        Capsule::schema()->create('users8', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email');

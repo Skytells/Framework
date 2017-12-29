@@ -28,6 +28,26 @@ $ALCONF['Migrations'] = false;
 
 
 
+/*
+|--------------------------------------------------------------------------
+| PRE-LOADED SERVICES
+|--------------------------------------------------------------------------
+|
+| Sometimes you need your handlers or libraries to be ready at anytime
+| without loading them each time you need to use
+| In order to auto-load a handler or a library, write it real-file name
+| on the belonging array.
+| NOTE: That Http handler is required by the Framework.
+*/
+
+$_Preloaded['Handlers'] = ["Http"];
+$_Preloaded['Helpers'] = [];
+$_Preloaded['Libraries'] = [];
+
+
+
+
+
 
 /*
 | -------------------------------------------------------------------

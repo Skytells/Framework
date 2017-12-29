@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.2
+ * @version    3.3
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -71,7 +71,7 @@ Use Skytells\Core\Runtime;
           detectCurrentLanguage();
         // Assigning Vars...
         $variables = array_merge($variables, View::$OxParses);
-        if (is_array($variables) && count($variables) > 0) {
+        if (is_array($variables) && !empty($variables)) {
           foreach ($variables as $key => $value) {
            ${$key} = $value;
           }

@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.2
+ * @version    3.3
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -25,11 +25,11 @@ Class Boot {
   }
 
   private function loadModules() {
-    global $Modules, $Settings;
+    global $SF_Modules, $Settings;
     if ($Settings['USE_MODULES'] === TRUE) {
       if (!is_dir(ENV_MODULES_DIR)) {throw new \ErrorException("Error Loading Modules: The modules directory cannot be found!", 1);}
-        if (is_array($Modules) && count($Modules) > 0) {
-          foreach ($Modules as $name => $status) {
+        if (is_array($SF_Modules) && !empty($SF_Modules)) {
+          foreach ($SF_Modules as $name => $status) {
             if (!file_exists(ENV_MODULES_DIR.$name.'.php') && $status === TRUE) {
               throw new \ErrorException("Error Loading Module [$name]: The module cannot be found!", 1);
             }elseif ($status === TRUE) {
@@ -43,7 +43,7 @@ Class Boot {
   }
 
   private function Powerup($Args = array()) {
-    global $Routes, $Modules;
+    global $Routes, $SF_Modules;
     Router::map('GET|POST', "[*:".ROUTER_CONFIG_DEFAULT_ROUTE_PARAM."]",  function($__MVCallback){
       if (isset($__MVCallback) && !empty($__MVCallback) && $__MVCallback != ""){
         $_MVURI = $__MVCallback;

@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.2
+ * @version    3.3
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -192,7 +192,7 @@
   | You can load/unload modules by turning it on or off.
   */
    $Settings['USE_MODULES'] = TRUE;
-   $Modules = Array (
+   $SF_Modules = Array (
      "Firewall" => TRUE
    );
 
@@ -209,6 +209,7 @@
   |
   */
   $Settings['LOG_DT_FORMAT'] = 'Y-m-d H:i:s';
+
 
 
 

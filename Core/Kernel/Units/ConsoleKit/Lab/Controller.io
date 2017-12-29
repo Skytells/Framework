@@ -11,7 +11,7 @@
  */
  use Skytells\UI\View;
  use Skytells\Runtime;
- Class Home extends Controller implements \IController {
+ Class {OBJECTNAME} extends Controller implements \IController {
 
    /**
     * @method __construct function.
@@ -30,7 +30,7 @@
      // Now, We want to load the model.
       # $this->load->model('HomeModel', $this);
       # d(Skytells\Elquents\Users::all());
-    
+
    }
 
    /**
@@ -38,7 +38,7 @@
     * This function cannot be deleted.
     * This function is responsible for rendering the view, Each controller must
     * have this public function.
-    * @route /index
+    * @route /{CTRL_NAME}/index
     */
    public function index($args = '') {
     // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )
@@ -51,21 +51,7 @@
     # $this->view->assign('foo', 'bar');
 
     // OR : View::render('index.php', array("foo"=>'bar'));
-     View::render('index.php', array("foo"=>'bar'));
-   }
-
-   /**
-     * for fast routing creation, use (@route {URI_PATH})
-     * @route /Hello
-     * @arguments ['arg1' => 'test']
-     */
-   public function Hello() {
-      // This function created for demo only.
-      // Did you know that you can extend you controller with other child controllers?
-      // So you can (Add) or (Assign) Child-Controllers to other simply by performing
-      // the following functions.
-      $this->AddAlliance('Home', $this);
-      echo $this->Home->SayHello();
+    # View::render('index.php', array("foo"=>'bar'));
    }
 
  }

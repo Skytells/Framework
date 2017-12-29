@@ -77,4 +77,17 @@ Class Payload {
   }
 
 
+  public static function resolvePreloaded() {
+    global $_Preloaded;
+    if (!empty($_Preloaded['Handlers'])) {
+      foreach ($_Preloaded['Handlers'] as $_handler) { \Load::handler($_handler); }
+    }
+    if (!empty($_Preloaded['Helpers'])) {
+      foreach ($_Preloaded['Helpers'] as $_handler) { \Load::helper($_handler); }
+    }
+    if (!empty($_Preloaded['Libraries'])) {
+      foreach ($_Preloaded['Libraries'] as $_handler) { \Load::library($_handler); }
+    }
+  }
+
 }

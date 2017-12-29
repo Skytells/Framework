@@ -4,13 +4,14 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.2
+ * @version    3.3
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
   $ENV_STARTUP_TIME=microtime(TRUE);
+
   $ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'] = "Core";
   $ENVIRONMENT_CONFIG['APPLICATION_PATH'] = "Application";
   @define(BASEPATH, __DIR__.'/', TRUE);

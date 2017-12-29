@@ -20,6 +20,7 @@ Kernel::addCLICommand("perform", "perform");
 Kernel::addCLICommand("mkroutes", "makeRoutes");
 Kernel::addCLICommand("make", "make");
 Kernel::addCLICommand("serve", "serve");
+Kernel::addCLICommand("create", "create");
 
 
 /**
@@ -111,6 +112,51 @@ Kernel::addCLICommand("serve", "serve");
   }
 
 
+
+
+
+  function create($args, $options, $console) {
+
+    if (!isset($args[0])) {
+      throw new \ErrorException("Cannot perform create() function without an argement ", 1);
+    }
+    if (!isset($args[1])) {
+      throw new \ErrorException("Cannot perform create() function without thr 2nd argement ", 1);
+    }
+
+    $Type = $args[0];
+    $Name = $args[1];
+    switch ($Type) {
+      case 'controller':
+        if (file_exists(APP_CONTROLLERS_DIR.'/'.$Name.'.php')) {
+          throw new \ErrorException("This controller is already exists!", 1);
+        }
+        $l = Colors::colorize("Creating $Name Controller..", 'yellow');
+        $console->writeln($l);
+        $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Controller.io'));
+        file_put_contents(APP_CONTROLLERS_DIR.'/'.$Name.'.php', $Template);
+        $l = Colors::colorize("$Name.php Created!", 'green');
+        $console->writeln($l);
+        break;
+      case 'model':
+          if (file_exists(APP_CONTROLLERS_DIR.'/'.$Name.'.php')) {
+            throw new \ErrorException("This model is already exists!", 1);
+          }
+          $l = Colors::colorize("Creating $Name Model..", 'yellow');
+          $console->writeln($l);
+          $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Model.io'));
+          file_put_contents(APP_MODELS_DIR.'/'.$Name.'.php', $Template);
+          $l = Colors::colorize("$Name.php Created!", 'green');
+          $console->writeln($l);
+        break;
+      default:
+      $l = Colors::colorize("Unrecognized Type!", 'red');
+      $console->writeln($l);
+        break;
+    }
+  }
+
+
   function make($args, $options, $console) {
 
     if (!isset($args[0])) {
@@ -199,7 +245,13 @@ Kernel::addCLICommand("serve", "serve");
   function checkforupdate($args, $options, $console) {
     $l = Colors::colorize('Checking for Framework Updates...', 'yellow');
     $console->writeln($l);
-    $res = file_get_contents('https://raw.githubusercontent.com/Skytells/Framework/master/Latest');
+    $arrContextOptions=array(
+    "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+    ),
+    );  
+    $res = file_get_contents('https://raw.githubusercontent.com/Skytells/Framework/master/Latest', false, stream_context_create($arrContextOptions));
     if (empty($res) || $res == false) {
       $l = Colors::colorize('ERROR: Unable to check for updates, Try again later.', 'red');
       $console->writeln($l);
