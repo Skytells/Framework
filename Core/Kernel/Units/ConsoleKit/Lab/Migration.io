@@ -14,7 +14,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-Class CreateUsersTable extends Migration {
+Class {OBJECTNAME} extends Migration {
     /**
      * Run the migrations.
      *
@@ -22,7 +22,8 @@ Class CreateUsersTable extends Migration {
      */
     public static function run()
     {
-        Capsule::schema()->create('users', function (Blueprint $table) {
+        // NOTE: DO NOT FORGET TO CHANGE TABLE_NAME if you didn't assigned to a database table.
+        Capsule::schema()->create('{TABLE_NAME}', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email');
@@ -36,6 +37,6 @@ Class CreateUsersTable extends Migration {
      * @return void
      */
     public static function drop() {
-        Capsule::schema()->drop('users');
+        Capsule::schema()->drop('{TABLE_NAME}');
     }
 }

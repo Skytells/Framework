@@ -11,8 +11,7 @@
  */
  use Skytells\UI\View;
  use Skytells\Runtime;
- Class Home extends Controller implements \IController {
-
+ Class Home extends \Controller implements \IController {
    /**
     * @method __construct function.
     * Classes which have a constructor method call this method on each newly-created object,
@@ -27,10 +26,13 @@
      // Log some text in the Console (YOU MUST USE 'Skytells\Core\Console' NAMESPACE.)
      # Console::log("The Home Controller has been loaded.");
 
+     // use Illuminate\Support\Facades\Cache; to enable Oxide Cache
+     # Cache::store('file')->put('foo', 'bar', 100);
+     # echo Cache::get('foo');
+
      // Now, We want to load the model.
-      # $this->load->model('HomeModel', $this);
-      # d(Skytells\Elquents\Users::all());
-    
+     # $this->load->model('HomeModel', $this);
+     # d(Skytells\Elquents\Users::all());
    }
 
    /**
@@ -41,6 +43,9 @@
     * @route /index
     */
    public function index($args = '') {
+
+    //  $this->cache->put('test', 'This is loaded from cache.', 500);
+    //  echo $this->cache->get('test');
     // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )
     // Full URL : http://www.domain.com/{Framework_FOLDER}/Home/index/
     // Rendering the View.

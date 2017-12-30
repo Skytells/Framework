@@ -18,7 +18,7 @@
  |
  | These settings needs to be changed before the application being uploaded
  */
-  // WHERE SKYTELLS FRAMEWORK IS INSTAALLED? IF YOU'RE RUNNING ON THE ROOT
+  // WHERE SKYTELLS FRAMEWORK IS INSTALLED? IF YOU'RE RUNNING ON THE ROOT
   // FOLDER OR THE MAIN (WWW), PLEASE LEAVE IT EMPTY, OTHERWISE,
   // PLEASE WRITE THE NAME OF THE DIRECTORY YOU INSTALLED SKYTELLS FW ON IT.
   $Settings["ROOT_PATH"]   = '';
@@ -176,12 +176,57 @@
  | CACHE_DRIVER : FileCache, APC, Memcache.
  | $Memcache["Settings"] : If Memcache Driver is enabled.
  | CACHE_DIR : Which Dir. the Cached files will be stored on?
+ | $OXCache : Dynamic array contains an Alternative Oxide Caching Config.
+ | SF_CACHE is another cache driver which used by laravel.
+ | $OXCache['ENABLED'] Enables or disables the Oxide Cache driver.
+ | NOTE: That enable or disable this $OXCache cache doesn't effect the
+ | Main cache configuration which used for $Settings["USE_CACHE"].
+ | $OXCache['PERIOD'] : The default period for storing your cache.
  */
   $Settings["USE_CACHE"]  = TRUE;
   $Settings["CACHE_DRIVER"] = 'FileCache';
   $Settings["CACHE_DIR"]  = "Storage/Cache";
   $Settings["CACHE_TIME"] = 500;
   $Memcache["Settings"] = Array('HOST' => "127.0.0.1", 'PORT' => 11211);
+
+  // Alternative Oxide Cache Driver.
+  // Oxide Cache Driver is a powerful caching engine.
+  $OXCache['ENABLED']  = TRUE;
+  $OXCache['PERIOD'] = 500;
+  $OXCache['config'] = [
+       'cache.default' => 'file',
+       'cache.prefix' => 'SF_',
+       'cache.stores.file' => [
+           'driver' => 'file',
+           'path' => APPBASE.'Storage/Cache/FileCache'
+           // APPBASE : Returns the Application path.
+       ],
+       'cache.stores.memcached' => [
+           'driver' => 'memcached',
+           'servers' => [
+               [
+                   'host' => getenv('MEMCACHED_HOST', '127.0.0.1'),
+                   'port' => getenv('MEMCACHED_PORT', 11211),
+                   'weight' => 100,
+               ],
+           ],
+       ],
+       'cache.stores.redis' => [
+            'driver' => 'redis',
+            'connection' => 'default'
+        ],
+        'database.redis' => [
+            'cluster' => false,
+            'default' => [
+                'host' => '127.0.0.1',
+                'port' => 6379,
+                'database' => 0,
+            ]
+        ]
+   ];
+
+
+
 
 
   /*
@@ -195,6 +240,10 @@
    $SF_Modules = Array (
      "Firewall" => TRUE
    );
+
+
+
+
 
 
 

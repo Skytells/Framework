@@ -21,6 +21,7 @@
  require __DIR__.'/Ecosystem/Router.php';
  require __DIR__.'/Kernel/Kernel.php';
  foreach(glob(APP_MISC_DIR.'/Config/*.php') as $file) { require $file; }
+ global ${APP_INSTANCE};
  require __DIR__.'/Kernel/Boot.php';
  #  if (count($_Autoload) > 0) { Payload::Autoload($_Autoload); }
   Payload::Define('ROUTES');

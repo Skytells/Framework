@@ -19,6 +19,7 @@
 
    }
 
+   
    public function Connect($GroupID = 'Default', $args = array()) {
      try {
        global $dbconfig, $Settings, $db, $DBGroups;

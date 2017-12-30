@@ -2,80 +2,80 @@
     "Runtime": {
         "All": [
             {
-                "ProccessID": 2553,
+                "ProccessID": 8460,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1514504324.4935451
+                "Timestamp": 1514665162.449481
             },
             {
-                "ProccessID": 3188,
+                "ProccessID": 8864,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1514504324.4947629
+                "Timestamp": 1514665162.4505119
             },
             {
-                "ProccessID": 2518,
+                "ProccessID": 2262,
                 "isLoaded": true,
                 "Name": "Index",
                 "Type": "UI",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1514504324.496038
+                "Timestamp": 1514665162.4516699
             },
             {
-                "ProccessID": 3473,
+                "ProccessID": 1944,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1514504324.496042
+                "Timestamp": 1514665162.451674
             }
         ],
         "Handlers": [
             {
-                "ProccessID": 2553,
+                "ProccessID": 8460,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1514504324.493547
+                "Timestamp": 1514665162.4494829
             }
         ],
         "Modules": [
             {
-                "ProccessID": 3188,
+                "ProccessID": 8864,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1514504324.4947641
+                "Timestamp": 1514665162.4505141
             }
         ],
         "UIs": [
             {
-                "ProccessID": 2518,
+                "ProccessID": 2262,
                 "isLoaded": true,
                 "Name": "Index",
                 "Type": "UI",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1514504324.4960389
+                "Timestamp": 1514665162.4516709
             }
         ],
         "Controllers": [
             {
-                "ProccessID": 3473,
+                "ProccessID": 1944,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1514504324.496043
+                "Timestamp": 1514665162.451674
             }
         ]
     },
-    "benchmark": "0.00789713",
+    "benchmark": "0.00761079",
     "language": "en_US",
     "Settings": {
         "ROOT_PATH": "Framework",

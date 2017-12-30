@@ -13,7 +13,7 @@
  Class Controller {
 
    public function __construct($args = array()) {
-     global $Extentions;
+     global $Extentions, $OXCache;
      if (CHECK_EXTENTIONS === TRUE) {
        foreach ($Extentions as $ex) {
          if (!extension_loaded($ex)) { show_error('Woops!', 'The [ '. $ex .' ] extention is missing out<br>This Extention is required for this web application, Please install it on your PHP.'); }
@@ -21,7 +21,6 @@
      }
      $this->load = new \Load();
      $this->view = new View();
-
      // Handling Languages.
      if (MULTILANGS_DETECTION === TRUE) {
        $SISID = (empty(LANG_SESID)) ? 'SFW_LANGUAGE' : LANG_SESID;
@@ -47,8 +46,6 @@
 
 
    }
-
-
 
 
   public function AddAlliance($File, $to = false, $args = array(), $newName = '') {

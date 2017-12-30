@@ -11,7 +11,7 @@
  */
  use Skytells\UI\View;
  use Skytells\Runtime;
- Class {OBJECTNAME} extends Controller implements \IController {
+ Class {OBJECTNAME} extends \Controller implements \IController {
 
    /**
     * @method __construct function.

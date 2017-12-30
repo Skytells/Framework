@@ -56,6 +56,7 @@ Use Skytells\Core\Runtime;
         $filename = str_replace(".".TEMPLATE_FILE_EXTENSION.".php", "", $view);
         $Oxygen = new \OxygenInstance(APP_VIEWS_DIR, APPBASE."/".TEMPLATE_CACHE_DIR.'/');
         echo $Oxygen->render($filename, $variables);
+        unset($Oxygen);
         }
         else if (!class_exists("TemplateEngine")) {
           require ENV_UNITS_DIR.'MicroUI.php';
@@ -64,6 +65,7 @@ Use Skytells\Core\Runtime;
           if ($cFilters != null && is_array($cFilters) && !empty($cFilters)){
             foreach ($cFilters as $key => $value) { if (!empty($key)){ $te->addFilter ($key, $value); } } }
                echo $te->apply($variables);
+               unset($te);
           }
         }
       else {
@@ -77,6 +79,7 @@ Use Skytells\Core\Runtime;
           }
         }
         require APP_VIEWS_DIR.$view;
+        unset($variables);
       }
       Runtime::Report('UI', ucfirst(str_replace('.php', '', str_replace('.ui', '', $view))), APP_VIEWS_DIR.$view);
 

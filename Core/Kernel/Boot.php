@@ -21,7 +21,7 @@ Class Boot {
       $this->loadModules();
       $this->Powerup();
       $this->BootORM();
-    //  Console::log('Framework Bootstrap Initialized');
+    # Console::log('Framework Bootstrap Initialized');
   }
 
   private function loadModules() {
@@ -42,6 +42,28 @@ Class Boot {
     }
   }
 
+  private function InternalProviders($Container) {
+    global $OXCache;
+    $Container->singleton('cache', function() use($Container) {
+      global $OXCache;
+      if ($OXCache['ENABLED'] === TRUE) {
+        $container = $Container;
+        $driver = $OXCache['config']['cache.default'];
+        if ($driver == 'file') {
+        $container['config'] = $OXCache['config'];
+        $container['files'] = new Illuminate\Filesystem\Filesystem;
+        }elseif ($driver == 'redis') {
+        $container['redis'] = new Illuminate\Redis\Database($container['config']['database.redis']);
+        }elseif ($driver == 'memcache') {
+         $container['memcached.connector'] = new \Illuminate\Cache\MemcachedConnector();
+        }
+        Skytells\Core\Runtime::Report('driver', 'Oxide Cache Driver Globally', 'Autoloader > Illuminate/Cache/CacheManager');
+        return new Illuminate\Cache\CacheManager($container);
+      }
+    });
+    return $Container;
+  }
+
   private function Powerup($Args = array()) {
     global $Routes, $SF_Modules;
     Router::map('GET|POST', "[*:".ROUTER_CONFIG_DEFAULT_ROUTE_PARAM."]",  function($__MVCallback){
@@ -57,7 +79,9 @@ Class Boot {
           if (file_exists(APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php") ){
             require APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php";
             ${APP_INSTANCE} = new Illuminate\Container\Container;
+            Container::setInstance(${APP_INSTANCE});
             Facade::setFacadeApplication(${APP_INSTANCE});
+            ${APP_INSTANCE} = Boot::InternalProviders(${APP_INSTANCE});
             ${APP_INSTANCE}->bind($DEFAULT_CONTROLLER, $CNamespace.$DEFAULT_CONTROLLER);
             $Home = ${APP_INSTANCE}->make($CNamespace.$DEFAULT_CONTROLLER);
             $Home->$DEFAULT_CONTROLLER_METHOD();
@@ -67,8 +91,6 @@ Class Boot {
             }
           return false;
          }
-
-
           if ( !empty($_ctrlName = Payload::getExplosion($_MVURI, 1) ) ){
             if (file_exists(APP_CONTROLLERS_DIR.$_ctrlName.".php")) {
               require APP_CONTROLLERS_DIR.$_ctrlName.".php";
@@ -78,7 +100,9 @@ Class Boot {
             $ParentClass = get_parent_class($CNamespace.$_ctrlName);
             if ($ParentClass != "Controller") {  show_401(); }
             ${APP_INSTANCE} = new Illuminate\Container\Container;
+            Container::setInstance(${APP_INSTANCE});
             Facade::setFacadeApplication(${APP_INSTANCE});
+            ${APP_INSTANCE} = Boot::InternalProviders(${APP_INSTANCE});
             ${APP_INSTANCE}->bind($_ctrlName, $CNamespace.$_ctrlName);
             $_CTR = ${APP_INSTANCE}->make($CNamespace.$_ctrlName);
             if ($_funcName = Payload::getExplosion($_MVURI, 2)){
@@ -123,7 +147,6 @@ Class Boot {
      }
      return true;
   }
-
 
 
   public static function Controller($Controller, $method = false, $args = false) {

@@ -113,8 +113,6 @@ Kernel::addCLICommand("create", "create");
 
 
 
-
-
   function create($args, $options, $console) {
 
     if (!isset($args[0])) {
@@ -139,7 +137,7 @@ Kernel::addCLICommand("create", "create");
         $console->writeln($l);
         break;
       case 'model':
-          if (file_exists(APP_CONTROLLERS_DIR.'/'.$Name.'.php')) {
+          if (file_exists(APP_MODELS_DIR.'/'.$Name.'.php')) {
             throw new \ErrorException("This model is already exists!", 1);
           }
           $l = Colors::colorize("Creating $Name Model..", 'yellow');
@@ -148,6 +146,33 @@ Kernel::addCLICommand("create", "create");
           file_put_contents(APP_MODELS_DIR.'/'.$Name.'.php', $Template);
           $l = Colors::colorize("$Name.php Created!", 'green');
           $console->writeln($l);
+        break;
+
+
+      case 'eloquent':
+            if (file_exists(APP_ELOQUENTS_DIR.'/'.$Name.'.php')) {
+              throw new \ErrorException("This model is already exists!", 1);
+            }
+            $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
+            $console->writeln($l);
+            $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(APP_ELOQUENTS_DIR.'/ConsoleKit/Lab/Eloquent.io'));
+            file_put_contents(APP_ELOQUENTS_DIR.'/'.$Name.'.php', $Template);
+            $l = Colors::colorize("$Name.php Created!", 'green');
+            $console->writeln($l);
+        break;
+      case 'migration':
+              if (file_exists(APP_MIGRATIONS_DIR.'/'.$Name.'.php')) {
+                throw new \ErrorException("This Migration is already exists!", 1);
+              }
+              $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
+              $console->writeln($l);
+              $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(APP_MIGRATIONS_DIR.'/ConsoleKit/Lab/Migration.io'));
+              if (isset($args[2])) {
+                $Template = str_replace('{TABLE_NAME}', $args[2], file_get_contents(APP_MIGRATIONS_DIR.'/ConsoleKit/Lab/Migration.io'));
+              }
+              file_put_contents(APP_MIGRATIONS_DIR.'/'.$Name.'.php', $Template);
+              $l = Colors::colorize("$Name.php Created!", 'green');
+              $console->writeln($l);
         break;
       default:
       $l = Colors::colorize("Unrecognized Type!", 'red');
@@ -250,7 +275,7 @@ Kernel::addCLICommand("create", "create");
         "verify_peer"=>false,
         "verify_peer_name"=>false,
     ),
-    );  
+    );
     $res = file_get_contents('https://raw.githubusercontent.com/Skytells/Framework/master/Latest', false, stream_context_create($arrContextOptions));
     if (empty($res) || $res == false) {
       $l = Colors::colorize('ERROR: Unable to check for updates, Try again later.', 'red');

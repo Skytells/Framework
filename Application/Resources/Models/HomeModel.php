@@ -24,7 +24,7 @@
       // Connecting to the Selected Database Group.
        $this->Connect('Default'); // Connect to db.1
       //      ->Join('Default'); // Joining another DB
-
+    
   }
 
    function getUsers() {

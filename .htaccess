@@ -4,7 +4,9 @@
     </IfModule>
 
     RewriteEngine On
-    RewriteRule ^assets/(.*)$ Application/Resources/Views/assets/$1 [L]
+    RewriteRule ^assets/(.*)$ Application/Public/assets/$1 [L]
+    RewriteRule ^public/(.*)$ Application/Public/$1 [L]
+
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
