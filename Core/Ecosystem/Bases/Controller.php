@@ -65,48 +65,8 @@
     } else { $to->$OwnerObject = new $realClassName; } }else {require $Path;}
     return true;
   }
-   /**
-    * Grant Database Access
-    * @return bool
-    */
-   public function GrantDBAccess($GroupID = 'Default') {
-     try {
-       global $dbconfig, $Settings, $db;
-       $DriverName = $dbconfig[$GroupID]['dbdriver'];
-       if (!in_array($dbconfig[$GroupID]['dbdriver'], $this->LoadedDrivers)) {
-       $driver = ENV_DRIVERS_DIR.'Database/'.$dbconfig[$GroupID]['dbdriver'].'/Init.php';
-       if (!file_exists($driver)) { throw new \ErrorException("DB Driver [$DriverName] selected on Group [$GroupID] is not found as it should be in [$driver]", 1); }
-       $LoadedDrivers[] = $dbconfig[$GroupID]['dbdriver'];
-       }
-       $DB_ACTIVE_GROUP = $GroupID;
-       $db = require $driver;
-       if ($dbconfig[$GroupID]['dbdriver'] === 'mysqli') {
-         $db_data = array ('host' => $dbconfig[$GroupID]['hostname'],
-                            'username' => $dbconfig[$GroupID]['username'],
-                            'password' => $dbconfig[$GroupID]['password'],
-                            'db'=> $dbconfig[$GroupID]['database'],
-                            'port' => $dbconfig[$GroupID]['port'],
-                            'prefix' => $dbconfig[$GroupID]['dbprefix'],
-                            'charset' => $dbconfig[$GroupID]['charset']);
-         $this->SQLManager[$GroupID] = new SQLManager($db_data);
-         if ($dbconfig['QUERYBUILDER'] === TRUE) {
-           $this->DBObject[$GroupID] = new DBObject();
-          }
-         $this->db[$GroupID] = ($dbconfig[$GroupID]['raw'] == TRUE) ?
-         new mysqli( $dbconfig[$GroupID]['hostname'], $dbconfig[$GroupID]['username'], $dbconfig[$GroupID]['password'], $dbconfig[$GroupID]['database']) : NULL;
-         $db = $this->db[$GroupID];
-       }
-       if (DEVELOPMENT_MODE === TRUE) {
-         global $Framework;
-         $Framework['db_connection'] = true;
-         $Framework['db_drivers'][] = $dbconfig[$GroupID]['dbdriver'];
-         $Framework['dbs'][] = $dbconfig[$GroupID]['database'];
-       }
-       return true;
-     } catch (Exception $e) {
-      throw new \Exception($e->getMessage(), 1);
-    }
-   }
+
+
 
 
  }

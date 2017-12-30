@@ -50,17 +50,17 @@
         ]
     },
     {
-        "name": "illuminate/contracts",
+        "name": "skytells/contracts",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/contracts.git",
+            "url": "https://github.com/skytells/contracts.git",
             "reference": "67f642e018f3e95fb0b2ebffc206c3200391b1ab"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/contracts/zipball/67f642e018f3e95fb0b2ebffc206c3200391b1ab",
+            "url": "https://api.github.com/repos/skytells/contracts/zipball/67f642e018f3e95fb0b2ebffc206c3200391b1ab",
             "reference": "67f642e018f3e95fb0b2ebffc206c3200391b1ab",
             "shasum": ""
         },
@@ -77,7 +77,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Contracts\\": ""
+                "Skytells\\Contracts\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -90,7 +90,7 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Contracts package.",
+        "description": "The Skytells Contracts package.",
         "homepage": "https://laravel.com"
     },
     {
@@ -163,24 +163,24 @@
         ]
     },
     {
-        "name": "illuminate/support",
+        "name": "skytells/support",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/support.git",
+            "url": "https://github.com/skytells/support.git",
             "reference": "feab1d1495fd6d38970bd6c83586ba2ace8f299a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/support/zipball/feab1d1495fd6d38970bd6c83586ba2ace8f299a",
+            "url": "https://api.github.com/repos/skytells/support/zipball/feab1d1495fd6d38970bd6c83586ba2ace8f299a",
             "reference": "feab1d1495fd6d38970bd6c83586ba2ace8f299a",
             "shasum": ""
         },
         "require": {
             "doctrine/inflector": "~1.1",
             "ext-mbstring": "*",
-            "illuminate/contracts": "5.4.*",
+            "skytells/contracts": "5.4.*",
             "paragonie/random_compat": "~1.4|~2.0",
             "php": ">=5.6.4"
         },
@@ -188,7 +188,7 @@
             "tightenco/collect": "self.version"
         },
         "suggest": {
-            "illuminate/filesystem": "Required to use the composer class (5.2.*).",
+            "skytells/filesystem": "Required to use the composer class (5.2.*).",
             "symfony/process": "Required to use the composer class (~3.2).",
             "symfony/var-dumper": "Required to use the dd function (~3.2)."
         },
@@ -202,7 +202,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Support\\": ""
+                "Skytells\\Support\\": ""
             },
             "files": [
                 "helpers.php"
@@ -218,26 +218,26 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Support package.",
+        "description": "The Skytells Support package.",
         "homepage": "https://laravel.com"
     },
     {
-        "name": "illuminate/container",
+        "name": "skytells/container",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/container.git",
+            "url": "https://github.com/skytells/container.git",
             "reference": "c5b8a02a34a52c307f16922334c355c5eef725a6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/container/zipball/c5b8a02a34a52c307f16922334c355c5eef725a6",
+            "url": "https://api.github.com/repos/skytells/container/zipball/c5b8a02a34a52c307f16922334c355c5eef725a6",
             "reference": "c5b8a02a34a52c307f16922334c355c5eef725a6",
             "shasum": ""
         },
         "require": {
-            "illuminate/contracts": "5.4.*",
+            "skytells/contracts": "5.4.*",
             "php": ">=5.6.4"
         },
         "time": "2017-05-24T14:15:53+00:00",
@@ -250,7 +250,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Container\\": ""
+                "Skytells\\Container\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -263,28 +263,28 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Container package.",
+        "description": "The Skytells Container package.",
         "homepage": "https://laravel.com"
     },
     {
-        "name": "illuminate/events",
+        "name": "skytells/events",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/events.git",
+            "url": "https://github.com/skytells/events.git",
             "reference": "ebdca3b0305e9fc954afb9e422c4559482cd11e6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/events/zipball/ebdca3b0305e9fc954afb9e422c4559482cd11e6",
+            "url": "https://api.github.com/repos/skytells/events/zipball/ebdca3b0305e9fc954afb9e422c4559482cd11e6",
             "reference": "ebdca3b0305e9fc954afb9e422c4559482cd11e6",
             "shasum": ""
         },
         "require": {
-            "illuminate/container": "5.4.*",
-            "illuminate/contracts": "5.4.*",
-            "illuminate/support": "5.4.*",
+            "skytells/container": "5.4.*",
+            "skytells/contracts": "5.4.*",
+            "skytells/support": "5.4.*",
             "php": ">=5.6.4"
         },
         "time": "2017-05-02T12:57:00+00:00",
@@ -297,7 +297,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Events\\": ""
+                "Skytells\\Events\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -310,7 +310,7 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Events package.",
+        "description": "The Skytells Events package.",
         "homepage": "https://laravel.com"
     },
     {
@@ -500,34 +500,34 @@
         ]
     },
     {
-        "name": "illuminate/database",
+        "name": "skytells/database",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/database.git",
+            "url": "https://github.com/skytells/database.git",
             "reference": "405aa061a5bc8588cbf3a78fba383541a568e3fe"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/database/zipball/405aa061a5bc8588cbf3a78fba383541a568e3fe",
+            "url": "https://api.github.com/repos/skytells/database/zipball/405aa061a5bc8588cbf3a78fba383541a568e3fe",
             "reference": "405aa061a5bc8588cbf3a78fba383541a568e3fe",
             "shasum": ""
         },
         "require": {
-            "illuminate/container": "5.4.*",
-            "illuminate/contracts": "5.4.*",
-            "illuminate/support": "5.4.*",
+            "skytells/container": "5.4.*",
+            "skytells/contracts": "5.4.*",
+            "skytells/support": "5.4.*",
             "nesbot/carbon": "~1.20",
             "php": ">=5.6.4"
         },
         "suggest": {
             "doctrine/dbal": "Required to rename columns and drop SQLite columns (~2.5).",
             "fzaninotto/faker": "Required to use the eloquent factory builder (~1.4).",
-            "illuminate/console": "Required to use the database commands (5.4.*).",
-            "illuminate/events": "Required to use the observers with Eloquent (5.4.*).",
-            "illuminate/filesystem": "Required to use the migrations (5.4.*).",
-            "illuminate/pagination": "Required to paginate the result set (5.4.*)."
+            "skytells/console": "Required to use the database commands (5.4.*).",
+            "skytells/events": "Required to use the observers with Eloquent (5.4.*).",
+            "skytells/filesystem": "Required to use the migrations (5.4.*).",
+            "skytells/pagination": "Required to paginate the result set (5.4.*)."
         },
         "time": "2017-08-24T12:07:53+00:00",
         "type": "library",
@@ -539,7 +539,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Database\\": ""
+                "Skytells\\Database\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -552,7 +552,7 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Database package.",
+        "description": "The Skytells Database package.",
         "homepage": "https://laravel.com",
         "keywords": [
             "database",
@@ -720,23 +720,23 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "illuminate/filesystem",
+        "name": "skytells/filesystem",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/filesystem.git",
+            "url": "https://github.com/skytells/filesystem.git",
             "reference": "b800a1423d06869ee5c2768eee123917f12b693e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/filesystem/zipball/b800a1423d06869ee5c2768eee123917f12b693e",
+            "url": "https://api.github.com/repos/skytells/filesystem/zipball/b800a1423d06869ee5c2768eee123917f12b693e",
             "reference": "b800a1423d06869ee5c2768eee123917f12b693e",
             "shasum": ""
         },
         "require": {
-            "illuminate/contracts": "5.4.*",
-            "illuminate/support": "5.4.*",
+            "skytells/contracts": "5.4.*",
+            "skytells/support": "5.4.*",
             "php": ">=5.6.4",
             "symfony/finder": "~3.2"
         },
@@ -755,7 +755,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Filesystem\\": ""
+                "Skytells\\Filesystem\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -768,30 +768,30 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Filesystem package.",
+        "description": "The Skytells Filesystem package.",
         "homepage": "https://laravel.com"
     },
     {
-        "name": "illuminate/view",
+        "name": "skytells/view",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/view.git",
+            "url": "https://github.com/skytells/view.git",
             "reference": "785f41f8f01653dc830c5c89eb0f25c311af7615"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/view/zipball/785f41f8f01653dc830c5c89eb0f25c311af7615",
+            "url": "https://api.github.com/repos/skytells/view/zipball/785f41f8f01653dc830c5c89eb0f25c311af7615",
             "reference": "785f41f8f01653dc830c5c89eb0f25c311af7615",
             "shasum": ""
         },
         "require": {
-            "illuminate/container": "5.4.*",
-            "illuminate/contracts": "5.4.*",
-            "illuminate/events": "5.4.*",
-            "illuminate/filesystem": "5.4.*",
-            "illuminate/support": "5.4.*",
+            "skytells/container": "5.4.*",
+            "skytells/contracts": "5.4.*",
+            "skytells/events": "5.4.*",
+            "skytells/filesystem": "5.4.*",
+            "skytells/support": "5.4.*",
             "php": ">=5.6.4",
             "symfony/debug": "~3.2"
         },
@@ -805,7 +805,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\View\\": ""
+                "Skytells\\View\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -818,28 +818,28 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate View package.",
+        "description": "The Skytells View package.",
         "homepage": "https://laravel.com"
     },
     {
-        "name": "illuminate/translation",
+        "name": "skytells/translation",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/translation.git",
+            "url": "https://github.com/skytells/translation.git",
             "reference": "b671ddf78cbee60b0b357ad5745eceda2df26082"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/translation/zipball/b671ddf78cbee60b0b357ad5745eceda2df26082",
+            "url": "https://api.github.com/repos/skytells/translation/zipball/b671ddf78cbee60b0b357ad5745eceda2df26082",
             "reference": "b671ddf78cbee60b0b357ad5745eceda2df26082",
             "shasum": ""
         },
         "require": {
-            "illuminate/contracts": "5.4.*",
-            "illuminate/filesystem": "5.4.*",
-            "illuminate/support": "5.4.*",
+            "skytells/contracts": "5.4.*",
+            "skytells/filesystem": "5.4.*",
+            "skytells/support": "5.4.*",
             "php": ">=5.6.4"
         },
         "time": "2017-06-11T21:19:31+00:00",
@@ -852,7 +852,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Translation\\": ""
+                "Skytells\\Translation\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -865,34 +865,34 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Translation package.",
+        "description": "The Skytells Translation package.",
         "homepage": "https://laravel.com"
     },
     {
-        "name": "illuminate/cache",
+        "name": "skytells/cache",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/cache.git",
+            "url": "https://github.com/skytells/cache.git",
             "reference": "281adfd3fc7067ee1e23320e1abe0fa090c5fc22"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/cache/zipball/281adfd3fc7067ee1e23320e1abe0fa090c5fc22",
+            "url": "https://api.github.com/repos/skytells/cache/zipball/281adfd3fc7067ee1e23320e1abe0fa090c5fc22",
             "reference": "281adfd3fc7067ee1e23320e1abe0fa090c5fc22",
             "shasum": ""
         },
         "require": {
-            "illuminate/contracts": "5.4.*",
-            "illuminate/support": "5.4.*",
+            "skytells/contracts": "5.4.*",
+            "skytells/support": "5.4.*",
             "nesbot/carbon": "~1.20",
             "php": ">=5.6.4"
         },
         "suggest": {
-            "illuminate/database": "Required to use the database cache driver (5.4.*).",
-            "illuminate/filesystem": "Required to use the file cache driver (5.4.*).",
-            "illuminate/redis": "Required to use the redis cache driver (5.4.*)."
+            "skytells/database": "Required to use the database cache driver (5.4.*).",
+            "skytells/filesystem": "Required to use the file cache driver (5.4.*).",
+            "skytells/redis": "Required to use the redis cache driver (5.4.*)."
         },
         "time": "2017-08-22T15:53:21+00:00",
         "type": "library",
@@ -904,7 +904,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Cache\\": ""
+                "Skytells\\Cache\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -917,27 +917,27 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Cache package.",
+        "description": "The Skytells Cache package.",
         "homepage": "https://laravel.com"
     },
     {
-        "name": "illuminate/config",
+        "name": "skytells/config",
         "version": "v5.4.36",
         "version_normalized": "5.4.36.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/illuminate/config.git",
+            "url": "https://github.com/skytells/config.git",
             "reference": "8fe700aa596bc623d347e4578041fbda7a44c3d9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/config/zipball/8fe700aa596bc623d347e4578041fbda7a44c3d9",
+            "url": "https://api.github.com/repos/skytells/config/zipball/8fe700aa596bc623d347e4578041fbda7a44c3d9",
             "reference": "8fe700aa596bc623d347e4578041fbda7a44c3d9",
             "shasum": ""
         },
         "require": {
-            "illuminate/contracts": "5.4.*",
-            "illuminate/support": "5.4.*",
+            "skytells/contracts": "5.4.*",
+            "skytells/support": "5.4.*",
             "php": ">=5.6.4"
         },
         "time": "2017-02-04T20:27:32+00:00",
@@ -950,7 +950,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Illuminate\\Config\\": ""
+                "Skytells\\Config\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -963,7 +963,7 @@
                 "email": "taylor@laravel.com"
             }
         ],
-        "description": "The Illuminate Config package.",
+        "description": "The Skytells Config package.",
         "homepage": "https://laravel.com"
     }
 ]

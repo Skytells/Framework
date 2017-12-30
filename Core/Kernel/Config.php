@@ -10,7 +10,7 @@
  * @see        The Framework's changelog to be always up to date.
  */
  use Symfony\Component\Finder\Finder;
- use Illuminate\Config\Repository;
+ use Skytells\Config\Repository;
  Class Config  {
    public static $worker;
   function __construct() {

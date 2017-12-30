@@ -9,8 +9,8 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
- use Illuminate\Database\Capsule\Manager as Capsule;
- use Skytells\Database\Model as Model;
+ use Skytells\Database\Capsule\Manager as Capsule;
+ use Skytells\Wrappers\Model as Model;
  Class {OBJECTNAME} extends Model {
 
   function __construct($Ref = '') {
@@ -32,12 +32,12 @@
    }
 
    function getUserByCapsule($ID = '') {
-     // Requires [ORM][illuminate] to be TRUE from Database config file.
+     // Requires [ORM][skytells] to be TRUE from Database config file.
      # return $this->Capsule['Default']->table('users')->get();
    }
 
    function buildUsersTable() {
-     // Requires [ORM][illuminate] to be TRUE from Database config file.
+     // Requires [ORM][skytells] to be TRUE from Database config file.
      # $this->AddMigration('CreateUsersTable');
      # CreateUsersTable::run();
    }

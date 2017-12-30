@@ -12,10 +12,10 @@
 use Skytells\Core\Runtime;
 use Skytells\Core\Console;
 use Skytells\Ecosystem\Payload;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
-use Illuminate\Database\Capsule\Manager as Capsule;
+use Skytells\Support\Facades\Facade;
+use Skytells\Events\Dispatcher;
+use Skytells\Container\Container;
+use Skytells\Database\Capsule\Manager as Capsule;
 Class Boot {
   public function __construct($_ROUTER = ''){
       $this->loadModules();
@@ -51,14 +51,14 @@ Class Boot {
         $driver = $OXCache['config']['cache.default'];
         if ($driver == 'file') {
         $container['config'] = $OXCache['config'];
-        $container['files'] = new Illuminate\Filesystem\Filesystem;
+        $container['files'] = new Skytells\Filesystem\Filesystem;
         }elseif ($driver == 'redis') {
-        $container['redis'] = new Illuminate\Redis\Database($container['config']['database.redis']);
+        $container['redis'] = new Skytells\Redis\Database($container['config']['database.redis']);
         }elseif ($driver == 'memcache') {
-         $container['memcached.connector'] = new \Illuminate\Cache\MemcachedConnector();
+         $container['memcached.connector'] = new \Skytells\Cache\MemcachedConnector();
         }
-        Skytells\Core\Runtime::Report('driver', 'Oxide Cache Driver Globally', 'Autoloader > Illuminate/Cache/CacheManager');
-        return new Illuminate\Cache\CacheManager($container);
+        Skytells\Core\Runtime::Report('driver', 'Oxide Cache Driver Globally', 'Autoloader > Skytells/Cache/CacheManager');
+        return new Skytells\Cache\CacheManager($container);
       }
     });
     return $Container;
@@ -78,7 +78,7 @@ Class Boot {
           $DEFAULT_CONTROLLER_METHOD = ROUTER_CONFIG_DEFAULT_METHOD;
           if (file_exists(APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php") ){
             require APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php";
-            ${APP_INSTANCE} = new Illuminate\Container\Container;
+            ${APP_INSTANCE} = new Skytells\Container\Container;
             Container::setInstance(${APP_INSTANCE});
             Facade::setFacadeApplication(${APP_INSTANCE});
             ${APP_INSTANCE} = Boot::InternalProviders(${APP_INSTANCE});
@@ -99,7 +99,7 @@ Class Boot {
 
             $ParentClass = get_parent_class($CNamespace.$_ctrlName);
             if ($ParentClass != "Controller") {  show_401(); }
-            ${APP_INSTANCE} = new Illuminate\Container\Container;
+            ${APP_INSTANCE} = new Skytells\Container\Container;
             Container::setInstance(${APP_INSTANCE});
             Facade::setFacadeApplication(${APP_INSTANCE});
             ${APP_INSTANCE} = Boot::InternalProviders(${APP_INSTANCE});
@@ -128,20 +128,20 @@ Class Boot {
   }
 
   private function BootORM() {
-    global $Illuminate, $DBGroups;
-     if ($Illuminate['ORM'] === TRUE) {
+    global $SF_ORM, $DBGroups;
+     if ($SF_ORM['ORM'] === TRUE) {
       $Capsule = new Capsule;
        $Capsule->addConnection([
-           'driver'    => $DBGroups[$Illuminate['DATABASE']]['ORM']['illuminatedriver'],
-           'host'      => $DBGroups[$Illuminate['DATABASE']]['host'],
-           'database'  => $DBGroups[$Illuminate['DATABASE']]['database'],
-           'username'  => $DBGroups[$Illuminate['DATABASE']]['username'],
-           'password'  => $DBGroups[$Illuminate['DATABASE']]['password'],
-           'charset'   => $DBGroups[$Illuminate['DATABASE']]['charset'],
-           'collation' => $DBGroups[$Illuminate['DATABASE']]['collation'],
-           'prefix'    => $DBGroups[$Illuminate['DATABASE']]['prefix'],
+           'driver'    => $DBGroups[$SF_ORM['DATABASE']]['ORM']['driver'],
+           'host'      => $DBGroups[$SF_ORM['DATABASE']]['host'],
+           'database'  => $DBGroups[$SF_ORM['DATABASE']]['database'],
+           'username'  => $DBGroups[$SF_ORM['DATABASE']]['username'],
+           'password'  => $DBGroups[$SF_ORM['DATABASE']]['password'],
+           'charset'   => $DBGroups[$SF_ORM['DATABASE']]['charset'],
+           'collation' => $DBGroups[$SF_ORM['DATABASE']]['collation'],
+           'prefix'    => $DBGroups[$SF_ORM['DATABASE']]['prefix'],
        ]);
-       $Capsule->setEventDispatcher(new Illuminate\Events\Dispatcher(new Illuminate\Container\Container));
+       $Capsule->setEventDispatcher(new Skytells\Events\Dispatcher(new Skytells\Container\Container));
        $Capsule->setAsGlobal();
        $Capsule->bootEloquent();
      }
@@ -153,7 +153,7 @@ Class Boot {
     $Controller = str_replace('.php', '', $Controller);
     $Name = $Controller;
     require APP_CONTROLLERS_DIR.$Controller.".php";
-    ${APP_INSTANCE} = new Illuminate\Container\Container;
+    ${APP_INSTANCE} = new Skytells\Container\Container;
     Facade::setFacadeApplication(${APP_INSTANCE});
     ${APP_INSTANCE}->bind($Controller, $Controller);
     ${$Controller} = ${APP_INSTANCE}->make($Controller);

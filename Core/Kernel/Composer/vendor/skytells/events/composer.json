@@ -1,0 +1,36 @@
+{
+    "name": "skytells/events",
+    "description": "The Skytells Events package.",
+    "license": "MIT",
+    "homepage": "https://laravel.com",
+    "support": {
+        "issues": "https://github.com/laravel/framework/issues",
+        "source": "https://github.com/laravel/framework"
+    },
+    "authors": [
+        {
+            "name": "Taylor Otwell",
+            "email": "taylor@laravel.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "skytells/container": "5.4.*",
+        "skytells/contracts": "5.4.*",
+        "skytells/support": "5.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skytells\\Events\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.4-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,29 @@
+{
+    "name": "skytells/view",
+    "description": "The Skytells View package.",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.6.4",
+        "skytells/container": "5.4.*",
+        "skytells/contracts": "5.4.*",
+        "skytells/events": "5.4.*",
+        "skytells/filesystem": "5.4.*",
+        "skytells/support": "5.4.*",
+        "symfony/debug": "~3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skytells\\View\\": ""
+        },
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.4-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

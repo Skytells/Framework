@@ -2,80 +2,105 @@
     "Runtime": {
         "All": [
             {
-                "ProccessID": 8460,
+                "ProccessID": 6778,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1514665162.449481
+                "Timestamp": 1514671572.371896
             },
             {
-                "ProccessID": 8864,
+                "ProccessID": 3807,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1514665162.4505119
+                "Timestamp": 1514671572.373035
             },
             {
-                "ProccessID": 2262,
+                "ProccessID": 3996,
+                "isLoaded": true,
+                "Name": "HomeModel",
+                "Type": "Model",
+                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Models\/HomeModel.php",
+                "Timestamp": 1514671572.3784671
+            },
+            {
+                "ProccessID": 8316,
                 "isLoaded": true,
                 "Name": "Index",
                 "Type": "UI",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1514665162.4516699
+                "Timestamp": 1514671572.3885529
             },
             {
-                "ProccessID": 1944,
+                "ProccessID": 4081,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1514665162.451674
+                "Timestamp": 1514671572.3885579
             }
         ],
         "Handlers": [
             {
-                "ProccessID": 8460,
+                "ProccessID": 6778,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1514665162.4494829
+                "Timestamp": 1514671572.3718979
             }
         ],
         "Modules": [
             {
-                "ProccessID": 8864,
+                "ProccessID": 3807,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1514665162.4505141
+                "Timestamp": 1514671572.3730359
+            }
+        ],
+        "Models": [
+            {
+                "ProccessID": 3996,
+                "isLoaded": true,
+                "Name": "HomeModel",
+                "Type": "Model",
+                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Models\/HomeModel.php",
+                "Timestamp": 1514671572.378468
             }
         ],
         "UIs": [
             {
-                "ProccessID": 2262,
+                "ProccessID": 8316,
                 "isLoaded": true,
                 "Name": "Index",
                 "Type": "UI",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1514665162.4516709
+                "Timestamp": 1514671572.388555
             }
         ],
         "Controllers": [
             {
-                "ProccessID": 1944,
+                "ProccessID": 4081,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1514665162.451674
+                "Timestamp": 1514671572.3885579
             }
         ]
     },
-    "benchmark": "0.00761079",
+    "db_connection": true,
+    "db_drivers": [
+        "mysqli"
+    ],
+    "dbs": [
+        "test"
+    ],
+    "benchmark": "0.02376699",
     "language": "en_US",
     "Settings": {
         "ROOT_PATH": "Framework",
@@ -110,6 +135,6 @@
     },
     "totalCached": 0,
     "homebase": "http:\/\/localhost\/Framework",
-    "dbversion": "Unknown",
-    "dbcount": 0
+    "dbversion": "5.6.37",
+    "dbcount": 1
 }

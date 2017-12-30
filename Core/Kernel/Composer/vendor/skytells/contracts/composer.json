@@ -1,0 +1,23 @@
+{
+    "name": "skytells/contracts",
+    "description": "The Skytells Contracts package.",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skytells\\Contracts\\": ""
+        },
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.4-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

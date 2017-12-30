@@ -92,8 +92,8 @@ $DBGroups['Default'] = Array (
 			'stricton' => FALSE,
 			'raw' => TRUE,
 			'ORM' => Array(
-				'illuminate' => FALSE,
-				'illuminatedriver' => 'mysql'
+				'enabled' => FALSE,
+				'driver' => 'mysql'
 			)
 		);
 
@@ -102,7 +102,7 @@ $DBGroups['Default'] = Array (
 
 /*
 | -------------------------------------------------------------------
-| ILLUMINATE DATABASES & Eloquents Relationships
+| SKYTELLS ORM DATABASES & Eloquents Relationships
 | -------------------------------------------------------------------
 | Database tables are often related to one another.
 | For example, a blog post may have many comments, or an order could be
@@ -123,14 +123,14 @@ $DBGroups['Default'] = Array (
 | EXPLANATION OF VARIABLES
 | -------------------------------------------------------------------
 |
-|	$Illuminate['ORM'] Enables or Disables ORM
-|	$Illuminate['DATABASE'] The Default Database Group which used for creating
+|	$SF_ORM['ORM'] Enables or Disables ORM
+|	$SF_ORM['DATABASE'] The Default Database Group which used for creating
 | the first Connection.
 | NOTE: That you can also use a multiple databases.
 | SEE: https://developers.skytells.net/Framework for more info.
 | -------------------------------------------------------------------*/
 
-$Illuminate = [
+$SF_ORM = [
 	'ORM' => FALSE,
 	'DATABASE' => 'Default',
 ];

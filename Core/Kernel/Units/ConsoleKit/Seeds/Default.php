@@ -5,10 +5,10 @@ use ConsoleKit\Console,
     ConsoleKit\Utils,
     ConsoleKit\Widgets\Dialog,
     ConsoleKit\Widgets\ProgressBar;
-    use Illuminate\Support\Facades\Schema;
-    use Illuminate\Database\Schema\Blueprint;
-    use Illuminate\Database\Migrations\Migration;
-    use Illuminate\Database\Capsule\Manager as Capsule;
+    use Skytells\Support\Facades\Schema;
+    use Skytells\Database\Schema\Blueprint;
+    use Skytells\Database\Migrations\Migration;
+    use Skytells\Database\Capsule\Manager as Capsule;
 global $console;
 Kernel::addCLICommand("init", "init");
 Kernel::addCLICommand("install", "install");
@@ -200,11 +200,11 @@ Kernel::addCLICommand("create", "create");
         cliprogress($args, $options, $console);
         global $DBGroups, $dbconfig; $GroupID = $dbconfig['ACTIVE_GROUP'];
         $Capsule = new Capsule;
-         $Capsule->addConnection(['driver' => $DBGroups[$GroupID]['ORM']['illuminatedriver'],'host' => $DBGroups[$GroupID]['host'],
+         $Capsule->addConnection(['driver' => $DBGroups[$GroupID]['ORM']['driver'],'host' => $DBGroups[$GroupID]['host'],
              'database'  => $DBGroups[$GroupID]['database'], 'username' => $DBGroups[$GroupID]['username'], 'password' => $DBGroups[$GroupID]['password'],
              'charset' => $DBGroups[$GroupID]['charset'], 'collation' => $DBGroups[$GroupID]['collation'], 'prefix' => $DBGroups[$GroupID]['prefix'],
          ]);
-         $Capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher(new \Illuminate\Container\Container));
+         $Capsule->setEventDispatcher(new \Skytells\Events\Dispatcher(new \Skytells\Container\Container));
          $Capsule->setAsGlobal();
          $Capsule->bootEloquent();
         $args[1]::$args[2]();

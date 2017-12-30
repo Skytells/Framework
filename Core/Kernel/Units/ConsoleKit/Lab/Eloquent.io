@@ -10,11 +10,11 @@
  * @see        The Framework's changelog to be always up to date.
  */
  Namespace Skytells\Elquents;
- use Illuminate\Events\Dispatcher;
- use Illuminate\Container\Container;
- use Illuminate\Database\Capsule\Manager as Capsule;
+ use Skytells\Events\Dispatcher;
+ use Skytells\Container\Container;
+ use Skytells\Database\Capsule\Manager as Capsule;
 
- Class {OBJECTNAME} extends \Illuminate\Database\Eloquent\Model {
+ Class {OBJECTNAME} extends \Skytells\Database\Eloquent\Model {
 
   // Identify the Table which used in the database.
   // Incase of working with multiple databases, put DB name before table.

@@ -2,8 +2,8 @@
 
 
 
-use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\View;
+use Skytells\View\Compilers\BladeCompiler;
+use Skytells\View\View;
 
 /**
  * Standalone class for generating text using blade templates.

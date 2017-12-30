@@ -1,0 +1,25 @@
+{
+    "name": "skytells/config",
+    "description": "The Skytells Config package.",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.6.4",
+        "skytells/contracts": "5.4.*",
+        "skytells/support": "5.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skytells\\Config\\": ""
+        },
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.4-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

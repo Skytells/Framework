@@ -1,0 +1,28 @@
+<?php
+
+use Skytells\Support\Facades\Schema;
+use Skytells\Database\Schema\Blueprint;
+use Skytells\Database\Migrations\Migration;
+
+class DummyClass extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        //
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}

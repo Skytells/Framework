@@ -9,9 +9,9 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
- Namespace Skytells\Database;
+ Namespace Skytells\Wrappers;
  use Skytells\Core\Runtime;
- use Illuminate\Database\Capsule\Manager as Capsule;
+ use Skytells\Database\Capsule\Manager as Capsule;
  Class Model {
    public  $SQLManager;
    public  $DBObject;
@@ -19,7 +19,7 @@
 
    }
 
-   
+
    public function Connect($GroupID = 'Default', $args = array()) {
      try {
        global $dbconfig, $Settings, $db, $DBGroups;
@@ -31,13 +31,13 @@
        }
        $DB_ACTIVE_GROUP = $GroupID;
 
-       if ($DBGroups[$GroupID]['ORM']['illuminate'] === TRUE) {
+       if ($DBGroups[$GroupID]['ORM']['enabled'] === TRUE) {
          $this->Capsule[$GroupID] = new Capsule;
-          $this->Capsule[$GroupID]->addConnection(['driver' => $DBGroups[$GroupID]['ORM']['illuminatedriver'],'host' => $DBGroups[$GroupID]['host'],
+          $this->Capsule[$GroupID]->addConnection(['driver' => $DBGroups[$GroupID]['ORM']['driver'],'host' => $DBGroups[$GroupID]['host'],
               'database'  => $DBGroups[$GroupID]['database'], 'username' => $DBGroups[$GroupID]['username'], 'password' => $DBGroups[$GroupID]['password'],
               'charset' => $DBGroups[$GroupID]['charset'], 'collation' => $DBGroups[$GroupID]['collation'], 'prefix' => $DBGroups[$GroupID]['prefix'],
           ]);
-          $this->Capsule[$GroupID]->setEventDispatcher(new \Illuminate\Events\Dispatcher(new \Illuminate\Container\Container));
+          $this->Capsule[$GroupID]->setEventDispatcher(new \Skytells\Events\Dispatcher(new \Skytells\Container\Container));
           $this->Capsule[$GroupID]->setAsGlobal();
           $this->Capsule[$GroupID]->bootEloquent();
        }

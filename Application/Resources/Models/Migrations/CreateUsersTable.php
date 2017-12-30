@@ -9,10 +9,10 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Capsule\Manager as Capsule;
+use Skytells\Support\Facades\Schema;
+use Skytells\Database\Schema\Blueprint;
+use Skytells\Database\Migrations\Migration;
+use Skytells\Database\Capsule\Manager as Capsule;
 
 Class CreateUsersTable extends Migration {
     /**

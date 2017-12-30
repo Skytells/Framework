@@ -104,7 +104,7 @@
  |
  | Skytells Framework comes with (2) Language Engines.
  | - Built-In Engine
- | - Illuminate Engine
+ | - Skytells Engine
  | These settings to allow internationalization for your application by allowing
  | the app to support other languages.
  | --
@@ -191,7 +191,7 @@
 
   // Alternative Oxide Cache Driver.
   // Oxide Cache Driver is a powerful caching engine.
-  $OXCache['ENABLED']  = TRUE;
+  $OXCache['ENABLED']  = FALSE;
   $OXCache['PERIOD'] = 500;
   $OXCache['config'] = [
        'cache.default' => 'file',
