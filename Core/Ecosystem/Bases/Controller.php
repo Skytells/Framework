@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -12,7 +12,7 @@
  use Skytells\UI\View;
  Class Controller {
 
-   public function __construct($args = array()) {
+   public function __construct() {
      global $Extentions, $OXCache;
      if (CHECK_EXTENTIONS === TRUE) {
        foreach ($Extentions as $ex) {
@@ -37,7 +37,10 @@
 
        }
        // FREE UP RAM.
-       unset($_GET['lang']); unset($LANG); unset($SISID);
+       $_GET['lang'] = null;
+       $LANG = null;
+       $SISID = null;
+      
      }
 
      if (isset($_GET['action']) && $_GET['action'] == 'flushcache') {

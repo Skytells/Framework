@@ -4,8 +4,8 @@
     "license": "MIT",
     "require": {
         "php": ">=5.6.4",
-        "skytells/contracts": "5.4.*",
-        "skytells/support": "5.4.*",
+        "skytells/contracts": "1.*",
+        "skytells/support": "1.*",
         "nesbot/carbon": "~1.20"
     },
     "autoload": {
@@ -16,13 +16,13 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.4-dev"
+            "dev-master": "1.0-dev"
         }
     },
     "suggest": {
-        "skytells/database": "Required to use the database cache driver (5.4.*).",
-        "skytells/filesystem": "Required to use the file cache driver (5.4.*).",
-        "skytells/redis": "Required to use the redis cache driver (5.4.*)."
+        "skytells/database": "Required to use the database cache driver (1.*).",
+        "skytells/filesystem": "Required to use the file cache driver (1.*).",
+        "skytells/redis": "Required to use the redis cache driver (1.*)."
     },
     "config": {
         "sort-packages": true

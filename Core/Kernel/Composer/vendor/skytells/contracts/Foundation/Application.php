@@ -14,7 +14,7 @@ interface Application extends Container
     public function version();
 
     /**
-     * Get the base path of the Laravel installation.
+     * Get the base path of the Skytells installation.
      *
      * @return string
      */

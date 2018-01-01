@@ -74,8 +74,8 @@ class CacheTableCommand extends Command
     {
         $name = 'create_cache_table';
 
-        $path = $this->laravel->databasePath().'/migrations';
+        $path = $this->skytells->databasePath().'/migrations';
 
-        return $this->laravel['migration.creator']->create($name, $path);
+        return $this->skytells['migration.creator']->create($name, $path);
     }
 }

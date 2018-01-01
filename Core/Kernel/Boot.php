@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -17,6 +17,10 @@ use Skytells\Events\Dispatcher;
 use Skytells\Container\Container;
 use Skytells\Database\Capsule\Manager as Capsule;
 Class Boot {
+
+  static $App;
+
+
   public function __construct($_ROUTER = ''){
       $this->loadModules();
       $this->Powerup();
@@ -42,11 +46,33 @@ Class Boot {
     }
   }
 
-  private function InternalProviders($Container) {
+  /**
+   * @method Providers.
+   * Booting the providers array which required for the app.
+   */
+  private static function Providers() {
+    if (USE_PROVIDERS === FALSE) {
+      return Skytells\Foundation::$App;
+    }
+    global $SF_PROVIDERS;
+    if (!empty($SF_PROVIDERS)) {
+      foreach ($SF_PROVIDERS as $ProviderName => $ProviderClass) {
+        Skytells\Ecosystem\Payload::ResolveProvider($ProviderName, $ProviderClass);
+      }
+    }
+    return Skytells\Foundation::$App;
+  }
+
+  /**
+   * @method InternalProviders
+   * This method loads the internal provider which used by the framework's ecosystem.
+   */
+  private static function InternalProviders($Container) {
+
     global $OXCache;
+    if ($OXCache['ENABLED'] === TRUE) {
     $Container->singleton('cache', function() use($Container) {
       global $OXCache;
-      if ($OXCache['ENABLED'] === TRUE) {
         $container = $Container;
         $driver = $OXCache['config']['cache.default'];
         if ($driver == 'file') {
@@ -60,10 +86,16 @@ Class Boot {
         Skytells\Core\Runtime::Report('driver', 'Oxide Cache Driver Globally', 'Autoloader > Skytells/Cache/CacheManager');
         return new Skytells\Cache\CacheManager($container);
       }
-    });
+      );
+    }
     return $Container;
   }
 
+
+  /**
+   * @method Powerup
+   * Booting up the Application.
+   */
   private function Powerup($Args = array()) {
     global $Routes, $SF_Modules;
     Router::map('GET|POST', "[*:".ROUTER_CONFIG_DEFAULT_ROUTE_PARAM."]",  function($__MVCallback){
@@ -79,14 +111,16 @@ Class Boot {
           if (file_exists(APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php") ){
             require APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php";
             ${APP_INSTANCE} = new Skytells\Container\Container;
-            Container::setInstance(${APP_INSTANCE});
-            Facade::setFacadeApplication(${APP_INSTANCE});
-            ${APP_INSTANCE} = Boot::InternalProviders(${APP_INSTANCE});
-            ${APP_INSTANCE}->bind($DEFAULT_CONTROLLER, $CNamespace.$DEFAULT_CONTROLLER);
-            $Home = ${APP_INSTANCE}->make($CNamespace.$DEFAULT_CONTROLLER);
+            Skytells\Foundation::$App = ${APP_INSTANCE};
+            Container::setInstance(Skytells\Foundation::$App);
+            Facade::setFacadeApplication(Skytells\Foundation::$App);
+            Skytells\Foundation::$App = Boot::InternalProviders(Skytells\Foundation::$App);
+            Boot::Providers();
+            Skytells\Foundation::$App->bind($DEFAULT_CONTROLLER, $CNamespace.$DEFAULT_CONTROLLER);
+            $Home = Skytells\Foundation::$App->make($CNamespace.$DEFAULT_CONTROLLER);
             $Home->$DEFAULT_CONTROLLER_METHOD();
             Runtime::Report('Controller', $DEFAULT_CONTROLLER, APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php");
-            unset($Home);
+            $Home = null;
             return true;
             }
           return false;
@@ -100,10 +134,12 @@ Class Boot {
             $ParentClass = get_parent_class($CNamespace.$_ctrlName);
             if ($ParentClass != "Controller") {  show_401(); }
             ${APP_INSTANCE} = new Skytells\Container\Container;
-            Container::setInstance(${APP_INSTANCE});
-            Facade::setFacadeApplication(${APP_INSTANCE});
-            ${APP_INSTANCE} = Boot::InternalProviders(${APP_INSTANCE});
-            ${APP_INSTANCE}->bind($_ctrlName, $CNamespace.$_ctrlName);
+            Skytells\Foundation::$App = ${APP_INSTANCE};
+            Container::setInstance(Skytells\Foundation::$App);
+            Facade::setFacadeApplication(Skytells\Foundation::$App);
+            Skytells\Foundation::$App = Boot::InternalProviders(Skytells\Foundation::$App);
+            Boot::Providers();
+            Skytells\Foundation::$App->bind($_ctrlName, $CNamespace.$_ctrlName);
             $_CTR = ${APP_INSTANCE}->make($CNamespace.$_ctrlName);
             if ($_funcName = Payload::getExplosion($_MVURI, 2)){
               if ( Payload::isFunctionExist($CNamespace.$_ctrlName, $_funcName ) ){
@@ -131,7 +167,7 @@ Class Boot {
     global $SF_ORM, $DBGroups;
      if ($SF_ORM['ORM'] === TRUE) {
       $Capsule = new Capsule;
-       $Capsule->addConnection([
+      $Capsule->addConnection([
            'driver'    => $DBGroups[$SF_ORM['DATABASE']]['ORM']['driver'],
            'host'      => $DBGroups[$SF_ORM['DATABASE']]['host'],
            'database'  => $DBGroups[$SF_ORM['DATABASE']]['database'],
@@ -141,7 +177,7 @@ Class Boot {
            'collation' => $DBGroups[$SF_ORM['DATABASE']]['collation'],
            'prefix'    => $DBGroups[$SF_ORM['DATABASE']]['prefix'],
        ]);
-       $Capsule->setEventDispatcher(new Skytells\Events\Dispatcher(new Skytells\Container\Container));
+       $Capsule->setEventDispatcher(new Skytells\Events\Dispatcher(\Skytells\Foundation::$App));
        $Capsule->setAsGlobal();
        $Capsule->bootEloquent();
      }
@@ -154,9 +190,13 @@ Class Boot {
     $Name = $Controller;
     require APP_CONTROLLERS_DIR.$Controller.".php";
     ${APP_INSTANCE} = new Skytells\Container\Container;
-    Facade::setFacadeApplication(${APP_INSTANCE});
-    ${APP_INSTANCE}->bind($Controller, $Controller);
-    ${$Controller} = ${APP_INSTANCE}->make($Controller);
+    Skytells\Foundation::$App = ${APP_INSTANCE};
+    Container::setInstance(Skytells\Foundation::$App);
+    Facade::setFacadeApplication(Skytells\Foundation::$App);
+    Skytells\Foundation::$App = Boot::InternalProviders(Skytells\Foundation::$App);
+    Boot::Providers();
+    Skytells\Foundation::$App->bind($Controller, $Controller);
+    ${$Controller} = Skytells\Foundation::$App->make($Controller);
     $m = ($method == false) ? $DEFAULT_CONTROLLER_METHOD : $method;
     if ($args != false) {
       if (is_array($args)) {

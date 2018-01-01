@@ -11,21 +11,18 @@ Class Payload {
   public static function loadConfigManager() {
     require COREDIRNAME.'/Kernel/Config.php';
   }
-  public static function isClassExist($ClassName, $ReturnType = "Page")
-      {
+  public static function isClassExist($ClassName, $ReturnType = "Page") {
         if ( !class_exists($ClassName) )
         {
-          if ($ReturnType != "Page") { return false; }
-            if (DEVELOPMENT_MODE == true){
+          if (DEVELOPMENT_MODE === true){
               throw new  \ErrorException("Error: Requested Controller [ ".$ClassName." ] Does not exist.\r\n You're seeing this Exception because you're in the development mode.", 8);
               }else{
               show_404();
               }
-        }else{
-          if ($ReturnType != "Page") { return true; }
         }
         return true;
-      }
+   }
+
   public static function getExplosion($ptr, $id, $trim = true)
      {
        if (empty($ptr) || $ptr == ""){ return false; }
@@ -42,21 +39,18 @@ Class Payload {
          return false;
        }
      }
-  public static function isFunctionExist($ClassName, $Function, $ReturnType = "Page")
-        {
+  public static function isFunctionExist($ClassName, $Function, $ReturnType = "Page") {
           if ( !method_exists($ClassName, $Function) )
           {
-            if ($ReturnType != "Page") { return false; }
-              if (DEVELOPMENT_MODE == true){
+              if (DEVELOPMENT_MODE === true){
                 throw new  \ErrorException("Error: Requested Function [ ".$Function." ] Does not exist in Controller [ $ClassName ]. ", 9);
                 }else{
                 show_404();
                 }
-          }else{
-            if ($ReturnType != "Page") { return true; }
           }
           return true;
-        }
+   }
+
   public static function Define($NODE) {
     global $Routes, $Settings, $Firewall;
 
@@ -88,6 +82,27 @@ Class Payload {
     if (!empty($_Preloaded['Libraries'])) {
       foreach ($_Preloaded['Libraries'] as $_handler) { \Load::library($_handler); }
     }
+  }
+
+
+  /**
+   * @method ResolveProvider
+   */
+  public static function ResolveProvider($ProviderName, $ProviderClass) {
+      require APP_PROVIDERS_DIR.$ProviderName.'.php';
+      ${$ProviderName} = new $ProviderClass(\Skytells\Foundation::$App);
+      $requirements = ${$ProviderName}->boot();
+      if (is_array($requirements) && !empty($requirements['services']) && !empty($requirements['contracts'])) {
+        foreach ($requirements['contracts'] as $contract) {
+          require APP_PROVIDERS_DIR.'/Contracts/'.$contract.'.php';
+        }
+        foreach ($requirements['services'] as $service) {
+          require APP_PROVIDERS_DIR.'/Services/'.$service.'.php';
+        }
+        ${$ProviderName}->register();
+        \Skytells\Core\Runtime::Report('Service Provider', $ProviderClass, APP_PROVIDERS_DIR.$ProviderName.'.php');
+      }
+      return true;
   }
 
 }

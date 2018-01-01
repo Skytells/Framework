@@ -285,7 +285,7 @@ class BelongsTo extends Relation
      */
     public function getRelationCountHash()
     {
-        return 'laravel_reserved_'.static::$selfJoinCount++;
+        return 'skytells_reserved_'.static::$selfJoinCount++;
     }
 
     /**

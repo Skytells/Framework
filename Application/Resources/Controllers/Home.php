@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -11,6 +11,7 @@
  */
  use Skytells\UI\View;
  use Skytells\Runtime;
+
  Class Home extends \Controller implements \IController {
    /**
     * @method __construct function.
@@ -31,8 +32,11 @@
      # echo Cache::get('foo');
 
      // Now, We want to load the model.
+    
+
      # $this->load->model('HomeModel', $this);
      # $Users = $this->HomeModel->getUsers();
+     # d($Users);
      # d(Skytells\Elquents\Users::all());
    }
 

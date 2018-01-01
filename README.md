@@ -1,7 +1,7 @@
 # Skytells Framework for PHP
-Version 3.3 ( Last Release Version )
+Version 3.4 ( Last Release Version )
 
-Version 3.4 ( Current Development Version )
+Version 3.3 ( Current Development Version )
 
 Skytells Framework is an Application Development Framework - a toolkit - for people who build web sites using PHP. Its goal is to enable you to develop projects much faster than you could if you were writing code from scratch, by providing a rich set of libraries for commonly needed tasks, as well as a simple interface and logical structure to access these libraries. Skytells Framework lets you creatively focus on your project by minimizing the amount of code needed for a given task.
 
@@ -13,7 +13,7 @@ Powered by : Skytells, Inc.
 
 ## Important
 
-Please refer to the Changelog.md for any future updates.
+Please refer to the [Release Notes](http://developers.skytells.net/framework/release-notes/) for any future updates.
 
 Also, Please see the ( <a href='http://developers.skytells.net/framework/'>Framework Guide</a> ) to learn how to use Skytells FW.
 
@@ -86,7 +86,7 @@ $ > composer require skytells/framework
 ```
 
 ##### Configuring Framework.
-Please See <a href='http://developers.skytells.net/framework/Getting_Started/Configuration/'>Configuration manual for more information</a>
+Please See <a href='http://developers.skytells.net/framework/configuration/'>Configuration manual for more information</a>
 
 
 

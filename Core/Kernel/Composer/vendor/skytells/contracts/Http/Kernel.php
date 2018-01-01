@@ -29,7 +29,7 @@ interface Kernel
     public function terminate($request, $response);
 
     /**
-     * Get the Laravel application instance.
+     * Get the Skytells application instance.
      *
      * @return \Skytells\Contracts\Foundation\Application
      */

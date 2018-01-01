@@ -50,11 +50,11 @@ class ClearCommand extends Command
      */
     public function handle()
     {
-        $this->laravel['events']->fire('cache:clearing', [$this->argument('store'), $this->tags()]);
+        $this->skytells['events']->fire('cache:clearing', [$this->argument('store'), $this->tags()]);
 
         $this->cache()->flush();
 
-        $this->laravel['events']->fire('cache:cleared', [$this->argument('store'), $this->tags()]);
+        $this->skytells['events']->fire('cache:cleared', [$this->argument('store'), $this->tags()]);
 
         $this->info('Cache cleared successfully.');
     }

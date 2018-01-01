@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -11,7 +11,6 @@
  */
  Namespace Skytells\Core;
  Class Runtime {
-
 
    public static function Report($TYPE, $Name, $FILE) {
      if (DEVELOPMENT_MODE !== TRUE) { return false; }
@@ -22,6 +21,5 @@
      $Framework['Runtime']['All'][] = Array('ProccessID' => $ProccessID, 'isLoaded' => true, 'Name' => $Name, 'Type' => ucfirst($TYPE), 'File' => $FILE, 'Timestamp' => microtime(true));
      $Framework['Runtime'][ucfirst($TYPE).'s'][] = Array('ProccessID' => $ProccessID, 'isLoaded' => true, 'Name' => $Name, 'Type' => ucfirst($TYPE), 'File' => $FILE, 'Timestamp' => microtime(true));
    }
-
 
  }

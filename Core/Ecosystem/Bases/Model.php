@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -15,11 +15,9 @@
  Class Model {
    public  $SQLManager;
    public  $DBObject;
-   public function __construct($args = array()) {
+   public function __construct() {
 
    }
-
-
    public function Connect($GroupID = 'Default', $args = array()) {
      try {
        global $dbconfig, $Settings, $db, $DBGroups;
@@ -30,7 +28,6 @@
           $db = require $driver;
        }
        $DB_ACTIVE_GROUP = $GroupID;
-
        if ($DBGroups[$GroupID]['ORM']['enabled'] === TRUE) {
          $this->Capsule[$GroupID] = new Capsule;
           $this->Capsule[$GroupID]->addConnection(['driver' => $DBGroups[$GroupID]['ORM']['driver'],'host' => $DBGroups[$GroupID]['host'],

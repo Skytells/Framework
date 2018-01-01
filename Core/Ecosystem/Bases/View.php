@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -51,12 +51,12 @@ Use Skytells\Core\Runtime;
         $variables = array_merge($TParses, View::$OxParses);
         Runtime::Report('Language', ucfirst(str_replace('.php', '', $ACTIVELANG)), APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php');
       }
-      if (strtolower(TEMPLATE_ENGINE) == "oxygen") {
+      if (strtolower(TEMPLATE_ENGINE) === "oxygen") {
         \Kernel::Import('Oxygen');
         $filename = str_replace(".".TEMPLATE_FILE_EXTENSION.".php", "", $view);
         $Oxygen = new \OxygenInstance(APP_VIEWS_DIR, APPBASE."/".TEMPLATE_CACHE_DIR.'/');
         echo $Oxygen->render($filename, $variables);
-        unset($Oxygen);
+        $Oxygen = null;
         }
         else if (!class_exists("TemplateEngine")) {
           require ENV_UNITS_DIR.'MicroUI.php';
@@ -65,7 +65,7 @@ Use Skytells\Core\Runtime;
           if ($cFilters != null && is_array($cFilters) && !empty($cFilters)){
             foreach ($cFilters as $key => $value) { if (!empty($key)){ $te->addFilter ($key, $value); } } }
                echo $te->apply($variables);
-               unset($te);
+               $te = null;
           }
         }
       else {
@@ -79,7 +79,7 @@ Use Skytells\Core\Runtime;
           }
         }
         require APP_VIEWS_DIR.$view;
-        unset($variables);
+        $variables = null;
       }
       Runtime::Report('UI', ucfirst(str_replace('.php', '', str_replace('.ui', '', $view))), APP_VIEWS_DIR.$view);
 

@@ -71,7 +71,7 @@
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -86,12 +86,12 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Contracts package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     },
     {
         "name": "doctrine/inflector",
@@ -180,7 +180,7 @@
         "require": {
             "doctrine/inflector": "~1.1",
             "ext-mbstring": "*",
-            "skytells/contracts": "5.4.*",
+            "skytells/contracts": "1.*",
             "paragonie/random_compat": "~1.4|~2.0",
             "php": ">=5.6.4"
         },
@@ -196,7 +196,7 @@
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -214,12 +214,12 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Support package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     },
     {
         "name": "skytells/container",
@@ -237,14 +237,14 @@
             "shasum": ""
         },
         "require": {
-            "skytells/contracts": "5.4.*",
+            "skytells/contracts": "1.*",
             "php": ">=5.6.4"
         },
         "time": "2017-05-24T14:15:53+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -259,12 +259,12 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Container package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     },
     {
         "name": "skytells/events",
@@ -282,16 +282,16 @@
             "shasum": ""
         },
         "require": {
-            "skytells/container": "5.4.*",
-            "skytells/contracts": "5.4.*",
-            "skytells/support": "5.4.*",
+            "skytells/container": "1.*",
+            "skytells/contracts": "1.*",
+            "skytells/support": "1.*",
             "php": ">=5.6.4"
         },
         "time": "2017-05-02T12:57:00+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -306,12 +306,12 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Events package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     },
     {
         "name": "symfony/polyfill-mbstring",
@@ -515,25 +515,25 @@
             "shasum": ""
         },
         "require": {
-            "skytells/container": "5.4.*",
-            "skytells/contracts": "5.4.*",
-            "skytells/support": "5.4.*",
+            "skytells/container": "1.*",
+            "skytells/contracts": "1.*",
+            "skytells/support": "1.*",
             "nesbot/carbon": "~1.20",
             "php": ">=5.6.4"
         },
         "suggest": {
             "doctrine/dbal": "Required to rename columns and drop SQLite columns (~2.5).",
             "fzaninotto/faker": "Required to use the eloquent factory builder (~1.4).",
-            "skytells/console": "Required to use the database commands (5.4.*).",
-            "skytells/events": "Required to use the observers with Eloquent (5.4.*).",
-            "skytells/filesystem": "Required to use the migrations (5.4.*).",
-            "skytells/pagination": "Required to paginate the result set (5.4.*)."
+            "skytells/console": "Required to use the database commands (1.*).",
+            "skytells/events": "Required to use the observers with Eloquent (1.*).",
+            "skytells/filesystem": "Required to use the migrations (1.*).",
+            "skytells/pagination": "Required to paginate the result set (1.*)."
         },
         "time": "2017-08-24T12:07:53+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -548,15 +548,15 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Database package.",
-        "homepage": "https://laravel.com",
+        "homepage": "https://skytells.net",
         "keywords": [
             "database",
-            "laravel",
+            "skytells",
             "orm",
             "sql"
         ]
@@ -735,8 +735,8 @@
             "shasum": ""
         },
         "require": {
-            "skytells/contracts": "5.4.*",
-            "skytells/support": "5.4.*",
+            "skytells/contracts": "1.*",
+            "skytells/support": "1.*",
             "php": ">=5.6.4",
             "symfony/finder": "~3.2"
         },
@@ -749,7 +749,7 @@
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -764,12 +764,12 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Filesystem package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     },
     {
         "name": "skytells/view",
@@ -787,11 +787,11 @@
             "shasum": ""
         },
         "require": {
-            "skytells/container": "5.4.*",
-            "skytells/contracts": "5.4.*",
-            "skytells/events": "5.4.*",
-            "skytells/filesystem": "5.4.*",
-            "skytells/support": "5.4.*",
+            "skytells/container": "1.*",
+            "skytells/contracts": "1.*",
+            "skytells/events": "1.*",
+            "skytells/filesystem": "1.*",
+            "skytells/support": "1.*",
             "php": ">=5.6.4",
             "symfony/debug": "~3.2"
         },
@@ -799,7 +799,7 @@
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -814,12 +814,12 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells View package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     },
     {
         "name": "skytells/translation",
@@ -837,16 +837,16 @@
             "shasum": ""
         },
         "require": {
-            "skytells/contracts": "5.4.*",
-            "skytells/filesystem": "5.4.*",
-            "skytells/support": "5.4.*",
+            "skytells/contracts": "1.*",
+            "skytells/filesystem": "1.*",
+            "skytells/support": "1.*",
             "php": ">=5.6.4"
         },
         "time": "2017-06-11T21:19:31+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -861,12 +861,12 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Translation package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     },
     {
         "name": "skytells/cache",
@@ -884,21 +884,21 @@
             "shasum": ""
         },
         "require": {
-            "skytells/contracts": "5.4.*",
-            "skytells/support": "5.4.*",
+            "skytells/contracts": "1.*",
+            "skytells/support": "1.*",
             "nesbot/carbon": "~1.20",
             "php": ">=5.6.4"
         },
         "suggest": {
-            "skytells/database": "Required to use the database cache driver (5.4.*).",
-            "skytells/filesystem": "Required to use the file cache driver (5.4.*).",
-            "skytells/redis": "Required to use the redis cache driver (5.4.*)."
+            "skytells/database": "Required to use the database cache driver (1.*).",
+            "skytells/filesystem": "Required to use the file cache driver (1.*).",
+            "skytells/redis": "Required to use the redis cache driver (1.*)."
         },
         "time": "2017-08-22T15:53:21+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -913,12 +913,12 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Cache package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     },
     {
         "name": "skytells/config",
@@ -936,15 +936,15 @@
             "shasum": ""
         },
         "require": {
-            "skytells/contracts": "5.4.*",
-            "skytells/support": "5.4.*",
+            "skytells/contracts": "1.*",
+            "skytells/support": "1.*",
             "php": ">=5.6.4"
         },
         "time": "2017-02-04T20:27:32+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.4-dev"
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
@@ -959,11 +959,11 @@
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "name": "Dr. Hazem Ali",
+                "email": "hazem@skytells.net"
             }
         ],
         "description": "The Skytells Config package.",
-        "homepage": "https://laravel.com"
+        "homepage": "https://skytells.net"
     }
 ]

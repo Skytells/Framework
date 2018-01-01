@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -32,7 +32,7 @@
    }
 
    function getUserByCapsule($ID = '') {
-     // Requires [ORM][skytells] to be TRUE from Database config file.
+     // Requires [ORM][enabled] to be TRUE from Database config file.
      return $this->Capsule['Default']->table('users')->get();
    }
 

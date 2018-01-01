@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
@@ -9,12 +9,8 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
+Namespace Skytells;
+Class Foundation {
+  static $App;
 
- // ------------------------------------------------------------------------
- // ARABIC EG - LANGUAGE FILE.
- // ------------------------------------------------------------------------
-
- $lang['PAGE_TITLE'] = 'مرحبا';
- $lang['HEADING']    = 'مرحبا بك في سكاي تيلز';
-
- return $lang;
+ }

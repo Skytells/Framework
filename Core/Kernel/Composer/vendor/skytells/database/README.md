@@ -1,10 +1,10 @@
 ## Skytells Database
 
-The Skytells Database component is a full database toolkit for PHP, providing an expressive query builder, ActiveRecord style ORM, and schema builder. It currently supports MySQL, Postgres, SQL Server, and SQLite. It also serves as the database layer of the Laravel PHP framework.
+The Skytells Database component is a full database toolkit for PHP, providing an expressive query builder, ActiveRecord style ORM, and schema builder. It currently supports MySQL, Postgres, SQL Server, and SQLite. It also serves as the database layer of the Skytells PHP framework.
 
 ### Usage Instructions
 
-First, create a new "Capsule" manager instance. Capsule aims to make configuring the library for usage outside of the Laravel framework as easy as possible.
+First, create a new "Capsule" manager instance. Capsule aims to make configuring the library for usage outside of the Skytells framework as easy as possible.
 
 ```PHP
 use Skytells\Database\Capsule\Manager as Capsule;
@@ -66,4 +66,4 @@ class User extends Skytells\Database\Eloquent\Model {}
 $users = User::where('votes', '>', 1)->get();
 ```
 
-For further documentation on using the various database facilities this library provides, consult the [Laravel framework documentation](https://laravel.com/docs).
+For further documentation on using the various database facilities this library provides, consult the [Skytells framework documentation](https://skytells.net/docs).

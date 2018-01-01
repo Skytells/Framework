@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -177,7 +177,7 @@
  | $Memcache["Settings"] : If Memcache Driver is enabled.
  | CACHE_DIR : Which Dir. the Cached files will be stored on?
  | $OXCache : Dynamic array contains an Alternative Oxide Caching Config.
- | SF_CACHE is another cache driver which used by laravel.
+ | SF_CACHE is another cache driver which used by skytells.
  | $OXCache['ENABLED'] Enables or disables the Oxide Cache driver.
  | NOTE: That enable or disable this $OXCache cache doesn't effect the
  | Main cache configuration which used for $Settings["USE_CACHE"].
@@ -240,6 +240,30 @@
    $SF_Modules = Array (
      "Firewall" => TRUE
    );
+
+
+
+
+
+
+
+   /*
+   |-------------------------------------------------------------------------------
+   | SERVICE PROVIDERS
+   |-------------------------------------------------------------------------------
+   |
+   | Service providers are the central place of all Skytells application bootstrapping.
+   | Your own application, as well as all of Skytells Framework's core services are
+   | bootstrapped via service providers.
+   */
+    $Settings['USE_PROVIDERS'] = FALSE;
+    $SF_PROVIDERS = [
+     /*
+      * Application Service Providers...
+      */
+      "AppServiceProvider" => App\Providers\AppServiceProvider::class
+    ];
+
 
 
 

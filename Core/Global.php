@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.3
+ * @version    3.4
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -21,13 +21,14 @@
  require __DIR__.'/Ecosystem/Router.php';
  require __DIR__.'/Kernel/Kernel.php';
  foreach(glob(APP_MISC_DIR.'/Config/*.php') as $file) { require $file; }
- global ${APP_INSTANCE};
+ require __DIR__.'/Kernel/Foundation.php';
  require __DIR__.'/Kernel/Boot.php';
  #  if (count($_Autoload) > 0) { Payload::Autoload($_Autoload); }
+
   Payload::Define('ROUTES');
   Payload::Define('SETTINGS');
   Payload::Autoload(Array(ENV_FUNCTIONS_DIR));
-  require COREDIRNAME.'/Services.php';
+  require __DIR__.'/Services.php';
   Load::setReporter(FALSE);
   Payload::resolvePreloaded();
   define('HTTP_SERVER_PROTOCOL', (Skytells\Handlers\Http::isSSL()) ? 'https://' : 'http://');

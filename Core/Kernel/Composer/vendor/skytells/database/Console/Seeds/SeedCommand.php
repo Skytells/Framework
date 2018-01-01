@@ -71,9 +71,9 @@ class SeedCommand extends Command
      */
     protected function getSeeder()
     {
-        $class = $this->laravel->make($this->input->getOption('class'));
+        $class = $this->skytells->make($this->input->getOption('class'));
 
-        return $class->setContainer($this->laravel)->setCommand($this);
+        return $class->setContainer($this->skytells)->setCommand($this);
     }
 
     /**
@@ -85,7 +85,7 @@ class SeedCommand extends Command
     {
         $database = $this->input->getOption('database');
 
-        return $database ?: $this->laravel['config']['database.default'];
+        return $database ?: $this->skytells['config']['database.default'];
     }
 
     /**
