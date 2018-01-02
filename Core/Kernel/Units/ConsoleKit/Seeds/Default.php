@@ -1,4 +1,6 @@
 <?
+ini_set("display_errors", 1);
+error_reporting(E_ALL | E_STRICT);
 use ConsoleKit\Console,
     ConsoleKit\Command,
     ConsoleKit\Colors,
@@ -21,7 +23,7 @@ Kernel::addCLICommand("mkroutes", "makeRoutes");
 Kernel::addCLICommand("make", "make");
 Kernel::addCLICommand("serve", "serve");
 Kernel::addCLICommand("create", "create");
-
+Kernel::addCLICommand("create-project", "createproject");
 
 /**
  * @method Seeds Starts here
@@ -94,6 +96,7 @@ Kernel::addCLICommand("create", "create");
     $l = Colors::colorize('Results: '.$passed.' Extentions loaded and ' . $missed . ' Missing.', 'yellow');
     $console->writeln($l);
   }
+
   /***
    * Displays a progress bar
    *
@@ -155,7 +158,7 @@ Kernel::addCLICommand("create", "create");
             }
             $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
             $console->writeln($l);
-            $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(APP_ELOQUENTS_DIR.'/ConsoleKit/Lab/Eloquent.io'));
+            $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Eloquent.io'));
             file_put_contents(APP_ELOQUENTS_DIR.'/'.$Name.'.php', $Template);
             $l = Colors::colorize("$Name.php Created!", 'green');
             $console->writeln($l);
@@ -166,14 +169,51 @@ Kernel::addCLICommand("create", "create");
               }
               $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
               $console->writeln($l);
-              $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(APP_MIGRATIONS_DIR.'/ConsoleKit/Lab/Migration.io'));
+              $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Migration.io'));
               if (isset($args[2])) {
-                $Template = str_replace('{TABLE_NAME}', $args[2], file_get_contents(APP_MIGRATIONS_DIR.'/ConsoleKit/Lab/Migration.io'));
+                $Template = str_replace('{TABLE_NAME}', $args[2], $Template);
               }
               file_put_contents(APP_MIGRATIONS_DIR.'/'.$Name.'.php', $Template);
               $l = Colors::colorize("$Name.php Created!", 'green');
               $console->writeln($l);
         break;
+
+
+
+        case 'service-provider':
+        $dialog = new ConsoleKit\Widgets\Dialog($console);
+          if ($dialog->confirm('Are you sure you want to use ['. $Name .'] as a namespace for the repository?')) {
+            $confirmedNamespace = $Name;
+            $ContractName = $dialog->ask('Please Enter Contract Class name for the Service Provider :');
+            $ContractName = $ContractName;
+            $ServiceName = $dialog->ask('Please Enter Service Class name for the Provider :');
+            $ServiceName = $ServiceName;
+            $ProviderName = $dialog->ask('Please Enter Provider Class name for the Provider :');
+            if (!isset($options['endpoint'])) {
+              $ProviderName = $ProviderName."ServiceProvider";
+            }elseif (isset($options['endpoint']) && !empty($options['endpoint'])) {
+              $ProviderName = $ProviderName.$options['endpoint'];
+            }
+
+            if ($dialog->confirm("------------------------------\nJust to confirm\n------------------------------\nThe following configurations will be used for your service provider\n Namespace : $confirmedNamespace \n Contract Class Name: $ContractName ($confirmedNamespace\\$ContractName)\n Service Class Name : $ServiceName ($confirmedNamespace\\$ServiceName)\n Provider Class Name : $ProviderName ($confirmedNamespace\\$ProviderName)\n------------------------------\nWrite (y) to confirm creation of this service provider!")) {
+
+              if (createServiceProvider($console, $confirmedNamespace, $ContractName, $ServiceName, $ProviderName) === true) {
+                $l = Colors::colorize("Your Service Provider has been successfully created!", 'green');
+                $console->writeln($l);
+              }else {
+                $l = Colors::colorize("Something went wrong!", 'red');
+                $console->writeln($l);
+              }
+
+            }else {
+              $l = Colors::colorize("Service Provider Creation Aborted!", 'red');
+              $console->writeln($l);
+            }
+          }else {
+            $l = Colors::colorize("Service Provider Creation Aborted!", 'red');
+            $console->writeln($l);
+          }
+          break;
       default:
       $l = Colors::colorize("Unrecognized Type!", 'red');
       $console->writeln($l);
@@ -223,6 +263,7 @@ Kernel::addCLICommand("create", "create");
       break;
     }
   }
+
   function version($args, $options, $console) {
     global $_FRAMEWORK_VER;
     $console->writeln("This version : " . FRAMEWORK_VERSION);
@@ -303,7 +344,124 @@ Kernel::addCLICommand("create", "create");
   }
 
 
+  function createproject($args, $options, $console) {
+    if (!isset($args[0])) {
+      throw new \ErrorException("Cannot perform create-project() function without an argement ", 1);
+    }
+    $dialog = new ConsoleKit\Widgets\Dialog($console);
+    $ProjectName = $args[0];
+    $Name = $ProjectName;
+    if ($dialog->confirm('Skytells is going to create a new project ['. $Name .'] Are you sure?')) {
 
+      if ($dialog->confirm('Are you going to handle Databases with Models?')) {
+        $USE_MODELS = true;
+
+
+        if ($dialog->confirm('Great, Do you want to use Migrations with your model?')) {
+          $MigrationName = $dialog->ask('Alright, Give the Migration a name :');
+          if ($dialog->confirm('Okay, The Migration name of ['.$MigrationName.'] Will be used, Are you sure?')) {
+            $MigrationTableName = $dialog->ask('Well, Enter the database.table name which will be used on the migration file :');
+            $Migrations = true;
+          }else{
+            $Migrations = false;
+          }
+
+        }else{ $Migrations = false; }
+
+        if ($dialog->confirm('Alright, Would you like to create an Eloquent with your model as well?')) {
+          $EloquentName = $dialog->ask('Okay, Give the Eloquent a name :');
+          if ($dialog->confirm('Alright, The Eloquent name of ['.$EloquentName.'] Will be used, Are you sure?')) {
+            $Eloquent = true;
+          }else{
+            $Eloquent = false;
+          }
+
+        }else{ $Eloquent = false; }
+
+      }else{
+        $USE_MODELS = false;
+      }
+
+      $ModelStatus = ($USE_MODELS === true) ? "Yes [$Name] -> $Name.php" : "Disabled!";
+      $EloquentStatus = ($Eloquent === true) ? "Yes [$EloquentName] -> $Name.php" : "Disabled!";
+      $MigrationsStatus = ($Eloquent === true) ? "Yes [$MigrationName ($MigrationTableName)] -> $Name.php" : "Disabled!";
+
+      if (!$dialog->confirm("Project Creation Confirmation Required!\n---------------------------------------\nAt the moment Skytells is going to create the [$Name] project with the following configurations :\n---------------------------------------\n * Controller : [Required] -> $Name.php\n * Model(s)   : $ModelStatus\n * Migrations : $MigrationsStatus\n * Eloquents  : $EloquentStatus\n---------------------------------------\nAre you sure you want to build your project with the following configurations?")) {
+        $l = Colors::colorize("Project Creation Aborted!", 'red');
+        $console->writeln($l);
+        return 0;
+      }
+      $l = Colors::colorize("Checking up..", 'white');
+      $console->writeln($l);
+      if (file_exists(APP_CONTROLLERS_DIR.'/'.$Name.'.php')) {
+        throw new \ErrorException("This controller [$Name] is already exists!", 1);
+      }
+      if (file_exists(APP_MODELS_DIR.'/'.$Name.'.php') && $USE_MODELS === true) {
+        throw new \ErrorException("This model [$Name] is already exists!", 1);
+      }
+      if (file_exists(APP_MIGRATIONS_DIR.'/'.$Name.'.php') && $Migrations === true) {
+        throw new \ErrorException("This Migration [$Name] is already exists!", 1);
+      }
+      if (file_exists(APP_ELOQUENTS_DIR.'/'.$Name.'.php') && $Eloquent === true) {
+        throw new \ErrorException("This Eloquent [$Name] is already exists!", 1);
+      }
+      sleep(1);
+      $l = Colors::colorize("-----------------------------------------", 'white');
+      $console->writeln($l);
+      $l = Colors::colorize("Creating Project $Name..", 'white');
+      $console->writeln($l);
+      $l = Colors::colorize("-----------------------------------------", 'white');
+      $console->writeln($l);
+      sleep(1);
+      $l = Colors::colorize("Creating $Name Controller..", 'yellow');
+      $console->writeln($l);
+      $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Controller.io'));
+      file_put_contents(APP_CONTROLLERS_DIR.'/'.$Name.'.php', $Template);
+      $l = Colors::colorize("$Name.php Created!", 'green');
+      $console->writeln($l);
+
+      if ($USE_MODELS === true)
+      {
+        $l = Colors::colorize("Creating $Name Model..", 'yellow');
+        $console->writeln($l);
+        $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Model.io'));
+        file_put_contents(APP_MODELS_DIR.'/'.$Name.'.php', $Template);
+        $l = Colors::colorize("$Name.php Created!", 'green');
+        $console->writeln($l);
+
+        if ($Migrations === true) {
+
+          $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
+          $console->writeln($l);
+          $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Migration.io'));
+          if (isset($MigrationTableName)) {
+            $Template = str_replace('{TABLE_NAME}', $MigrationTableName, $Template);
+          }
+          file_put_contents(APP_MIGRATIONS_DIR.'/'.$Name.'.php', $Template);
+          $l = Colors::colorize("$Name.php Created!", 'green');
+          $console->writeln($l);
+        }
+
+
+        if ($Eloquent === true) {
+          $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
+          $console->writeln($l);
+          $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Eloquent.io'));
+          file_put_contents(APP_ELOQUENTS_DIR.'/'.$Name.'.php', $Template);
+          $l = Colors::colorize("$Name.php Created!", 'green');
+          $console->writeln($l);
+        }
+      }
+      $l = Colors::colorize("Builing Project $Name....", 'yellow');
+      $console->writeln($l);
+      cliprogress($args, $options, $console);
+      sleep(1);
+      $l = Colors::colorize("-----------------------------------------", 'white');
+      $console->writeln($l);
+      $l = Colors::colorize("Project $Name Created! ------------> %100 [SUCCESS]", 'green');
+      $console->writeln($l);
+    }
+  }
 
   function perform($args, $options, $console) {
     if (isset($options['selfcheck'])) {

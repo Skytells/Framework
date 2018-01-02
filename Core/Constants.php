@@ -9,7 +9,7 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
-
+global $ENVIRONMENT_CONFIG;
 const FRAMEWORK_VERSION = '3.4';
 define(ENVCORE, BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/');
 define(ENV_DIR, BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/');
