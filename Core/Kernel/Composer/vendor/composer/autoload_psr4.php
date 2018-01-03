@@ -18,7 +18,6 @@ return array(
     'Skytells\\Database\\' => array($vendorDir . '/skytells/database'),
     'Skytells\\Contracts\\' => array($vendorDir . '/skytells/contracts'),
     'Skytells\\Container\\' => array($vendorDir . '/skytells/container'),
-    'Skytells\\Config\\' => array($vendorDir . '/skytells/config'),
     'Skytells\\Cache\\' => array($vendorDir . '/skytells/cache'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'IntelliSense\\' => array($vendorDir . '/IntelliSense'),

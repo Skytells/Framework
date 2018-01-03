@@ -66,4 +66,4 @@ class User extends Skytells\Database\Eloquent\Model {}
 $users = User::where('votes', '>', 1)->get();
 ```
 
-For further documentation on using the various database facilities this library provides, consult the [Skytells framework documentation](https://skytells.net/docs).
+For further documentation on using the various database facilities this library provides, consult the [Skytells framework documentation](https://skytells.com/docs).

@@ -8,8 +8,7 @@
     "autoload": {
         "psr-4": {
             "Skytells\\Contracts\\": ""
-        },
-        "optimize-autoloader": true
+        }
     },
     "extra": {
         "branch-alias": {

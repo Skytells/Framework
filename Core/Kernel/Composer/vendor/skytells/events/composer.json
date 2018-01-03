@@ -2,11 +2,7 @@
     "name": "skytells/events",
     "description": "The Skytells Events package.",
     "license": "MIT",
-    "homepage": "https://skytells.net",
-    "support": {
-        "issues": "https://github.com/skytells/framework/issues",
-        "source": "https://github.com/skytells/framework"
-    },
+    "homepage": "https://www.skytells.net",
     "authors": [
         {
             "name": "Dr. Hazem Ali",

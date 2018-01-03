@@ -1,7 +1,6 @@
 {
     "require": {
       "skytells/database": "^1.0",
-      "skytells/config": "^1.0",
       "skytells/events": "^1.0",
       "skytells/view": "^1.0",
       "skytells/filesystem": "^1.0",

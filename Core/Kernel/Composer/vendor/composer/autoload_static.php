@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit38662b738353e81bf5e3841dc8491223
+class ComposerStaticInitd1a02d72f8a3498648d6de2887210386
 {
     public static $files = array (
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
@@ -27,7 +27,6 @@ class ComposerStaticInit38662b738353e81bf5e3841dc8491223
             'Skytells\\Database\\' => 18,
             'Skytells\\Contracts\\' => 19,
             'Skytells\\Container\\' => 19,
-            'Skytells\\Config\\' => 16,
             'Skytells\\Cache\\' => 15,
         ),
         'P' => 
@@ -93,10 +92,6 @@ class ComposerStaticInit38662b738353e81bf5e3841dc8491223
         array (
             0 => __DIR__ . '/..' . '/skytells/container',
         ),
-        'Skytells\\Config\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/skytells/config',
-        ),
         'Skytells\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/skytells/cache',
@@ -128,9 +123,9 @@ class ComposerStaticInit38662b738353e81bf5e3841dc8491223
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit38662b738353e81bf5e3841dc8491223::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit38662b738353e81bf5e3841dc8491223::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit38662b738353e81bf5e3841dc8491223::$prefixesPsr0;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd1a02d72f8a3498648d6de2887210386::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd1a02d72f8a3498648d6de2887210386::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitd1a02d72f8a3498648d6de2887210386::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

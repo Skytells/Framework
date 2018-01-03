@@ -9,8 +9,7 @@
     "autoload": {
         "psr-4": {
             "Skytells\\Container\\": ""
-        },
-        "optimize-autoloader": true
+        }
     },
     "extra": {
         "branch-alias": {

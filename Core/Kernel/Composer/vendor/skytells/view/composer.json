@@ -14,8 +14,7 @@
     "autoload": {
         "psr-4": {
             "Skytells\\View\\": ""
-        },
-        "optimize-autoloader": true
+        }
     },
     "extra": {
         "branch-alias": {
