@@ -272,11 +272,12 @@ Kernel::addCLICommand("create-project", "createproject");
 
   function install($args, $options, $console) {
     if (!isset($options)){
-    $l = Colors::colorize('Please include the options with the command.', 'red');
-        $console->writeln($l); exit; }else{
-          if (!is_dir(APP_PACKAGES_DIR)) {
+        $l = Colors::colorize('Please include the options with the command.', 'red');
+        $console->writeln($l); exit;
+      }
+     if (!is_dir(APP_PACKAGES_DIR)) {
             $l = Colors::colorize('Packages DIR is not found in (Application/Misc)', 'red');
-                $console->writeln($l); exit;
+            $console->writeln($l); exit;
           }
       $PATH = APP_PACKAGES_DIR;
       $EXTR_TO = BASEPATH;
@@ -304,7 +305,7 @@ Kernel::addCLICommand("create-project", "createproject");
         $console->writeln($l);
 
       }
-    }
+
   }
 
 
@@ -330,17 +331,23 @@ Kernel::addCLICommand("create-project", "createproject");
       $l = Colors::colorize('ERROR: Unable to decode server response.', 'red');
       $console->writeln($l);
     }
-    if ((string)FRAMEWORK_VERSION != (string)$res->lastversion) {
-      $l = Colors::colorize("You're not up to date!", 'red');
-      $console->writeln($l);
-      $l = Colors::colorize("You're running Skytells Framework on version ".FRAMEWORK_VERSION, 'white');
-      $console->writeln($l);
-      $l = Colors::colorize("The latest version is : ". $res->lastversion, 'white');
-      $console->writeln($l);
+    if (isset($res->lastversion)) {
+      if ((string)FRAMEWORK_VERSION != (string)$res->lastversion) {
+        $l = Colors::colorize("You're not up to date!", 'red');
+        $console->writeln($l);
+        $l = Colors::colorize("You're running Skytells Framework on version ".FRAMEWORK_VERSION, 'white');
+        $console->writeln($l);
+        $l = Colors::colorize("The latest version is : ". $res->lastversion, 'white');
+        $console->writeln($l);
+      }else {
+        $l = Colors::colorize("You're up to date!", 'green');
+        $console->writeln($l);
+      }
     }else {
-      $l = Colors::colorize("You're up to date!", 'green');
+      $l = Colors::colorize("Error getting V-STRING from server..", 'red');
       $console->writeln($l);
     }
+
   }
 
 
@@ -464,7 +471,7 @@ Kernel::addCLICommand("create-project", "createproject");
   }
 
   function perform($args, $options, $console) {
-    if (isset($options['selfcheck'])) {
+    if (isset($options['selfcheck']) || $args[0] === 'selfcheck') {
       $l = Colors::colorize('-------------------------------------', 'white');
       $console->writeln($l);
       $l = Colors::colorize('Performing Self-Check..', 'yellow');
