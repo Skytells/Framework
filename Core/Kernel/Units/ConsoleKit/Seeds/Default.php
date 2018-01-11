@@ -30,7 +30,7 @@ Kernel::addCLICommand("create-project", "createproject");
  */
 
   function init($args, $options, $console) {
-    if ($options["help"] == true){
+    if (isset($options["help"]) && $options["help"] == true){
       $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --getpkg option used for getting Skytells packages\n cf --dir To analyze your code.");
     }else{
       $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --help for displying Help!");
