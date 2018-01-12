@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -32,6 +32,29 @@
     }
 
 
+
+    public static function getMethod() {
+      $method = $_SERVER['REQUEST_METHOD'];
+      if ($method == 'POST') {
+          return "POST";
+      } elseif ($method == 'GET') {
+          return "GET";
+      } elseif ($method == 'PUT') {
+          return "PUT";
+      } elseif ($method == 'DELETE') {
+          return "DELETE";
+      } else {
+          return "UNKNOWN";
+      }
+    }
+
+
+    public static function verifyMethod($Method) {
+      if (strtolower($Method) !== strtolower(self::getMethod())) {
+        return false;
+      }
+      return true;
+    }
 
 
   }

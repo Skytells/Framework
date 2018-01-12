@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -121,8 +121,9 @@
 					$Target = explode('@', $Target);
 					if ($methodArgs !== false) {
 						Boot::Controller($Target[0], $Target[1], $methodArgs);
+					}else {
+						Boot::Controller($Target[0], $Target[1]);
 					}
-
 				}
 			});
 

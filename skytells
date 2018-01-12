@@ -1,33 +1,41 @@
+#!/usr/bin/env php
 <?php
 /**
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
-   define("IS_CORE_CLI", TRUE);
-   @define(BASEPATH, __DIR__.'/', TRUE);
+  @define("IS_CORE_CLI", TRUE);
+  @define(BASEPATH, __DIR__.'/', TRUE);
   $ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'] = "Core"; $ENVIRONMENT_CONFIG['APPLICATION_PATH'] = "Application";
-   require BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Global.php";
-   require(__DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Kernel/Services/CLI.php");
+   require __DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Global.php";
+   require __DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Kernel/Services/CLI.php";
    use ConsoleKit\Console,
        ConsoleKit\Command,
        ConsoleKit\Colors,
        ConsoleKit\Utils,
        ConsoleKit\Widgets\Dialog,
        ConsoleKit\Widgets\ProgressBar;
+       $helpers_files = glob(__DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/Kernel/Units/ConsoleKit/Helpers/*.php');
+       if (count($helpers_files) > 0){
+         foreach($helpers_files as $file) {
+           require_once $file;
+         }
+       }
        $files = glob(__DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/Kernel/Units/ConsoleKit/Seeds/*.php');
        if (count($files) > 0){
          foreach($files as $file) {
            require_once $file;
          }
        }
+
     $CLI = new Console();
-    require(__DIR__.'/'.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/Misc/Config/CLI.php');
+    require(__DIR__.'/'.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/Misc/Config/Terminal.php');
     global $_CLI_COMMANDS;
     foreach ($_CLI_COMMANDS as $Key => $value) {
     $CLI->addCommand($value, $Key); // alternative when using a closure

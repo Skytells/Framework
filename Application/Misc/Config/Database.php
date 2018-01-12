@@ -53,14 +53,6 @@
 |	['stricton'] TRUE/FALSE - forces 'Strict Mode' connections
 |							- good for ensuring strict SQL while developing
 |	['ssl_options']	Used to set various SSL options that can be used when making SSL connections.
-|	['failover'] array - A array with 0 or more data for connections if the main should fail.
-|	['save_queries'] TRUE/FALSE - Whether to "save" all executed queries.
-| 				NOTE: Disabling this will also effectively disable both
-| 				$this->db->last_query() and profiling of DB queries.
-| 				When you run a query, with this setting set to TRUE (default),
-| 				Skytells Framework will store the SQL statement for debugging purposes.
-| 				However, this may cause high memory usage, especially if you run
-| 				a lot of SQL queries ... disable this to avoid that problem.
 |
 |	['raw'] TRUE/FALSE - allows models to access to the pure handlers such as (mysqli)
 | The $dbconfig['ACTIVE_GROUP']  variable lets you choose which connection group to
@@ -71,7 +63,12 @@
 */
 
 $dbconfig['ACTIVE_GROUP'] = 'Default';
-$dbconfig['QUERYBUILDER'] = FALSE;
+
+// Enables or Disables SQLManager.
+$dbconfig['QUERYBUILDER'] = TRUE;
+
+// Enables or Desables DBObject (Requires QUERYBUILDER to be on).
+$dbconfig['DBOBJECT'] = FALSE;
 
 
 // Here you can use a multiple databases.
@@ -87,25 +84,25 @@ $DBGroups['Default'] = Array (
 		  'collation' => 'utf8_unicode_ci',
 		  'prefix'    => '',
 			'pconnect' => FALSE,
-			'db_debug' => (ENVIRONMENT !== 'production'),
 			'cache_on' => FALSE,
 			'cachedir' => '',
 			'swap_pre' => '',
 			'encrypt' => FALSE,
 			'compress' => FALSE,
 			'stricton' => FALSE,
-			'failover' => array(),
-			'save_queries' => TRUE,
 			'raw' => TRUE,
-			'illuminate' => FALSE,
-			'illuminatedriver' => 'mysql');
+			'ORM' => Array(
+				'enabled' => FALSE,
+				'driver' => 'mysql'
+			)
+		);
 
 
 
 
 /*
 | -------------------------------------------------------------------
-| ILLUMINATE DATABASES & Eloquents Relationships
+| SKYTELLS ORM DATABASES & Eloquents Relationships
 | -------------------------------------------------------------------
 | Database tables are often related to one another.
 | For example, a blog post may have many comments, or an order could be
@@ -126,14 +123,14 @@ $DBGroups['Default'] = Array (
 | EXPLANATION OF VARIABLES
 | -------------------------------------------------------------------
 |
-|	$Illuminate['ORM'] Enables or Disables ORM
-|	$Illuminate['DATABASE'] The Default Database Group which used for creating
+|	$SF_ORM['ORM'] Enables or Disables ORM
+|	$SF_ORM['DATABASE'] The Default Database Group which used for creating
 | the first Connection.
 | NOTE: That you can also use a multiple databases.
 | SEE: https://developers.skytells.net/Framework for more info.
 | -------------------------------------------------------------------*/
 
-$Illuminate = [
+$SF_ORM = [
 	'ORM' => FALSE,
 	'DATABASE' => 'Default',
 ];

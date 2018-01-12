@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -56,6 +56,7 @@
 
 
 		public static function model($File, $setOwner = false, $args = false, $newName = "") {
+    
 			$path = BASEPATH.'/Application/Resources/Models/';
       if (!is_dir($path)){ throw new \Exception("The Models Folder does not exist in the main Application dir.", 90); return false; }
       if (!Contains($File, '.php')){ $File = $File.".php"; }

@@ -1,5 +1,7 @@
 <?
-define("IS_CORE_CLI", TRUE);
-@require dirname(__DIR__). '/../../../../skytells';
+ini_set("display_errors", 1);
+error_reporting(E_ALL | E_STRICT);
+//@define("IS_CORE_CLI", TRUE);
+require __DIR__. '/../../../../../skytells';
 
 exit;

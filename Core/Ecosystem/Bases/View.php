@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -14,6 +14,21 @@ Use Skytells\Core\Runtime;
  Class View {
    public $view;
    private static $OxParses = array ();
+   protected static $Oxygen = false;
+   private static $Extension = '.'.TEMPLATE_FILE_EXTENSION.'.php';
+   private static $ExtensionResolver = false;
+
+ /**
+  * @method getOxygenInstance
+  */
+  public static function getOxygenInstance() {
+    if (!class_exists('OxygenInstance')) {
+      \Kernel::Import('Oxygen');
+      View::$Oxygen = new \OxygenInstance(APP_VIEWS_DIR, APPBASE."/".TEMPLATE_CACHE_DIR.'/');
+      return View::$Oxygen;
+    }
+    return View::$Oxygen;
+  }
 
 
  /**
@@ -29,16 +44,41 @@ Use Skytells\Core\Runtime;
     } catch (Exception $e) { throw new \ErrorException("Error Assigning variables: " . $e->getMessage(), 1); }
   }
 
+
+
+ /**
+  * @method resolveExtension
+  * @return string
+  */
+  public static function resolveExtension($view) {
+    if (View::$ExtensionResolver === true) {
+      return $view.View::$Extension;
+    }
+    return $view;
+  }
+
+ /**
+  * @method setExtensionResolver
+  * @return bool
+  */
+  public static function setExtensionResolver($bool) {
+    View::$ExtensionResolver = (bool)$bool;
+    return View::$ExtensionResolver;
+  }
+
+
  /**
   * @method render
   * @return UI.
   */
   public static function render($view, $variables = array(), $cFilters = array()) {
     global $ENVIRONMENT_CONFIG;
+    $standardView = $view;
+    $view = View::resolveExtension($view);
     if (!file_exists(APP_VIEWS_DIR.$view)) {
       throw new \ErrorException("UI Error: The view of $view cannot be found in views dir.", 1);
     }
-    if (Contains($view, ".".TEMPLATE_FILE_EXTENSION.".php")) {
+    if (Contains($view, View::$Extension)) {
       if (USE_BUILTIN_PHRASES === TRUE) {
         $ACTIVELANG = (!isset($_SESSION[LANG_SESID]) || empty($_SESSION[LANG_SESID])) ? DEFAULTLANG : $_SESSION[LANG_SESID];
         if (!file_exists(APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php')) {
@@ -51,19 +91,19 @@ Use Skytells\Core\Runtime;
         $variables = array_merge($TParses, View::$OxParses);
         Runtime::Report('Language', ucfirst(str_replace('.php', '', $ACTIVELANG)), APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php');
       }
-      if (strtolower(TEMPLATE_ENGINE) == "oxygen") {
-        \Kernel::Import('Oxygen');
-        $filename = str_replace(".".TEMPLATE_FILE_EXTENSION.".php", "", $view);
-        $Oxygen = new \OxygenInstance(APP_VIEWS_DIR, APPBASE."/".CACHE_DIR."/Views/");
-        echo $Oxygen->render($filename, $variables);
+      if (strtolower(TEMPLATE_ENGINE) === "oxygen") {
+        View::getOxygenInstance();
+        $filename = str_replace(View::$Extension, "", $view);
+        echo View::$Oxygen->render($filename, $variables);
         }
         else if (!class_exists("TemplateEngine")) {
           require ENV_UNITS_DIR.'MicroUI.php';
-          $UI_Content = file_get_contents(APP_VIEWS_DIR.$File);
+          $UI_Content = file_get_contents(APP_VIEWS_DIR.$standardView);
           $te = new \TemplateEngine($UI_Content);
           if ($cFilters != null && is_array($cFilters) && !empty($cFilters)){
             foreach ($cFilters as $key => $value) { if (!empty($key)){ $te->addFilter ($key, $value); } } }
                echo $te->apply($variables);
+               $te = null;
           }
         }
       else {
@@ -71,15 +111,60 @@ Use Skytells\Core\Runtime;
           detectCurrentLanguage();
         // Assigning Vars...
         $variables = array_merge($variables, View::$OxParses);
-        if (is_array($variables) && count($variables) > 0) {
+        if (is_array($variables) && !empty($variables)) {
           foreach ($variables as $key => $value) {
            ${$key} = $value;
           }
         }
-        require APP_VIEWS_DIR.$view;
+        require APP_VIEWS_DIR.$standardView;
+        $variables = null;
       }
       Runtime::Report('UI', ucfirst(str_replace('.php', '', str_replace('.ui', '', $view))), APP_VIEWS_DIR.$view);
-
+      $standardView = null; $view = null;
   }
+
+
+ /**
+  * @method setExtension
+  */
+  public static function setExtension($ex = 'ui.php') {
+    $ex = ltrim($str, '.');
+    $ex = rtrim($str, '.');
+    View::$Extension = '.'.$ex;
+    return true;
+  }
+
+
+ /**
+  * @method getExtension
+  */
+  public static function getExtension() {
+    return View::$Extension;
+  }
+
+ /**
+  * @method __call
+  * Binding Calls to Oxygen Compiler
+  */
+  public function __call($method, $arguments = []) {
+    if (strtolower(TEMPLATE_ENGINE) === "oxygen") {
+      return call_user_func_array(array(View::getOxygenInstance(), $method), $arguments);
+    }
+  }
+
+
+ /**
+  * @method __callStatic
+  * Binding Calls to Oxygen Compiler Statically.
+  */
+  public static function __callStatic($method, $arguments = []) {
+    if (strtolower(TEMPLATE_ENGINE) === "oxygen") {
+      return call_user_func_array(array(View::getOxygenInstance(), $method), $arguments);
+    }
+  }
+
+
+
+
 
  }

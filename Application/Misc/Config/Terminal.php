@@ -27,3 +27,14 @@ $CLI_CONFIG["PASSWORD_HASH_ALGORITHM"] = '';
 // Example: $HOME_DIRECTORY = '/tmp';
 //          $HOME_DIRECTORY = array('user1' => '/home/user1', 'user2' => '/home/user2');
 $CLI_CONFIG["HOME_DIRECTORY"] = '';
+
+
+
+
+/**
+*-------------------------- [ CLI COMMAND LINE CONFIG ] --------------------------------------\
+* Here you can add you own commands to the CLI Core, Each command must be registered to
+* a function or class stored in (Application/Core/Resources/ConsoleKit/Seeds).
+*--------------------------------------------------------------------------------------------*/
+
+# Kernel::addCLICommand('test', function () { echo "This is test!\n"; });

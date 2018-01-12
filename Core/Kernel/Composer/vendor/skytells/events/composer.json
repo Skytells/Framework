@@ -1,0 +1,32 @@
+{
+    "name": "skytells/events",
+    "description": "The Skytells Events package.",
+    "license": "MIT",
+    "homepage": "https://www.skytells.net",
+    "authors": [
+        {
+            "name": "Dr. Hazem Ali",
+            "email": "hazem@skytells.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "skytells/container": "1.*",
+        "skytells/contracts": "1.*",
+        "skytells/support": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skytells\\Events\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

@@ -1,7 +1,7 @@
 # Skytells Framework for PHP
-Version 3.0 ( Last Release Version )
+Version 3.6 ( Last Release Version )
 
-Version 3.1 ( Current Development Version )
+Version 3.7 ( Current Development Version )
 
 Skytells Framework is an Application Development Framework - a toolkit - for people who build web sites using PHP. Its goal is to enable you to develop projects much faster than you could if you were writing code from scratch, by providing a rich set of libraries for commonly needed tasks, as well as a simple interface and logical structure to access these libraries. Skytells Framework lets you creatively focus on your project by minimizing the amount of code needed for a given task.
 
@@ -13,8 +13,9 @@ Powered by : Skytells, Inc.
 
 ## Important
 
-Please refer to the Changelog.md for any future updates.
-Also, Please see the ( Framework Manual ) to learn how to use it.
+Please refer to the [Release Notes](http://developers.skytells.net/framework/release-notes/) for any future updates.
+
+Also, Please see the ( <a href='http://developers.skytells.net/framework/'>Framework Guide</a> ) to learn how to use Skytells FW.
 
 
 
@@ -25,6 +26,7 @@ Also, Please see the ( Framework Manual ) to learn how to use it.
 - Built-in Very Useful Functions ( up to date )
 - Built-in Ready HTML5 ( 404, 505, 403 ) Pages.
 - Built-In Embed System for Social Networks Development.
+- Built-In ORM System ( With Over 4 Supported Drivers )
 - Advanced CLI & Analytical Tools.
 - MySQL(i) Support ( Objective & Static )
 - Social Plugins Support  ( Facebook Login )
@@ -32,7 +34,7 @@ Also, Please see the ( Framework Manual ) to learn how to use it.
 - Development Tools ( For Debugging )
 - Multi-Languages Support
 - IntelliSense Debugging Console
-- Advanced ( MVC ) - ( MVHC ) Support.
+- Advanced ( MVC ) - ( HMVC ) Support.
 - Super-fast Template Engine
 - GZIP Module ( For Ultra-fast Performance )
 - Super great libraries
@@ -59,8 +61,7 @@ Each Version of this Framework may require a new modules or extensions to be ava
 
 - Server
 - If localhost ( Please install Ampps or AppServ )
-- PHP 5.6+
-- Version 5.6 or Newer
+- PHP 5.6+ ( > 7 Recommended )
 - Tokenizer ( PHP Module )
 - Apache
 - Mode_Rewrite ( Apache Module )
@@ -68,15 +69,24 @@ Each Version of this Framework may require a new modules or extensions to be ava
 ### Installation
 The Installation is too easy!
 
+Just download the last release of the framework, and install it on your server and you're ready to go.
+
 ##### Download or Clone the Skytells PHP Framework
 Using your browser or Git.
 
 ```sh
-$ git clone https://github.com/Skytells/Framework.git
+$ > git clone https://github.com/Skytells/Framework.git
+```
+
+##### Composer ?
+Perform the following command to install it using Composer
+
+```sh
+$ > composer require skytells/framework
 ```
 
 ##### Configuring Framework.
-Please See <a href='http://developers.skytells.net/framework/Getting_Started/Configuration/'>Configuration manual for more information</a>
+Please See <a href='http://developers.skytells.net/framework/configuration/'>Configuration manual for more information</a>
 
 
 
@@ -96,7 +106,12 @@ Uddit is a very powerful social network platform built with Skytells Framework.
 #### <a href='http://cloud.skytells.me'>Skytells Cloud</a>
 Skytells Cloud is a very powerful cloud system like the iCloud built with Skytells Framework.
 
+#### <a href='https://www.oxgram.com'>Oxgram, Inc.</a>
+Oxgram is a Powerful financial platform for cryptocurrencies.
 
 ## Support
 This framework is a free PHP framework provided by Skytells, Inc.
 For any issues during using the Framework, Please inform us at developers@skytells.net.
+
+## Donations Are Welcomed!
+BTC : 172mnQHvCuQHh1sgo3i4MesBvV9SKECcMr

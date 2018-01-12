@@ -3,14 +3,14 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
-
-define(FRAMEWORK_VERSION, '3.1');
+global $ENVIRONMENT_CONFIG;
+const FRAMEWORK_VERSION = '3.6';
 define(ENVCORE, BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/');
 define(ENV_DIR, BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/');
 define(APPBASE, BASEPATH.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/');
@@ -34,10 +34,12 @@ define(ENV_DRIVERS_DIR, ENVCORE.'Ecosystem/Drivers/');
 define(APP_MISC_DIR, APPBASE.'Misc/');
 define(APP_RESOURCES_DIR, APPBASE.'Resources/');
 define(APP_CONTROLLERS_DIR, APPBASE.'Resources/Controllers/');
+define(APP_PROVIDERS_DIR, APPBASE.'Misc/Providers/');
 define(APP_VIEWS_DIR, APPBASE.'Resources/Views/');
 define(APP_MODELS_DIR, APPBASE.'Resources/Models/');
 define(APP_LANGUAGES_DIR, APPBASE.'Resources/Languages/');
 define(APP_ELOQUENTS_DIR, APPBASE.'Resources/Models/Eloquents/');
+define(APP_MIGRATIONS_DIR, APPBASE.'Resources/Models/Migrations/');
 define(APP_BUILTINLANGS_DIR, APPBASE.'Misc/Phrases/');
 define(APP_STORAGE_DIR, APPBASE.'Storage/');
 define(APP_STORAGE_LOGS, APPBASE.'Storage/Logs/');

@@ -1,5 +1,5 @@
 <?
-namespace Skytells\Helpers\Money;
+namespace Skytells\Handlers;
 
   Class CurrencyConverter {
 

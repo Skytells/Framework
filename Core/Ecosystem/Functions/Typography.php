@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -31,10 +31,4 @@
  }
 
 
- function free_memory() {
-   $vars = array_keys(get_defined_vars());
-    for ($i = 0; $i < sizeOf($vars); $i++) {
-        unset($$vars[$i]);
-    }
-    unset($vars,$i);
- }
+ 

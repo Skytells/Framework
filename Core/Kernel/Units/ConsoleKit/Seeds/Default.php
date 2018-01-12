@@ -1,10 +1,16 @@
 <?
+ini_set("display_errors", 1);
+error_reporting(E_ALL | E_STRICT);
 use ConsoleKit\Console,
     ConsoleKit\Command,
     ConsoleKit\Colors,
     ConsoleKit\Utils,
     ConsoleKit\Widgets\Dialog,
     ConsoleKit\Widgets\ProgressBar;
+    use Skytells\Support\Facades\Schema;
+    use Skytells\Database\Schema\Blueprint;
+    use Skytells\Database\Migrations\Migration;
+    use Skytells\Database\Capsule\Manager as Capsule;
 global $console;
 Kernel::addCLICommand("init", "init");
 Kernel::addCLICommand("install", "install");
@@ -13,17 +19,41 @@ Kernel::addCLICommand("flushcache", "flushcache");
 Kernel::addCLICommand("excheck", "excheck");
 Kernel::addCLICommand("check-for-update", "checkforupdate");
 Kernel::addCLICommand("perform", "perform");
+Kernel::addCLICommand("mkroutes", "makeRoutes");
+Kernel::addCLICommand("make", "make");
+Kernel::addCLICommand("serve", "serve");
+Kernel::addCLICommand("create", "create");
+Kernel::addCLICommand("create-project", "createproject");
+
 /**
  * @method Seeds Starts here
  */
 
   function init($args, $options, $console) {
-    if ($options["help"] == true){
+    if (isset($options["help"]) && $options["help"] == true){
       $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --getpkg option used for getting Skytells packages\n cf --dir To analyze your code.");
     }else{
       $box = new ConsoleKit\Widgets\Box($console, "Welcome to Skytells's Virtual Machine \nOPTIONS:\n --help for displying Help!");
     }
     $box->write();
+  }
+
+
+  function serve($args, $options, $console) {
+    $port = 8000;
+    $path = "";
+    if (isset($options['p']) && !empty($options['p']) && is_string($options['p'])) {
+      $port = $options['p'];
+    }
+
+    if (isset($options['t']) && !empty($options['t']) && is_string($options['t'])) {
+      $path = $options['t'];
+    }
+
+    $box = new ConsoleKit\Widgets\Box($console, "Skytells Built-in server started!\nServing on: http://localhost:$port");
+    $box->write();
+
+    echo system('php -S localhost:'.$port. ' '.$path);
   }
 
   function flushcache($args, $options, $console) {
@@ -66,6 +96,7 @@ Kernel::addCLICommand("perform", "perform");
     $l = Colors::colorize('Results: '.$passed.' Extentions loaded and ' . $missed . ' Missing.', 'yellow');
     $console->writeln($l);
   }
+
   /***
    * Displays a progress bar
    *
@@ -83,6 +114,156 @@ Kernel::addCLICommand("perform", "perform");
       $progress->stop();
   }
 
+
+
+  function create($args, $options, $console) {
+
+    if (!isset($args[0])) {
+      throw new \ErrorException("Cannot perform create() function without an argement ", 1);
+    }
+    if (!isset($args[1])) {
+      throw new \ErrorException("Cannot perform create() function without thr 2nd argement ", 1);
+    }
+
+    $Type = $args[0];
+    $Name = $args[1];
+    switch ($Type) {
+      case 'controller':
+        if (file_exists(APP_CONTROLLERS_DIR.'/'.$Name.'.php')) {
+          throw new \ErrorException("This controller is already exists!", 1);
+        }
+        $l = Colors::colorize("Creating $Name Controller..", 'yellow');
+        $console->writeln($l);
+        $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Controller.io'));
+        file_put_contents(APP_CONTROLLERS_DIR.'/'.$Name.'.php', $Template);
+        $l = Colors::colorize("$Name.php Created!", 'green');
+        $console->writeln($l);
+        break;
+      case 'model':
+          if (file_exists(APP_MODELS_DIR.'/'.$Name.'.php')) {
+            throw new \ErrorException("This model is already exists!", 1);
+          }
+          $l = Colors::colorize("Creating $Name Model..", 'yellow');
+          $console->writeln($l);
+          $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Model.io'));
+          file_put_contents(APP_MODELS_DIR.'/'.$Name.'.php', $Template);
+          $l = Colors::colorize("$Name.php Created!", 'green');
+          $console->writeln($l);
+        break;
+
+
+      case 'eloquent':
+            if (file_exists(APP_ELOQUENTS_DIR.'/'.$Name.'.php')) {
+              throw new \ErrorException("This model is already exists!", 1);
+            }
+            $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
+            $console->writeln($l);
+            $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Eloquent.io'));
+            file_put_contents(APP_ELOQUENTS_DIR.'/'.$Name.'.php', $Template);
+            $l = Colors::colorize("$Name.php Created!", 'green');
+            $console->writeln($l);
+        break;
+      case 'migration':
+              if (file_exists(APP_MIGRATIONS_DIR.'/'.$Name.'.php')) {
+                throw new \ErrorException("This Migration is already exists!", 1);
+              }
+              $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
+              $console->writeln($l);
+              $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Migration.io'));
+              if (isset($args[2])) {
+                $Template = str_replace('{TABLE_NAME}', $args[2], $Template);
+              }
+              file_put_contents(APP_MIGRATIONS_DIR.'/'.$Name.'.php', $Template);
+              $l = Colors::colorize("$Name.php Created!", 'green');
+              $console->writeln($l);
+        break;
+
+
+
+        case 'service-provider':
+        $dialog = new ConsoleKit\Widgets\Dialog($console);
+          if ($dialog->confirm('Are you sure you want to use ['. $Name .'] as a namespace for the repository?')) {
+            $confirmedNamespace = $Name;
+            $ContractName = $dialog->ask('Please Enter Contract Class name for the Service Provider :');
+            $ContractName = $ContractName;
+            $ServiceName = $dialog->ask('Please Enter Service Class name for the Provider :');
+            $ServiceName = $ServiceName;
+            $ProviderName = $dialog->ask('Please Enter Provider Class name for the Provider :');
+            if (!isset($options['endpoint'])) {
+              $ProviderName = $ProviderName."ServiceProvider";
+            }elseif (isset($options['endpoint']) && !empty($options['endpoint'])) {
+              $ProviderName = $ProviderName.$options['endpoint'];
+            }
+
+            if ($dialog->confirm("------------------------------\nJust to confirm\n------------------------------\nThe following configurations will be used for your service provider\n Namespace : $confirmedNamespace \n Contract Class Name: $ContractName ($confirmedNamespace\\$ContractName)\n Service Class Name : $ServiceName ($confirmedNamespace\\$ServiceName)\n Provider Class Name : $ProviderName ($confirmedNamespace\\$ProviderName)\n------------------------------\nWrite (y) to confirm creation of this service provider!")) {
+
+              if (createServiceProvider($console, $confirmedNamespace, $ContractName, $ServiceName, $ProviderName) === true) {
+                $l = Colors::colorize("Your Service Provider has been successfully created!", 'green');
+                $console->writeln($l);
+              }else {
+                $l = Colors::colorize("Something went wrong!", 'red');
+                $console->writeln($l);
+              }
+
+            }else {
+              $l = Colors::colorize("Service Provider Creation Aborted!", 'red');
+              $console->writeln($l);
+            }
+          }else {
+            $l = Colors::colorize("Service Provider Creation Aborted!", 'red');
+            $console->writeln($l);
+          }
+          break;
+      default:
+      $l = Colors::colorize("Unrecognized Type!", 'red');
+      $console->writeln($l);
+        break;
+    }
+  }
+
+
+  function make($args, $options, $console) {
+
+    if (!isset($args[0])) {
+      throw new \ErrorException("Cannot perform make() function without an argement ", 1);
+    }
+
+    switch ($args[0]) {
+      case 'migration':
+        require COREDIRNAME .'/Kernel/Composer/vendor/autoload.php';
+        if (!isset($args[1])) { throw new \ErrorException("Cannot perform database migration function on an empty argement.", 1); }
+        $file = APP_MIGRATIONS_DIR.$args[1].".php";
+        require $file;
+        if (!isset($args[2])) { throw new \ErrorException("Cannot perform database migration function with an empty run argement.", 1); }
+        $l = Colors::colorize('Performing commands on Database...', 'yellow');
+        $console->writeln($l);
+        cliprogress($args, $options, $console);
+        global $DBGroups, $dbconfig; $GroupID = $dbconfig['ACTIVE_GROUP'];
+        $Capsule = new Capsule;
+         $Capsule->addConnection(['driver' => $DBGroups[$GroupID]['ORM']['driver'],'host' => $DBGroups[$GroupID]['host'],
+             'database'  => $DBGroups[$GroupID]['database'], 'username' => $DBGroups[$GroupID]['username'], 'password' => $DBGroups[$GroupID]['password'],
+             'charset' => $DBGroups[$GroupID]['charset'], 'collation' => $DBGroups[$GroupID]['collation'], 'prefix' => $DBGroups[$GroupID]['prefix'],
+         ]);
+         $Capsule->setEventDispatcher(new \Skytells\Events\Dispatcher(new \Skytells\Container\Container));
+         $Capsule->setAsGlobal();
+         $Capsule->bootEloquent();
+        $args[1]::$args[2]();
+        $l = Colors::colorize('Database Migration: Operation finished. [SUCESS]', 'green');
+        $console->writeln($l);
+        break;
+
+      case 'routes':
+      $args[0] = $args[1];
+      $args[0] = $args[1];
+      makeRoutes($args, $options, $console);
+      break;
+      default:
+      $l = Colors::colorize('Make reported empty response.', 'red');
+      $console->writeln($l);
+      break;
+    }
+  }
+
   function version($args, $options, $console) {
     global $_FRAMEWORK_VER;
     $console->writeln("This version : " . FRAMEWORK_VERSION);
@@ -91,11 +272,12 @@ Kernel::addCLICommand("perform", "perform");
 
   function install($args, $options, $console) {
     if (!isset($options)){
-    $l = Colors::colorize('Please include the options with the command.', 'red');
-        $console->writeln($l); exit; }else{
-          if (!is_dir(APP_PACKAGES_DIR)) {
+        $l = Colors::colorize('Please include the options with the command.', 'red');
+        $console->writeln($l); exit;
+      }
+     if (!is_dir(APP_PACKAGES_DIR)) {
             $l = Colors::colorize('Packages DIR is not found in (Application/Misc)', 'red');
-                $console->writeln($l); exit;
+            $console->writeln($l); exit;
           }
       $PATH = APP_PACKAGES_DIR;
       $EXTR_TO = BASEPATH;
@@ -123,14 +305,20 @@ Kernel::addCLICommand("perform", "perform");
         $console->writeln($l);
 
       }
-    }
+
   }
 
 
   function checkforupdate($args, $options, $console) {
     $l = Colors::colorize('Checking for Framework Updates...', 'yellow');
     $console->writeln($l);
-    $res = file_get_contents('https://raw.githubusercontent.com/Skytells/Framework/master/Latest');
+    $arrContextOptions=array(
+    "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+    ),
+    );
+    $res = file_get_contents('https://raw.githubusercontent.com/Skytells/Framework/master/Latest', false, stream_context_create($arrContextOptions));
     if (empty($res) || $res == false) {
       $l = Colors::colorize('ERROR: Unable to check for updates, Try again later.', 'red');
       $console->writeln($l);
@@ -143,24 +331,147 @@ Kernel::addCLICommand("perform", "perform");
       $l = Colors::colorize('ERROR: Unable to decode server response.', 'red');
       $console->writeln($l);
     }
-    if ((string)FRAMEWORK_VERSION != (string)$res->lastversion) {
-      $l = Colors::colorize("You're not up to date!", 'red');
-      $console->writeln($l);
-      $l = Colors::colorize("You're running Skytells Framework on version ".FRAMEWORK_VERSION, 'white');
-      $console->writeln($l);
-      $l = Colors::colorize("The latest version is : ". $res->lastversion, 'white');
-      $console->writeln($l);
+    if (isset($res->lastversion)) {
+      if ((string)FRAMEWORK_VERSION != (string)$res->lastversion) {
+        $l = Colors::colorize("You're not up to date!", 'red');
+        $console->writeln($l);
+        $l = Colors::colorize("You're running Skytells Framework on version ".FRAMEWORK_VERSION, 'white');
+        $console->writeln($l);
+        $l = Colors::colorize("The latest version is : ". $res->lastversion, 'white');
+        $console->writeln($l);
+      }else {
+        $l = Colors::colorize("You're up to date!", 'green');
+        $console->writeln($l);
+      }
     }else {
-      $l = Colors::colorize("You're up to date!", 'green');
+      $l = Colors::colorize("Error getting V-STRING from server..", 'red');
+      $console->writeln($l);
+    }
+
+  }
+
+
+  function createproject($args, $options, $console) {
+    if (!isset($args[0])) {
+      throw new \ErrorException("Cannot perform create-project() function without an argement ", 1);
+    }
+    $dialog = new ConsoleKit\Widgets\Dialog($console);
+    $ProjectName = $args[0];
+    $Name = $ProjectName;
+    if ($dialog->confirm('Skytells is going to create a new project ['. $Name .'] Are you sure?')) {
+
+      if ($dialog->confirm('Are you going to handle Databases with Models?')) {
+        $USE_MODELS = true;
+
+
+        if ($dialog->confirm('Great, Do you want to use Migrations with your model?')) {
+          $MigrationName = $dialog->ask('Alright, Give the Migration a name :');
+          if ($dialog->confirm('Okay, The Migration name of ['.$MigrationName.'] Will be used, Are you sure?')) {
+            $MigrationTableName = $dialog->ask('Well, Enter the database.table name which will be used on the migration file :');
+            $Migrations = true;
+          }else{
+            $Migrations = false;
+          }
+
+        }else{ $Migrations = false; }
+
+        if ($dialog->confirm('Alright, Would you like to create an Eloquent with your model as well?')) {
+          $EloquentName = $dialog->ask('Okay, Give the Eloquent a name :');
+          if ($dialog->confirm('Alright, The Eloquent name of ['.$EloquentName.'] Will be used, Are you sure?')) {
+            $Eloquent = true;
+          }else{
+            $Eloquent = false;
+          }
+
+        }else{ $Eloquent = false; }
+
+      }else{
+        $USE_MODELS = false;
+      }
+
+      $ModelStatus = ($USE_MODELS === true) ? "Yes [$Name] -> $Name.php" : "Disabled!";
+      $EloquentStatus = ($Eloquent === true) ? "Yes [$EloquentName] -> $Name.php" : "Disabled!";
+      $MigrationsStatus = ($Eloquent === true) ? "Yes [$MigrationName ($MigrationTableName)] -> $Name.php" : "Disabled!";
+
+      if (!$dialog->confirm("Project Creation Confirmation Required!\n---------------------------------------\nAt the moment Skytells is going to create the [$Name] project with the following configurations :\n---------------------------------------\n * Controller : [Required] -> $Name.php\n * Model(s)   : $ModelStatus\n * Migrations : $MigrationsStatus\n * Eloquents  : $EloquentStatus\n---------------------------------------\nAre you sure you want to build your project with the following configurations?")) {
+        $l = Colors::colorize("Project Creation Aborted!", 'red');
+        $console->writeln($l);
+        return 0;
+      }
+      $l = Colors::colorize("Checking up..", 'white');
+      $console->writeln($l);
+      if (file_exists(APP_CONTROLLERS_DIR.'/'.$Name.'.php')) {
+        throw new \ErrorException("This controller [$Name] is already exists!", 1);
+      }
+      if (file_exists(APP_MODELS_DIR.'/'.$Name.'.php') && $USE_MODELS === true) {
+        throw new \ErrorException("This model [$Name] is already exists!", 1);
+      }
+      if (file_exists(APP_MIGRATIONS_DIR.'/'.$Name.'.php') && $Migrations === true) {
+        throw new \ErrorException("This Migration [$Name] is already exists!", 1);
+      }
+      if (file_exists(APP_ELOQUENTS_DIR.'/'.$Name.'.php') && $Eloquent === true) {
+        throw new \ErrorException("This Eloquent [$Name] is already exists!", 1);
+      }
+      sleep(1);
+      $l = Colors::colorize("-----------------------------------------", 'white');
+      $console->writeln($l);
+      $l = Colors::colorize("Creating Project $Name..", 'white');
+      $console->writeln($l);
+      $l = Colors::colorize("-----------------------------------------", 'white');
+      $console->writeln($l);
+      sleep(1);
+      $l = Colors::colorize("Creating $Name Controller..", 'yellow');
+      $console->writeln($l);
+      $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Controller.io'));
+      file_put_contents(APP_CONTROLLERS_DIR.'/'.$Name.'.php', $Template);
+      $l = Colors::colorize("$Name.php Created!", 'green');
+      $console->writeln($l);
+
+      if ($USE_MODELS === true)
+      {
+        $l = Colors::colorize("Creating $Name Model..", 'yellow');
+        $console->writeln($l);
+        $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Model.io'));
+        file_put_contents(APP_MODELS_DIR.'/'.$Name.'.php', $Template);
+        $l = Colors::colorize("$Name.php Created!", 'green');
+        $console->writeln($l);
+
+        if ($Migrations === true) {
+
+          $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
+          $console->writeln($l);
+          $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Migration.io'));
+          if (isset($MigrationTableName)) {
+            $Template = str_replace('{TABLE_NAME}', $MigrationTableName, $Template);
+          }
+          file_put_contents(APP_MIGRATIONS_DIR.'/'.$Name.'.php', $Template);
+          $l = Colors::colorize("$Name.php Created!", 'green');
+          $console->writeln($l);
+        }
+
+
+        if ($Eloquent === true) {
+          $l = Colors::colorize("Creating $Name eloquent..", 'yellow');
+          $console->writeln($l);
+          $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Eloquent.io'));
+          file_put_contents(APP_ELOQUENTS_DIR.'/'.$Name.'.php', $Template);
+          $l = Colors::colorize("$Name.php Created!", 'green');
+          $console->writeln($l);
+        }
+      }
+      $l = Colors::colorize("Builing Project $Name....", 'yellow');
+      $console->writeln($l);
+      cliprogress($args, $options, $console);
+      sleep(1);
+      $l = Colors::colorize("-----------------------------------------", 'white');
+      $console->writeln($l);
+      $l = Colors::colorize("Project $Name Created! ------------> %100 [SUCCESS]", 'green');
       $console->writeln($l);
     }
   }
 
-
-
-
   function perform($args, $options, $console) {
-    if (isset($options['selfcheck'])) {
+    if (isset($options['selfcheck']) || $args[0] === 'selfcheck') {
       $l = Colors::colorize('-------------------------------------', 'white');
       $console->writeln($l);
       $l = Colors::colorize('Performing Self-Check..', 'yellow');
@@ -212,4 +523,97 @@ Kernel::addCLICommand("perform", "perform");
       $l = Colors::colorize('ENV File fixed.', 'green');
       $console->writeln($l);
     }
+  }
+
+
+
+  function makeRoutes($args, $options, $console) {
+      if (!isset($args)) {
+        $l = Colors::colorize('ERROR: Please write an argument with a class name.', 'red');
+        $console->writeln($l);
+      }
+      foreach ([APP_CONTROLLERS_DIR, APP_CONTROLLERS_DIR.'/Aliases/'] as $dir) {
+          foreach(glob($dir .'*.php') as $class) {
+              require $class;
+          }
+      }
+      $className = $args[0];
+
+      if (isset($options['regen'])) {
+        @unlink(APP_MISC_DIR.'Config/Autorouting.php');
+      }
+      if (!file_exists(APP_MISC_DIR.'Config/Autorouting.php')) {
+        file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', "<?php\r\n/**\n* @package: Auto Routing System for Skytells Framework\n* @copyright: (C) 2018 Skytells, Inc, All rights reserved. \n* @license: MIT\n* @see: https://developers.skytells.net for more info.\n*/\n\n", FILE_APPEND);
+      }
+      require ENV_UNITS_DIR.'DocBlock.php';
+      $box = new ConsoleKit\Widgets\Box($console, 'Skytells Framework Routes Generator');
+      $box->write();
+    if ($className == 'all') {
+      foreach(glob($dir .'*.php') as $class) {
+        $className = \Load::getClassNameFromFile($class);
+        $console->writeln('Making Routes for ' . $className .'..');
+        $reflector = new ReflectionClass($className);
+        $console->writeln('Getting ['.$className.'] Methods..');
+        $methods = get_class_methods($className);
+        $console->writeln('Generating Routes..');
+        file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', "\n/**\n * @category: $className (Controller)\n */\n", FILE_APPEND);
+      foreach ($methods as $fn) {
+        $r = new ReflectionMethod($className, $fn);
+        $block = $r->getDocComment();
+        $block = str_replace('@Route', '@route', $block);
+        $block = str_replace('@Arguments', '@arguments', $block);
+        if (strpos($block, '@route') !== false) {
+            $block = new DocBlock($block);
+            $summary = "\n/**\n * @date : ".gmdate(LOG_DT_FORMAT)."\n * @URL : ".Base().$block->route."\n */\n";
+            $endsummary = "\n// -------------------------------- \n";
+            $blockArgs = $block->arguments;
+            if (strpos($block, '@arguments') !== false && !empty($blockArgs)) {
+              file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', $summary."Router::assign('$block->route', '$className@$fn', $block->arguments);".$endsummary, FILE_APPEND);
+            }else{
+              file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', $summary."Router::assign('$block->route', '$className@$fn');".$endsummary, FILE_APPEND);
+            }
+            $l = Colors::colorize('Routing ['.$fn.'] to '.Base().$block->route .' [OK]', 'yellow');
+            $console->writeln($l);
+        }
+        sleep(0.3);
+      }
+      $l = Colors::colorize('All Routes has been generated [SUCCESS]', 'green');
+      $console->writeln($l);
+    }
+    }else {
+      if (!class_exists($className)) {
+        $l = Colors::colorize("Class $className is not exists.", 'red');
+        $console->writeln($l); exit;
+      }
+      $console->writeln('Making Routes for ' . $className .'..');
+      $reflector = new ReflectionClass($className);
+      $console->writeln('Getting Methods..');
+      $methods = get_class_methods($className);
+        $console->writeln('Generating Routes..');
+        file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', "\n/**\n * @category: $className (Controller)\n */\n", FILE_APPEND);
+      foreach ($methods as $fn) {
+        $r = new ReflectionMethod($className, $fn);
+        $block = $r->getDocComment();
+        $block = str_replace('@Route', '@route', $block);
+        $block = str_replace('@Arguments', '@arguments', $block);
+        if (strpos($block, '@route') !== false) {
+            $block = new DocBlock($block);
+            $summary = "\n/**\n * @date : ".gmdate(LOG_DT_FORMAT)."\n * @URL : ".Base().$block->route."\n */\n";
+            $endsummary = "\n// -------------------------------- \n";
+            $blockArgs = $block->arguments;
+            if (strpos($block, '@arguments') !== false && !empty($blockArgs)) {
+              file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', $summary."Router::assign('$block->route', '$className@$fn', $block->arguments);".$endsummary, FILE_APPEND);
+            }else{
+              file_put_contents(APP_MISC_DIR.'Config/Autorouting.php', $summary."Router::assign('$block->route', '$className@$fn');".$endsummary, FILE_APPEND);
+            }
+            $l = Colors::colorize('Routing ['.$fn.'] to '.Base().$block->route .' [OK]', 'yellow');
+            $console->writeln($l);
+        }
+        sleep(0.3);
+      }
+      $l = Colors::colorize('All Routes has been generated [SUCCESS]', 'green');
+      $console->writeln($l);
+      $console->writeln($l);
+    }
+
   }

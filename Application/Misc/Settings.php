@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -18,7 +18,7 @@
  |
  | These settings needs to be changed before the application being uploaded
  */
-  // WHERE SKYTELLS FRAMEWORK IS INSTAALLED? IF YOU'RE RUNNING ON THE ROOT
+  // WHERE SKYTELLS FRAMEWORK IS INSTALLED? IF YOU'RE RUNNING ON THE ROOT
   // FOLDER OR THE MAIN (WWW), PLEASE LEAVE IT EMPTY, OTHERWISE,
   // PLEASE WRITE THE NAME OF THE DIRECTORY YOU INSTALLED SKYTELLS FW ON IT.
   $Settings["ROOT_PATH"]   = '';
@@ -104,12 +104,13 @@
  |
  | Skytells Framework comes with (2) Language Engines.
  | - Built-In Engine
- | - Illuminate Engine
+ | - Skytells Engine
  | These settings to allow internationalization for your application by allowing
  | the app to support other languages.
  | --
- | MULTILANGS: This var. is required to be set true or false, by enabling this
- | option, You're giving the Framework the chance to detect the language by
+ | MULTILANGS_DETECTION_DETECTION: This var. is required to be set true or false,
+ | by enabling this option, You're giving the Framework the chance to detect
+ | the language by
  | a URL parameter.
  | USE_BUILTIN_PHRASES: Allows you to use the built in languages.
  | LANG_SESID: The Session key which responsible for storing langID.
@@ -118,10 +119,10 @@
  | How to? you can see our documentation on our website.
  */
  // CHANGE THIS TO TRUE TO ENABLE THIS FEATURE.
- $Settings["MULTILANGS"] = TRUE;
+ $Settings["MULTILANGS_DETECTION"] = TRUE;
 
  // Use the BUILT-IN Engine as the primary languages engine?
- $Settings["USE_BUILTIN_PHRASES"] = TRUE;
+ $Settings["USE_BUILTIN_PHRASES"] = FALSE;
 
  // THE SESSION ID TO STORE THE SELECTED LANG.
  $Settings["LANG_SESID"] = "SFW_LANGUAGE";
@@ -175,12 +176,57 @@
  | CACHE_DRIVER : FileCache, APC, Memcache.
  | $Memcache["Settings"] : If Memcache Driver is enabled.
  | CACHE_DIR : Which Dir. the Cached files will be stored on?
+ | $OXCache : Dynamic array contains an Alternative Oxide Caching Config.
+ | SF_CACHE is another cache driver which used by skytells.
+ | $OXCache['ENABLED'] Enables or disables the Oxide Cache driver.
+ | NOTE: That enable or disable this $OXCache cache doesn't effect the
+ | Main cache configuration which used for $Settings["USE_CACHE"].
+ | $OXCache['PERIOD'] : The default period for storing your cache.
  */
   $Settings["USE_CACHE"]  = TRUE;
   $Settings["CACHE_DRIVER"] = 'FileCache';
   $Settings["CACHE_DIR"]  = "Storage/Cache";
   $Settings["CACHE_TIME"] = 500;
   $Memcache["Settings"] = Array('HOST' => "127.0.0.1", 'PORT' => 11211);
+
+  // Alternative Oxide Cache Driver.
+  // Oxide Cache Driver is a powerful caching engine.
+  $OXCache['ENABLED']  = FALSE;
+  $OXCache['PERIOD'] = 500;
+  $OXCache['config'] = [
+       'cache.default' => 'file',
+       'cache.prefix' => 'SF_',
+       'cache.stores.file' => [
+           'driver' => 'file',
+           'path' => APPBASE.'Storage/Cache/FileCache'
+           // APPBASE : Returns the Application path.
+       ],
+       'cache.stores.memcached' => [
+           'driver' => 'memcached',
+           'servers' => [
+               [
+                   'host' => getenv('MEMCACHED_HOST', '127.0.0.1'),
+                   'port' => getenv('MEMCACHED_PORT', 11211),
+                   'weight' => 100,
+               ],
+           ],
+       ],
+       'cache.stores.redis' => [
+            'driver' => 'redis',
+            'connection' => 'default'
+        ],
+        'database.redis' => [
+            'cluster' => false,
+            'default' => [
+                'host' => '127.0.0.1',
+                'port' => 6379,
+                'database' => 0,
+            ]
+        ]
+   ];
+
+
+
 
 
   /*
@@ -191,9 +237,37 @@
   | You can load/unload modules by turning it on or off.
   */
    $Settings['USE_MODULES'] = TRUE;
-   $Modules = Array (
+   $SF_Modules = Array (
      "Firewall" => TRUE
    );
+
+
+
+
+
+
+
+   /*
+   |-------------------------------------------------------------------------------
+   | SERVICE PROVIDERS
+   |-------------------------------------------------------------------------------
+   |
+   | Service providers are the central place of all Skytells application bootstrapping.
+   | Your own application, as well as all of Skytells Framework's core services are
+   | bootstrapped via service providers.
+   */
+    $Settings['USE_PROVIDERS'] = FALSE;
+    $SF_PROVIDERS = [
+     /*
+      * Application Service Providers...
+      */
+      "AppServiceProvider" => App\Providers\AppServiceProvider::class
+    ];
+
+
+
+
+
 
 
 
@@ -208,6 +282,7 @@
   |
   */
   $Settings['LOG_DT_FORMAT'] = 'Y-m-d H:i:s';
+
 
 
 

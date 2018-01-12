@@ -4,13 +4,14 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.1
+ * @version    3.6
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
   $ENV_STARTUP_TIME=microtime(TRUE);
+
   $ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'] = "Core";
   $ENVIRONMENT_CONFIG['APPLICATION_PATH'] = "Application";
   @define(BASEPATH, __DIR__.'/', TRUE);
@@ -23,4 +24,5 @@
   $match = Router::match();
   if( $match && is_callable( $match['target'] ) ) { call_user_func_array( $match['target'], $match['params'] ); }
   else { show_404(); }
+  $ENV_END_TIME = microtime(true) - $ENV_STARTUP_TIME;
   DevTools();

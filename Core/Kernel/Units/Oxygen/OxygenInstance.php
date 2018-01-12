@@ -2,15 +2,15 @@
 
 
 
-use Illuminate\Contracts\View\Factory as FactoryContract;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\Engines\CompilerEngine;
-use Illuminate\View\Engines\EngineResolver;
-use Illuminate\View\Factory;
-use Illuminate\View\FileViewFinder;
-use Illuminate\View\View;
+use Skytells\Contracts\View\Factory as FactoryContract;
+use Skytells\Events\Dispatcher;
+use Skytells\Filesystem\Filesystem;
+use Skytells\View\Compilers\BladeCompiler;
+use Skytells\View\Engines\CompilerEngine;
+use Skytells\View\Engines\EngineResolver;
+use Skytells\View\Factory;
+use Skytells\View\FileViewFinder;
+use Skytells\View\View;
 
 /**
  * Standalone class for generating text using blade templates.

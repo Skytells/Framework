@@ -1,6 +1,6 @@
 <?
-global $Framework, $ENV_STARTUP_TIME, $Settings, $db, $dbconfig, $BMEND, $ConnectedDBS;
-$time_elapsed_secs = microtime(true) - $ENV_STARTUP_TIME;
+global $Framework, $ENV_STARTUP_TIME, $Settings, $db, $dbconfig, $BMEND, $ConnectedDBS, $ENV_END_TIME;
+$time_elapsed_secs = $ENV_END_TIME;
 $Framework['benchmark'] = substr($time_elapsed_secs - $BMEND, 0, 10);
 $Framework['language'] = (isset($_SESSION[LANG_SESID])) ? $_SESSION[LANG_SESID] : "en_US";
 $Framework['Settings'] = $Settings;

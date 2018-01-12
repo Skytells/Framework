@@ -1,8 +1,7 @@
 <?
 $Datafile = __DIR__.'/data/Framework.json';
 $Data = file_get_contents($Datafile);
-$Data = trim($Data, "\x0\xEF\xBB\xBF");
-$Data = json_decode( stripslashes($Data) );
+$Data = json_decode($Data);
 
 function micro_to_hrs($time) {
 
@@ -13,11 +12,14 @@ function micro_to_hrs($time) {
 }
 $Console = new stdClass;
 $Console->Controllers = 'Loaded Controllers : '.count($Data->Runtime->Controllers).'<br>';
+if (count($Data->Runtime->Controllers) > 0) {
 foreach ($Data->Runtime->Controllers as $Object) {
 		$Console->Controllers = $Console->Controllers. '<O class="red">$ ></O> PID : '.$Object->ProccessID.' -> '.$Object->Type.' [ ' . $Object->Name . ' ] Loaded at '.micro_to_hrs($Object->Timestamp).' from : ' . $Object->File . '<br>';
 }
+}
 
 $Console->All = '<O class="red">$ ></O> Total Events : '.count($Data->Runtime->All).'<br>';
+if (count($Data->Runtime->All) > 0) {
 foreach ($Data->Runtime->All as $Object) {
 	if ($Object->Type !== 'cLog') {
 		$Console->All = $Console->All. '<O class="red">$ ></O> PID : '.$Object->ProccessID.' -> '.$Object->Type.' [ ' . $Object->Name . ' ] Loaded at '.micro_to_hrs($Object->Timestamp).' from : ' . $Object->File . '<br>';
@@ -25,7 +27,7 @@ foreach ($Data->Runtime->All as $Object) {
 		$Console->All = $Console->All. '<O class="red">$ ></O> PID : '.$Object->ProccessID.' -> Console Message logged at '.micro_to_hrs($Object->Timestamp).' : ' . $Object->Message . '<br>';
 	}
 }
-
+}
 
 $Console->Models = 'Total Models : '.count($Data->Runtime->Models).'<br>';
 if (count($Data->Runtime->Models) > 0) {

@@ -2,94 +2,76 @@
     "Runtime": {
         "All": [
             {
-                "ProccessID": 9536,
+                "ProccessID": 5146,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1513742073.8569729
+                "Timestamp": 1515800007.951072
             },
             {
-                "ProccessID": 5376,
+                "ProccessID": 6899,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1513742073.858052
+                "Timestamp": 1515800007.952188
             },
             {
-                "ProccessID": 3182,
+                "ProccessID": 6459,
                 "Type": "cLog",
-                "Message": "The Home Controller has been loaded.",
-                "Timestamp": 1513742073.859587
+                "Message": "The Home Aliase Controller has been loaded.",
+                "Timestamp": 1515800007.9547939
             },
             {
-                "ProccessID": 2744,
-                "isLoaded": true,
-                "Name": "Index",
-                "Type": "UI",
-                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1513742073.859719
-            },
-            {
-                "ProccessID": 2908,
+                "ProccessID": 1543,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1513742073.8597231
+                "Timestamp": 1515800007.9550569
             }
         ],
         "Handlers": [
             {
-                "ProccessID": 9536,
+                "ProccessID": 5146,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1513742073.8569751
+                "Timestamp": 1515800007.9510729
             }
         ],
         "Modules": [
             {
-                "ProccessID": 5376,
+                "ProccessID": 6899,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1513742073.858053
+                "Timestamp": 1515800007.952189
             }
         ],
         "Console": [
             {
-                "ProccessID": 3182,
+                "ProccessID": 6459,
                 "Type": "cLog",
-                "Message": "The Home Controller has been loaded.",
-                "Timestamp": 1513742073.859587
-            }
-        ],
-        "UIs": [
-            {
-                "ProccessID": 2744,
-                "isLoaded": true,
-                "Name": "Index",
-                "Type": "UI",
-                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
-                "Timestamp": 1513742073.85972
+                "Message": "The Home Aliase Controller has been loaded.",
+                "Timestamp": 1515800007.9547949
             }
         ],
         "Controllers": [
             {
-                "ProccessID": 2908,
+                "ProccessID": 1543,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1513742073.8597231
+                "Timestamp": 1515800007.9550581
             }
         ]
     },
-    "benchmark": "0.00882697",
+    "benchmark": "0.01083898",
     "language": "en_US",
     "Settings": {
         "ROOT_PATH": "Framework",
@@ -101,8 +83,8 @@
         "DEVELOPMENT_MODE": true,
         "INTELLISENSE_DEBUGGER": true,
         "INTELLISENSE_INTERFACE": "UI",
-        "MULTILANGS": true,
-        "USE_BUILTIN_PHRASES": true,
+        "MULTILANGS_DETECTION": true,
+        "USE_BUILTIN_PHRASES": false,
         "LANG_SESID": "SFW_LANGUAGE",
         "DEFAULTLANG": "en_US",
         "ENC_METHOD": "AES-256-CBC",
@@ -115,11 +97,13 @@
         "CACHE_DIR": "Storage\/Cache",
         "CACHE_TIME": 500,
         "USE_MODULES": true,
+        "USE_PROVIDERS": false,
         "LOG_DT_FORMAT": "Y-m-d H:i:s",
         "CHECK_EXTENTIONS": true,
-        "ALLOW_TERMINAL": true,
         "TEMPLATE_ENGINE": "Oxygen",
-        "TEMPLATE_FILE_EXTENSION": "ui"
+        "TEMPLATE_FILE_EXTENSION": "ui",
+        "TEMPLATE_CACHE_DIR": "Storage\/Cache\/Views",
+        "ALLOW_TERMINAL": true
     },
     "totalCached": 0,
     "homebase": "http:\/\/localhost\/Framework",
