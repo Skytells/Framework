@@ -2,76 +2,92 @@
     "Runtime": {
         "All": [
             {
-                "ProccessID": 5146,
+                "ProccessID": 1143,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1515800007.951072
+                "Timestamp": 1515813053.5901761
             },
             {
-                "ProccessID": 6899,
+                "ProccessID": 4245,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1515800007.952188
+                "Timestamp": 1515813053.591362
             },
             {
-                "ProccessID": 6459,
+                "ProccessID": 8806,
+                "isLoaded": true,
+                "Name": "\\MyApp",
+                "Type": "Controller",
+                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/MyApp.php",
+                "Timestamp": 1515813053.5930469
+            },
+            {
+                "ProccessID": 8114,
                 "Type": "cLog",
-                "Message": "The Home Aliase Controller has been loaded.",
-                "Timestamp": 1515800007.9547939
+                "Message": "The Alias Controller has been loaded.",
+                "Timestamp": 1515813053.5932529
             },
             {
-                "ProccessID": 1543,
+                "ProccessID": 3800,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1515800007.9550569
+                "Timestamp": 1515813053.5932591
             }
         ],
         "Handlers": [
             {
-                "ProccessID": 5146,
+                "ProccessID": 1143,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1515800007.9510729
+                "Timestamp": 1515813053.5901771
             }
         ],
         "Modules": [
             {
-                "ProccessID": 6899,
+                "ProccessID": 4245,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1515800007.952189
-            }
-        ],
-        "Console": [
-            {
-                "ProccessID": 6459,
-                "Type": "cLog",
-                "Message": "The Home Aliase Controller has been loaded.",
-                "Timestamp": 1515800007.9547949
+                "Timestamp": 1515813053.591363
             }
         ],
         "Controllers": [
             {
-                "ProccessID": 1543,
+                "ProccessID": 8806,
+                "isLoaded": true,
+                "Name": "\\MyApp",
+                "Type": "Controller",
+                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/MyApp.php",
+                "Timestamp": 1515813053.5930641
+            },
+            {
+                "ProccessID": 3800,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1515800007.9550581
+                "Timestamp": 1515813053.5932591
+            }
+        ],
+        "Console": [
+            {
+                "ProccessID": 8114,
+                "Type": "cLog",
+                "Message": "The Alias Controller has been loaded.",
+                "Timestamp": 1515813053.5932541
             }
         ]
     },
-    "benchmark": "0.01083898",
+    "benchmark": "0.00945591",
     "language": "en_US",
     "Settings": {
         "ROOT_PATH": "Framework",

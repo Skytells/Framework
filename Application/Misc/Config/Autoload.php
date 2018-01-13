@@ -9,6 +9,7 @@
 | what you want automatically
 */
 // Turn this to true to enable the features below.
+// NOTE: That by turning this on, The CLI will be effected.
 $ALCONF['Autoload'] = false;
 
 // Turn this to true to automatically load all of your controllers.

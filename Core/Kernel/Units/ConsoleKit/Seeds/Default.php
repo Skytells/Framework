@@ -136,8 +136,25 @@ Kernel::addCLICommand("create-project", "createproject");
         $console->writeln($l);
         $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Controller.io'));
         file_put_contents(APP_CONTROLLERS_DIR.'/'.$Name.'.php', $Template);
-        $l = Colors::colorize("$Name.php Created!", 'green');
+        $l = Colors::colorize("Controller: $Name.php Created!", 'green');
         $console->writeln($l);
+        break;
+
+      case 'alias':
+          if (file_exists(APP_CONTROLLERS_DIR.'/Aliases/'.$Name.'.php')) {
+            throw new \ErrorException("This Alias controller is already exists!", 1);
+          }
+          $l = Colors::colorize("Creating $Name Alias Controller..", 'yellow');
+          $console->writeln($l);
+
+          if (isset($args[2]) && !empty($args[2])) {
+            $Template = str_replace('{OBJECTNAME}', $Name.' extends '.$args[2], file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Alias.io'));
+          }else {
+            $Template = str_replace('{OBJECTNAME}', $Name, file_get_contents(ENV_UNITS_DIR.'/ConsoleKit/Lab/Alias.io'));
+          }
+          file_put_contents(APP_CONTROLLERS_DIR.'/Aliases/'.$Name.'.php', $Template);
+          $l = Colors::colorize("Alias : $Name.php Created!", 'green');
+          $console->writeln($l);
         break;
       case 'model':
           if (file_exists(APP_MODELS_DIR.'/'.$Name.'.php')) {

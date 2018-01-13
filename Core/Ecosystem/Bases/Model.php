@@ -117,4 +117,12 @@
      }
    }
 
+
+   /**
+    * @method inject
+    */
+   public function inject($Type, $File, $to = false, $args = [], $newName = '') {
+     Kernel::Inject($Type, $File, $to, $args, $newName);
+     return $this;
+   }
  }

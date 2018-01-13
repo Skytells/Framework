@@ -12,7 +12,10 @@
  use Skytells\UI\View;
  Class Controller {
 
-   public function __construct() {
+  /**
+   * @method __construct
+   */
+  public function __construct() {
      global $Extentions, $OXCache;
      if (CHECK_EXTENTIONS === TRUE) {
        foreach ($Extentions as $ex) {
@@ -50,7 +53,17 @@
 
    }
 
+  /**
+   * @method inject
+   */
+  public function inject($Type, $File, $to = false, $args = [], $newName = '') {
+    Kernel::Inject($Type, $File, $to, $args, $newName);
+    return $this;
+  }
 
+  /**
+   * @method AddAlias
+   */
   public function AddAlias($File, $to = false, $args = array(), $newName = '') {
     if (!Contains($File,".php")) { $File = $File.'.php'; }
     $Path =  APP_CONTROLLERS_DIR.'Aliases/'.$File;

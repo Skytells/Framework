@@ -10,11 +10,11 @@
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
  * @see        The Framework's changelog to be always up to date.
  */
-  @define("IS_CORE_CLI", TRUE);
-  @define(BASEPATH, __DIR__.'/', TRUE);
+  define("IS_CORE_CLI", TRUE);
+  define(BASEPATH, __DIR__.'/', TRUE);
   $ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'] = "Core"; $ENVIRONMENT_CONFIG['APPLICATION_PATH'] = "Application";
-   require __DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Global.php";
-   require __DIR__.'/'.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Kernel/Services/CLI.php";
+   require BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Global.php";
+   require BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Kernel/Services/CLI.php";
    use ConsoleKit\Console,
        ConsoleKit\Command,
        ConsoleKit\Colors,
@@ -33,7 +33,6 @@
            require_once $file;
          }
        }
-
     $CLI = new Console();
     require(__DIR__.'/'.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/Misc/Config/Terminal.php');
     global $_CLI_COMMANDS;

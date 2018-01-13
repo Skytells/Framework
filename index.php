@@ -11,7 +11,6 @@
  * @see        The Framework's changelog to be always up to date.
  */
   $ENV_STARTUP_TIME=microtime(TRUE);
-
   $ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'] = "Core";
   $ENVIRONMENT_CONFIG['APPLICATION_PATH'] = "Application";
   @define(BASEPATH, __DIR__.'/', TRUE);

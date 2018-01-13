@@ -44,4 +44,59 @@ Class Kernel {
 
    }
 
+
+
+ /**
+  * @method Inject
+  */
+  public static function Inject($Type, $File, $to = false, $args = [], $newName = '') {
+    if (empty($Type)) { throw new \ErrorException("use() expects the fist argument Type to be added. given null.", 1);}
+    if (empty($File)) { throw new \ErrorException("use() expects the sec. argument file to be added. given null.", 1);}
+    $Type = strtolower($Type);
+    if (!Contains($File,".php")) { $File = $File.'.php'; }
+     switch ($Type) {
+       case 'controller':
+         $Path =  APP_CONTROLLERS_DIR.$File;
+         if (!file_exists($Path)) { throw new \ErrorException("Controller [$File] is not found.", 1); }
+         if (is_object($to)) {
+           require $Path;
+           $clName = \Load::getClassNameFromFile($Path);
+           $OwnerObject = $clName;
+           $namespace = \Load::getClassNamespaceFromFile($Path);
+           $realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
+           if (!empty($newName)) { $OwnerObject = $newName;  }
+           if ($args != false && is_array($args)){
+           $refClass = new ReflectionClass($realClassName);
+           $to->$OwnerObject = $refClass->newInstanceArgs($args);
+         } else { $to->$OwnerObject = new $realClassName; } }else {require $Path;}
+         Skytells\Core\Runtime::Report('controller', $realClassName, $Path);
+         return true;
+         break;
+
+         case 'model':
+           $Path =  APP_MODELS_DIR.$File;
+           if (!file_exists($Path)) { throw new \ErrorException("Model [$File] is not found.", 1); }
+           if (is_object($to)) {
+             require $Path;
+             $clName = \Load::getClassNameFromFile($Path);
+             $OwnerObject = $clName;
+             $namespace = \Load::getClassNamespaceFromFile($Path);
+             $realClassName = (class_exists($namespace."\\".$clName)) ? $namespace."\\".$clName : $clName;
+             if (!empty($newName)) { $OwnerObject = $newName;  }
+             if ($args != false && is_array($args)){
+             $refClass = new ReflectionClass($realClassName);
+             $to->$OwnerObject = $refClass->newInstanceArgs($args);
+           } else { $to->$OwnerObject = new $realClassName; } }else {require $Path;}
+           Skytells\Core\Runtime::Report('model', $realClassName, $Path);
+           return true;
+          break;
+
+
+       default:
+         return false;
+         break;
+     }
+   }
+
+
  }

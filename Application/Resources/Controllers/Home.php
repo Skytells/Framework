@@ -75,6 +75,7 @@
       // Did you know that you can extend you controller with other child controllers?
       // So you can (Add) or (Assign) Child-Controllers to other simply by performing
       // the following functions.
+    
       $this->AddAlias('Home', $this);
       echo $this->Home->SayHello();
    }
