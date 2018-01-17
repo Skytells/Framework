@@ -10,7 +10,7 @@
  * @see        The Framework's changelog to be always up to date.
  */
 global $ENVIRONMENT_CONFIG;
-const FRAMEWORK_VERSION = '3.6';
+const FRAMEWORK_VERSION = '3.7-dev';
 define(ENVCORE, BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/');
 define(ENV_DIR, BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'].'/');
 define(APPBASE, BASEPATH.$ENVIRONMENT_CONFIG['APPLICATION_PATH'].'/');

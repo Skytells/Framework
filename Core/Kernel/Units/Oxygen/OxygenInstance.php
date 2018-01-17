@@ -295,4 +295,30 @@ class OxygenInstance implements FactoryContract
     {
         return $this->make($view, $params)->render();
     }
+
+
+    /**
+     * Get the content by generating a view.
+     *
+     * @param string $view The name of the view to make
+     * @param array $params The parameters to pass to the view
+     *
+     * @return string The generated content
+     */
+    public function first($views, $params = [], $ShowUI = false)
+    {
+      if (empty($views)) {
+          throw new \ErrorException("first() method needs to be called with an array of views.", 1);
+        }
+        if (is_bool($params)) { $ShowUI = true; $params = []; }
+        foreach ($views as $view) {
+          $ext = Skytells\UI\View::getExtension();
+          $filename = str_replace($ext, "", $view);
+          if ($this->exists($filename)) {
+            Skytells\Core\Runtime::Report('UI', ucfirst(str_replace('.php', '', str_replace('.ui', '', $view))), APP_VIEWS_DIR.$view.$ext);
+            $ext = null;
+            return $this->make($filename, $params)->render();
+          }
+        }
+    }
 }

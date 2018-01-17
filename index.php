@@ -16,6 +16,9 @@
   @define(BASEPATH, __DIR__.'/', TRUE);
   @define("IS_CORE_CLI", FALSE);
   require BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Global.php";
+  if (CACHE_SYS === true) {
+  require ENV_ECOSYSTEM_DIR.'/Cache.php';
+  $Ca = new Cache(); $Ca->start(); }
   Router::Init();
   $ROOT_PATH = (ROOT_PATH == '') ? '/' : '/'.ROOT_PATH;
   Router::setBasePath($ROOT_PATH);
@@ -23,5 +26,6 @@
   $match = Router::match();
   if( $match && is_callable( $match['target'] ) ) { call_user_func_array( $match['target'], $match['params'] ); }
   else { show_404(); }
+  if (CACHE_SYS === true) { $Ca->end(); }
   $ENV_END_TIME = microtime(true) - $ENV_STARTUP_TIME;
   DevTools();

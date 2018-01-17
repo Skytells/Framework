@@ -89,10 +89,12 @@
    @mkdir(APP_STORAGE_DIR.'Cache/FileCache/');
    @mkdir(APP_STORAGE_DIR.'Cache/Views/');
    @mkdir(APP_STORAGE_DIR.'Cache/Sessions/');
+   @mkdir(APP_STORAGE_DIR.'Cache/System/');
    @file_put_contents(APP_STORAGE_DIR.'Cache/index.html', '');
    @file_put_contents(APP_STORAGE_DIR.'Cache/FileCache/index.html', '');
    @file_put_contents(APP_STORAGE_DIR.'Cache/Views/index.html', '');
    @file_put_contents(APP_STORAGE_DIR.'Cache/Sessions/index.html', '');
+   @file_put_contents(APP_STORAGE_DIR.'Cache/System/index.html', '');
    return true;
  }
 

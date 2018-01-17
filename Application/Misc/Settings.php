@@ -182,6 +182,7 @@
  | NOTE: That enable or disable this $OXCache cache doesn't effect the
  | Main cache configuration which used for $Settings["USE_CACHE"].
  | $OXCache['PERIOD'] : The default period for storing your cache.
+ | CACHE_SYS: If Enabled, The entire app will be cached.
  */
   $Settings["USE_CACHE"]  = TRUE;
   $Settings["CACHE_DRIVER"] = 'FileCache';
@@ -225,6 +226,12 @@
         ]
    ];
 
+  // SYS CACHE is a back-end caching engine.
+  // When Enabled, The entire app will be cached.
+  $Settings["CACHE_SYS"]  = FALSE;
+  $SFSyscache['Exclusions'] = [
+    'www.somepagetoexclude.com'
+  ];
 
 
 

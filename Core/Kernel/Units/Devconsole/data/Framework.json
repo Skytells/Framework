@@ -2,92 +2,80 @@
     "Runtime": {
         "All": [
             {
-                "ProccessID": 1143,
+                "ProccessID": 6827,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1515813053.5901761
+                "Timestamp": 1516196411.5128651
             },
             {
-                "ProccessID": 4245,
+                "ProccessID": 7503,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1515813053.591362
+                "Timestamp": 1516196411.51437
             },
             {
-                "ProccessID": 8806,
+                "ProccessID": 1817,
                 "isLoaded": true,
-                "Name": "\\MyApp",
-                "Type": "Controller",
-                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/MyApp.php",
-                "Timestamp": 1515813053.5930469
+                "Name": "Index",
+                "Type": "UI",
+                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
+                "Timestamp": 1516196411.515918
             },
             {
-                "ProccessID": 8114,
-                "Type": "cLog",
-                "Message": "The Alias Controller has been loaded.",
-                "Timestamp": 1515813053.5932529
-            },
-            {
-                "ProccessID": 3800,
+                "ProccessID": 4981,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1515813053.5932591
+                "Timestamp": 1516196411.5159221
             }
         ],
         "Handlers": [
             {
-                "ProccessID": 1143,
+                "ProccessID": 6827,
                 "isLoaded": true,
                 "Name": "Http",
                 "Type": "Handler",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Handlers\/Http.php",
-                "Timestamp": 1515813053.5901771
+                "Timestamp": 1516196411.512867
             }
         ],
         "Modules": [
             {
-                "ProccessID": 4245,
+                "ProccessID": 7503,
                 "isLoaded": true,
                 "Name": "Firewall",
                 "Type": "Module",
                 "File": "Applications\/AMPPS\/www\/Framework\/Core\/Ecosystem\/Modules\/Firewall.php",
-                "Timestamp": 1515813053.591363
+                "Timestamp": 1516196411.5143721
+            }
+        ],
+        "UIs": [
+            {
+                "ProccessID": 1817,
+                "isLoaded": true,
+                "Name": "Index",
+                "Type": "UI",
+                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Views\/index.php",
+                "Timestamp": 1516196411.515919
             }
         ],
         "Controllers": [
             {
-                "ProccessID": 8806,
-                "isLoaded": true,
-                "Name": "\\MyApp",
-                "Type": "Controller",
-                "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/MyApp.php",
-                "Timestamp": 1515813053.5930641
-            },
-            {
-                "ProccessID": 3800,
+                "ProccessID": 4981,
                 "isLoaded": true,
                 "Name": "Home",
                 "Type": "Controller",
                 "File": "Applications\/AMPPS\/www\/Framework\/Application\/Resources\/Controllers\/Home.php",
-                "Timestamp": 1515813053.5932591
-            }
-        ],
-        "Console": [
-            {
-                "ProccessID": 8114,
-                "Type": "cLog",
-                "Message": "The Alias Controller has been loaded.",
-                "Timestamp": 1515813053.5932541
+                "Timestamp": 1516196411.515923
             }
         ]
     },
-    "benchmark": "0.00945591",
+    "benchmark": "0.00854015",
     "language": "en_US",
     "Settings": {
         "ROOT_PATH": "Framework",
@@ -112,6 +100,7 @@
         "CACHE_DRIVER": "FileCache",
         "CACHE_DIR": "Storage\/Cache",
         "CACHE_TIME": 500,
+        "CACHE_SYS": false,
         "USE_MODULES": true,
         "USE_PROVIDERS": false,
         "LOG_DT_FORMAT": "Y-m-d H:i:s",

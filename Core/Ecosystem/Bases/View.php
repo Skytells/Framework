@@ -125,6 +125,101 @@ Use Skytells\Core\Runtime;
 
 
  /**
+  * @method first
+  */
+  public static function first($view, $variables = [], $ShowUI = true) {
+    if (is_bool($variables)) { $ShowUI = $variables;  $variables = []; }
+    if (USE_BUILTIN_PHRASES === TRUE) {
+      $ACTIVELANG = (!isset($_SESSION[LANG_SESID]) || empty($_SESSION[LANG_SESID])) ? DEFAULTLANG : $_SESSION[LANG_SESID];
+      if (!file_exists(APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php')) {
+        throw new \ErrorException("UI Error: The language file [$ACTIVELANG] used in view [$view] cannot be found in dir.", 1);
+      }
+      // Secure Lang from unwanted strings..
+      $ACTIVELANG =  str_replace(array('../', 'http', '//', 'www', '/', '__DIR__', 'dirname', '\\'), '', $ACTIVELANG);
+      $lang = include APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php';
+      $TParses = array_merge($lang, $variables);
+      $variables = array_merge($TParses, View::$OxParses);
+      Runtime::Report('Language', ucfirst(str_replace('.php', '', $ACTIVELANG)), APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php');
+    }
+    View::getOxygenInstance();
+    if ($ShowUI === true) {
+      echo View::$Oxygen->first($view, $variables, $ShowUI);
+      $view = null;
+      return true;
+    }
+    return View::$Oxygen->first($view, $variables, $ShowUI);
+  }
+
+
+ /**
+  * @method build
+  */
+  public static function build($views, $variables = array(), $cFilters = array()) {
+    if (empty($views)) {
+      throw new \ErrorException("bulk() method requires an array of views to be set.", 1);
+    }
+   $mergedvars = View::mergeLanguageWith($variables);
+   if (array_search(View::$Extension, $views) && strtolower(TEMPLATE_ENGINE) === "oxygen") {
+      View::getOxygenInstance();
+      foreach ($views as $view => $vars) {
+        $view = View::resolveExtension($view);
+        if (isset($vars) && is_array($vars)) {
+          $variables = array_merge($mergedvars, $vars);
+        }else {
+          $variables = $mergedvars;
+          $view = $vars;
+        }
+        $filename = str_replace(View::$Extension, "", $view);
+        echo View::$Oxygen->render($filename, $variables);
+        Runtime::Report('UI', ucfirst(str_replace('.php', '', str_replace('.ui', '', $view))), APP_VIEWS_DIR.$view);
+      }
+      $mergedvars = null; $variables = null; $view = null; $filename = null;
+      return true;
+    }else {
+      detectCurrentLanguage();
+      $variables = array_merge($variables, View::$OxParses);
+      foreach ($views as $view => $vars) {
+        if (isset($vars) && is_array($vars)) {
+          if (is_array($variables) && !empty($variables)) {
+            foreach ($variables as $key => $value) {
+             ${$key} = $value;
+            }
+          }
+        }else {
+          $variables = $mergedvars;
+          $view = $vars;
+        }
+        require APP_VIEWS_DIR.$view;
+        Runtime::Report('UI', ucfirst(str_replace('.php', '', str_replace('.ui', '', $view))), APP_VIEWS_DIR.$view);
+      }
+      $mergedvars = null; $variables = null; $view = null; $filename = null;
+
+    }
+
+  }
+
+
+ /**
+  * @method mergeLanguageWith
+  */
+  public static function mergeLanguageWith($variables) {
+    if (USE_BUILTIN_PHRASES === TRUE) {
+      $ACTIVELANG = (!isset($_SESSION[LANG_SESID]) || empty($_SESSION[LANG_SESID])) ? DEFAULTLANG : $_SESSION[LANG_SESID];
+      if (!file_exists(APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php')) {
+        throw new \ErrorException("UI Error: The language file [$ACTIVELANG] used in view [$view] cannot be found in dir.", 1);
+      }
+      // Secure Lang from unwanted strings..
+      $ACTIVELANG =  str_replace(array('../', 'http', '//', 'www', '/', '__DIR__', 'dirname', '\\'), '', $ACTIVELANG);
+      $lang = include APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php';
+      $TParses = array_merge($lang, $variables);
+      $variables = array_merge($TParses, View::$OxParses);
+      Runtime::Report('Language', ucfirst(str_replace('.php', '', $ACTIVELANG)), APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php');
+    }
+    return $variables;
+  }
+
+
+ /**
   * @method setExtension
   */
   public static function setExtension($ex = 'ui.php') {
