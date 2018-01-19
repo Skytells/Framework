@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.6
+ * @version    3.7
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -74,23 +74,13 @@ Use Skytells\Core\Runtime;
   public static function render($view, $variables = array(), $cFilters = array()) {
     global $ENVIRONMENT_CONFIG;
     $standardView = $view;
+
     $view = View::resolveExtension($view);
     if (!file_exists(APP_VIEWS_DIR.$view)) {
       throw new \ErrorException("UI Error: The view of $view cannot be found in views dir.", 1);
     }
     if (Contains($view, View::$Extension)) {
-      if (USE_BUILTIN_PHRASES === TRUE) {
-        $ACTIVELANG = (!isset($_SESSION[LANG_SESID]) || empty($_SESSION[LANG_SESID])) ? DEFAULTLANG : $_SESSION[LANG_SESID];
-        if (!file_exists(APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php')) {
-          throw new \ErrorException("UI Error: The language file [$ACTIVELANG] used in view [$view] cannot be found in dir.", 1);
-        }
-        // Secure Lang from unwanted strings..
-        $ACTIVELANG =  str_replace(array('../', 'http', '//', 'www', '/', '__DIR__', 'dirname', '\\'), '', $ACTIVELANG);
-        $lang = include APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php';
-        $TParses = array_merge($lang, $variables);
-        $variables = array_merge($TParses, View::$OxParses);
-        Runtime::Report('Language', ucfirst(str_replace('.php', '', $ACTIVELANG)), APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php');
-      }
+      $variables = View::mergeLanguageWith($variables);
       if (strtolower(TEMPLATE_ENGINE) === "oxygen") {
         View::getOxygenInstance();
         $filename = str_replace(View::$Extension, "", $view);
@@ -129,18 +119,7 @@ Use Skytells\Core\Runtime;
   */
   public static function first($view, $variables = [], $ShowUI = true) {
     if (is_bool($variables)) { $ShowUI = $variables;  $variables = []; }
-    if (USE_BUILTIN_PHRASES === TRUE) {
-      $ACTIVELANG = (!isset($_SESSION[LANG_SESID]) || empty($_SESSION[LANG_SESID])) ? DEFAULTLANG : $_SESSION[LANG_SESID];
-      if (!file_exists(APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php')) {
-        throw new \ErrorException("UI Error: The language file [$ACTIVELANG] used in view [$view] cannot be found in dir.", 1);
-      }
-      // Secure Lang from unwanted strings..
-      $ACTIVELANG =  str_replace(array('../', 'http', '//', 'www', '/', '__DIR__', 'dirname', '\\'), '', $ACTIVELANG);
-      $lang = include APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php';
-      $TParses = array_merge($lang, $variables);
-      $variables = array_merge($TParses, View::$OxParses);
-      Runtime::Report('Language', ucfirst(str_replace('.php', '', $ACTIVELANG)), APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php');
-    }
+    $variables = View::mergeLanguageWith($variables);
     View::getOxygenInstance();
     if ($ShowUI === true) {
       echo View::$Oxygen->first($view, $variables, $ShowUI);
@@ -159,7 +138,7 @@ Use Skytells\Core\Runtime;
       throw new \ErrorException("bulk() method requires an array of views to be set.", 1);
     }
    $mergedvars = View::mergeLanguageWith($variables);
-   if (array_search(View::$Extension, $views) && strtolower(TEMPLATE_ENGINE) === "oxygen") {
+   if (Contains($views[0], View::$Extension) && strtolower(TEMPLATE_ENGINE) === "oxygen") {
       View::getOxygenInstance();
       foreach ($views as $view => $vars) {
         $view = View::resolveExtension($view);
@@ -214,6 +193,9 @@ Use Skytells\Core\Runtime;
       $TParses = array_merge($lang, $variables);
       $variables = array_merge($TParses, View::$OxParses);
       Runtime::Report('Language', ucfirst(str_replace('.php', '', $ACTIVELANG)), APP_BUILTINLANGS_DIR.$ACTIVELANG.'.php');
+    }else{
+      $TParses = $variables;
+      $variables = array_merge($TParses, View::$OxParses);
     }
     return $variables;
   }
@@ -257,9 +239,5 @@ Use Skytells\Core\Runtime;
       return call_user_func_array(array(View::getOxygenInstance(), $method), $arguments);
     }
   }
-
-
-
-
 
  }
