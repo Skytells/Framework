@@ -11,6 +11,10 @@ Class Payload {
     spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadMigration']);
     spl_autoload_register(function($class){
       if (!class_exists($class)) {
+        if (strpos($class, '\\') !== false) {
+          $class = str_replace('\\', '/', $class);
+          $class = @end(explode("/",$class));
+        }
         $exterialFile = ENVCORE.'/Ecosystem/Handlers/'.$class.'.php';
         $InternalPath = BASEPATH.'Application/Misc/Handlers/'.$class.'.php';
         if (file_exists($InternalPath)) { require $InternalPath; \Skytells\Core\Runtime::Report('handler', $class, $InternalPath); }
@@ -20,6 +24,10 @@ Class Payload {
 
     spl_autoload_register(function($class){
       if (!class_exists($class)) {
+        if (strpos($class, '\\') !== false) {
+          $class = str_replace('\\', '/', $class);
+          $class = @end(explode("/",$class));
+        }
         $exterialFile = ENVCORE.'/Ecosystem/Libraries/'.$class.'.php';
         $InternalPath = BASEPATH.'Application/Misc/Libraries/'.$class.'.php';
         if (file_exists($InternalPath)) { require $InternalPath; \Skytells\Core\Runtime::Report('library', $class, $InternalPath); }
