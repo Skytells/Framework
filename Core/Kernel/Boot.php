@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.6
+ * @version    3.7
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -27,6 +27,8 @@ Class Boot {
       $this->BootORM();
     # Console::log('Framework Bootstrap Initialized');
   }
+
+
 
   private function loadModules() {
     global $SF_Modules, $Settings;
@@ -109,7 +111,7 @@ Class Boot {
           $DEFAULT_CONTROLLER = ROUTER_CONFIG_DEFAULT_CONTROLLER;
           $DEFAULT_CONTROLLER_METHOD = ROUTER_CONFIG_DEFAULT_METHOD;
           if (file_exists(APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php") ){
-            require APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php";
+            spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadController']);
             ${APP_INSTANCE} = new Skytells\Container\Container;
             Skytells\Foundation::$App = ${APP_INSTANCE};
             Container::setInstance(Skytells\Foundation::$App);
@@ -126,9 +128,8 @@ Class Boot {
           return false;
          }
           if ( !empty($_ctrlName = Payload::getExplosion($_MVURI, 1) ) ){
-            if (file_exists(APP_CONTROLLERS_DIR.$_ctrlName.".php")) {
-              require APP_CONTROLLERS_DIR.$_ctrlName.".php";
-            }
+
+            spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadController']);
             if (Payload::isClassExist($CNamespace.$_ctrlName)) {
 
             $ParentClass = get_parent_class($CNamespace.$_ctrlName);

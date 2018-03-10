@@ -1,6 +1,79 @@
 <?php
 Namespace Skytells\Ecosystem;
 Class Payload {
+
+
+  public static function serve() {
+    spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadController']);
+    spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadAliase']);
+    spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadModel']);
+    spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadEloquent']);
+    spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadMigration']);
+    spl_autoload_register(function($class){
+      if (!class_exists($class)) {
+        $exterialFile = ENVCORE.'/Ecosystem/Handlers/'.$class.'.php';
+        $InternalPath = BASEPATH.'Application/Misc/Handlers/'.$class.'.php';
+        if (file_exists($InternalPath)) { require $InternalPath; \Skytells\Core\Runtime::Report('handler', $class, $InternalPath); }
+        if (file_exists($exterialFile)) { require $exterialFile; \Skytells\Core\Runtime::Report('handler', $class, $exterialFile); }
+       }
+     });
+
+    spl_autoload_register(function($class){
+      if (!class_exists($class)) {
+        $exterialFile = ENVCORE.'/Ecosystem/Libraries/'.$class.'.php';
+        $InternalPath = BASEPATH.'Application/Misc/Libraries/'.$class.'.php';
+        if (file_exists($InternalPath)) { require $InternalPath; \Skytells\Core\Runtime::Report('library', $class, $InternalPath); }
+        if (file_exists($exterialFile)) { require $exterialFile; \Skytells\Core\Runtime::Report('library', $class, $exterialFile); }
+       }
+     });
+
+    return true;
+  }
+
+
+  public static function loadController($className) {
+    $filename = APP_CONTROLLERS_DIR . $className . ".php";
+    if (is_readable($filename) && !class_exists($className)) {
+        require $filename;
+    }
+  }
+
+
+
+  public static function loadModel($className) {
+    $filename = APP_MODELS_DIR . $className . ".php";
+    if (is_readable($filename) && !class_exists($className)) {
+        require $filename;
+        \Skytells\Core\Runtime::Report('model', $className, $filename);
+    }
+  }
+
+  public static function loadAliase($className) {
+    $filename = APP_CONTROLLERS_DIR.'/Aliases/' . $className . ".php";
+    if (is_readable($filename) && !class_exists($className)) {
+        require $filename;
+        \Skytells\Core\Runtime::Report('aliase', $className, $filename);
+    }
+  }
+
+
+  public static function loadEloquent($className) {
+    $filename = APP_MODELS_DIR .'/Eloquents/'. $className . ".php";
+    if (is_readable($filename) && !class_exists($className)) {
+        require $filename;
+        \Skytells\Core\Runtime::Report('eloquent', $className, $filename);
+    }
+  }
+
+  public static function loadMigration($className) {
+    $filename = APP_MODELS_DIR .'/Migrations/' . $className . ".php";
+    if (is_readable($filename) && !class_exists($className)) {
+        require $filename;
+        \Skytells\Core\Runtime::Report('migration', $className, $filename);
+    }
+  }
+
+
   public static function Autoload($Directories) {
       foreach ($Directories as $dir) {
           foreach(glob($dir .'*.php') as $class) {

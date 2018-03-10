@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.6
+ * @version    3.7
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -19,7 +19,8 @@
  | These settings needs to be changed before the application being uploaded
  */
   // WHERE SKYTELLS FRAMEWORK IS INSTALLED? IF YOU'RE RUNNING ON THE ROOT
-  // FOLDER OR THE MAIN (WWW), PLEASE LEAVE IT EMPTY, OTHERWISE,
+  // FOLDER OR THE MAIN (WWW), PLEASE LEAVE IT EMPTY OR FILL IT WITH (!),
+  // OTHERWISE:-
   // PLEASE WRITE THE NAME OF THE DIRECTORY YOU INSTALLED SKYTELLS FW ON IT.
   $Settings["ROOT_PATH"]   = '';
 

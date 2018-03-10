@@ -6,8 +6,11 @@
 | BY DEFAULT; Skytells Framework doesn't load the controllers, models,
 | db seeds ..etc all at once for performance optimization.
 | You can configure there settings to allow the framework to load
-| what you want automatically
+| what you want automatically when needed.
+| THIS MECHANISM DOES NOT EFFECT YOUR PERFORMANCE, BECAUSE THE
+| ENABLED OPTIONS WILL BE LOADED JUST IN CASE OF USE ONLY.
 */
+
 // Turn this to true to enable the features below.
 // NOTE: That by turning this on, The CLI will be effected.
 $ALCONF['Autoload'] = false;

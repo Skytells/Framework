@@ -21,9 +21,9 @@ if (DEVELOPMENT_MODE === TRUE && IS_CORE_CLI === FALSE && INTELLISENSE_DEBUGGER 
 
 global $ALCONF;
 if ($ALCONF['Autoload'] === true) {
-  if ($ALCONF['Controllers'] === true) { Skytells\Ecosystem\Payload::Autoload([APP_CONTROLLERS_DIR]); }
-  if ($ALCONF['Aliases'] === true) { Skytells\Ecosystem\Payload::Autoload([APP_CONTROLLERS_DIR].'/Aliases/'); }
-  if ($ALCONF['Models'] === true) { Skytells\Ecosystem\Payload::Autoload([APP_MODELS_DIR]); }
-  if ($ALCONF['Eloquents'] === true) { Skytells\Ecosystem\Payload::Autoload([APP_MODELS_DIR.'/Eloquents/']); }
-  if ($ALCONF['Migrations'] === true) { Skytells\Ecosystem\Payload::Autoload([APP_MODELS_DIR.'/Migrations/']); }
+  if ($ALCONF['Controllers'] === true) { spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadController']); }
+  if ($ALCONF['Aliases'] === true) { spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadAliase']); }
+  if ($ALCONF['Models'] === true) { spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadModel']); }
+  if ($ALCONF['Eloquents'] === true) { spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadEloquent']); }
+  if ($ALCONF['Migrations'] === true) { spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadMigration']); }
 }

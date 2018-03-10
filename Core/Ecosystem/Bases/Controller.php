@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.6
+ * @version    3.7
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -80,6 +80,15 @@
       $to->$OwnerObject = $refClass->newInstanceArgs($args);
     } else { $to->$OwnerObject = new $realClassName; } }else {require $Path;}
     return true;
+  }
+
+
+  /**
+   * @method autoload
+   * @description This method detects the classes called by the controller and load it automatically.
+   */
+  public function autoload() {
+    return Skytells\Ecosystem\Payload::serve();
   }
 
 
