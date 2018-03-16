@@ -24,7 +24,7 @@
      // This is important to include in __construct function for each controller you create.
      // To get the required method, functions, engines and etc from the base controller.
      parent::__construct();
-    
+
      // Log some text in the Console (YOU MUST USE 'Skytells\Core\Console' NAMESPACE.)
      # Console::log("The Home Controller has been loaded.");
 
@@ -76,7 +76,6 @@
       // Did you know that you can extend you controller with other child controllers?
       // So you can (Add) or (Assign) Child-Controllers to other simply by performing
       // the following functions.
-
       $this->AddAlias('Home', $this);
       echo $this->Home->SayHello();
    }

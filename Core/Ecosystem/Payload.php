@@ -95,11 +95,12 @@ Class Payload {
   public static function isClassExist($ClassName, $ReturnType = "Page") {
         if ( !class_exists($ClassName) )
         {
-          if (DEVELOPMENT_MODE === true){
-              throw new  \ErrorException("Error: Requested Controller [ ".$ClassName." ] Does not exist.\r\n You're seeing this Exception because you're in the development mode.", 8);
-              }else{
-              show_404();
-              }
+          if ($ReturnType == "Page") {
+            if (DEVELOPMENT_MODE === true){
+                throw new  \ErrorException("Error: Requested Controller [ ".$ClassName." ] Does not exist.\r\n You're seeing this Exception because you're in the development mode.", 8);
+                }else{ show_404(); }
+          }
+          return false;
         }
         return true;
    }
@@ -123,11 +124,14 @@ Class Payload {
   public static function isFunctionExist($ClassName, $Function, $ReturnType = "Page") {
           if ( !method_exists($ClassName, $Function) )
           {
+              if ($ReturnType == "Page") {
               if (DEVELOPMENT_MODE === true){
                 throw new  \ErrorException("Error: Requested Function [ ".$Function." ] Does not exist in Controller [ $ClassName ]. ", 9);
                 }else{
                 show_404();
                 }
+              }
+                return false;
           }
           return true;
    }

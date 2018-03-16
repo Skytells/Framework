@@ -11,6 +11,7 @@
     $Routes["CONFIG"]["DEFAULT_ROUTE_PARAM"] = "SYSCALLBACK"; // DO NOT CHANGE THIS.
     $Routes["CONFIG"]["DEFAULT_CONTROLLER"] = "Home"; // -> The main controller.
     $Routes["CONFIG"]["DEFAULT_METHOD"] = "index"; // -> the main method.
+
     /**
      * @param INIT_DEFALUT_METHOD_AUTOMATICALLY
      * If TRUE, The Framework will automatically Initialize the default method which defined in
@@ -20,6 +21,25 @@
      * OR YOU HAVE TO SET THE DEFAULT VALUES FOR YOUR DEFAULT METHOD'S ARGUMENTS.
      */
     $Routes["CONFIG"]["INIT_DEFALUT_METHOD_AUTOMATICALLY"] = TRUE;
+
+
+    /**
+     * @param AUTO_RESOLVE_HCM
+     * If TRUE, The Framework will automatically search for a methods inside the default
+     * controller in case of the Url doesn't contains the controller name.
+     * eg. : localhost/method - the internal call will be associated for the home Controller
+     * so it will be : localhost/home/method.
+     * @warning : THIS ROUTE IS ONLY APPLIED WHEN THE FINAL URL BEING ROUTED WITH 404 RESULTS.
+     * WHICH MEANS, IF THE SYSTEM DOESN'T FOUND ANY RESULTS, THE SF WILL USE THIS FUNCTION.
+     * AND START TO SEARCH FOR THE METHOD INSIDE THE DEFAULT CONTROLLER WHICH DEFINED
+     * IN THE (DEFAULT_CONTROLLER) OPTION.
+     */
+    $Routes["CONFIG"]["AUTO_RESOLVE_HCM"] = FALSE;
+
+
+
+
+
     /**
      * ---------------------------- [ Static Routing ] ---------------------------------------------
      * Map a route to a target
@@ -30,16 +50,16 @@
      * @param string $name Optional name of this route. Supply if you want to reverse route this url in your application.
      */
      /**  (*)             // Match all request URIs
-     [i]                  // Match an integer
-     [i:id]               // Match an integer as 'id'
-     [a:action]           // Match alphanumeric characters as 'action'
-     [h:key]              // Match hexadecimal characters as 'key'
-     [:action]            // Match anything up to the next / or end of the URI as 'action'
-     [create|edit:action] // Match either 'create' or 'edit' as 'action'
-     [*]                  // Catch all (lazy, stops at the next trailing slash)
-     [*:trailing]         // Catch all as 'trailing' (lazy)
-     [**:trailing]        // Catch all (possessive - will match the rest of the URI)
-     .[:format]?          // Match an optional parameter 'format' - a / or . before the block is also optional
+     * [i]                  // Match an integer
+     * [i:id]               // Match an integer as 'id'
+     * [a:action]           // Match alphanumeric characters as 'action'
+     * [h:key]              // Match hexadecimal characters as 'key'
+     * [:action]            // Match anything up to the next / or end of the URI as 'action'
+     * [create|edit:action] // Match either 'create' or 'edit' as 'action'
+     * [*]                  // Catch all (lazy, stops at the next trailing slash)
+     * [*:trailing]         // Catch all as 'trailing' (lazy)
+     * [**:trailing]        // Catch all (possessive - will match the rest of the URI)
+     * .[:format]?          // Match an optional parameter 'format' - a / or . before the block is also optional
      * --------------------------------------------------------------------------------------*/
 
      #  Router::map('GET|POST', "/new_route", function($args) { Boot::Controller('Home', 'index', $args); });

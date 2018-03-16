@@ -128,10 +128,8 @@ Class Boot {
           return false;
          }
           if ( !empty($_ctrlName = Payload::getExplosion($_MVURI, 1) ) ){
-
             spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadController']);
-            if (Payload::isClassExist($CNamespace.$_ctrlName)) {
-
+            if (Payload::isClassExist($CNamespace.$_ctrlName, 'bool')) {
             $ParentClass = get_parent_class($CNamespace.$_ctrlName);
             if ($ParentClass != "Controller") {  show_401(); }
             ${APP_INSTANCE} = new Skytells\Container\Container;
@@ -143,7 +141,7 @@ Class Boot {
             Skytells\Foundation::$App->bind($_ctrlName, $CNamespace.$_ctrlName);
             $_CTR = ${APP_INSTANCE}->make($CNamespace.$_ctrlName);
             if ($_funcName = Payload::getExplosion($_MVURI, 2)){
-              if ( Payload::isFunctionExist($CNamespace.$_ctrlName, $_funcName ) ){
+              if ( Payload::isFunctionExist($CNamespace.$_ctrlName, $_funcName) ){
               $this->mvcroute = explode('/', $_MVURI);
               $arguments = array();
               foreach ($this->mvcroute as $key => $val) {
@@ -157,7 +155,38 @@ Class Boot {
                 }
               }
              Runtime::Report('Controller', $_ctrlName, APP_CONTROLLERS_DIR.$_ctrlName.".php");
-            }
+           }else {
+             // If Class is not Exist
+             $DEFAULT_CONTROLLER = ROUTER_CONFIG_DEFAULT_CONTROLLER;
+             $DEFAULT_CONTROLLER_METHOD = ROUTER_CONFIG_DEFAULT_METHOD;
+             ${APP_INSTANCE} = new Skytells\Container\Container;
+             Skytells\Foundation::$App = ${APP_INSTANCE};
+             Container::setInstance(Skytells\Foundation::$App);
+             Facade::setFacadeApplication(Skytells\Foundation::$App);
+             Skytells\Foundation::$App = Boot::InternalProviders(Skytells\Foundation::$App);
+             Boot::Providers();
+             Skytells\Foundation::$App->bind($DEFAULT_CONTROLLER, $CNamespace.$DEFAULT_CONTROLLER);
+             $_CTR = ${APP_INSTANCE}->make($CNamespace.$DEFAULT_CONTROLLER);
+             if (ROUTER_CONFIG_AUTO_RESOLVE_HCM === true) {
+               if ($_funcName = Payload::getExplosion($_MVURI, 1)){
+               if ( Payload::isFunctionExist($DEFAULT_CONTROLLER, $_funcName) ){
+                 $this->mvcroute = explode('/', $_MVURI);
+                 $arguments = array();
+                 foreach ($this->mvcroute as $key => $val) {
+                   if ($key > 1 && !empty($val)) { $arguments[$key] = $val; } }
+                           call_user_func_array(array($_CTR, $_funcName), $arguments);
+               }
+              Runtime::Report('Controller', $DEFAULT_CONTROLLER, APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php");
+             }
+             }else {
+               if (DEVELOPMENT_MODE === true){
+                 $_funcName = Payload::getExplosion($_MVURI, 1);
+                 throw new  \ErrorException("Error: Requested Controller [ ".$_funcName." ] Cannot be found. ", 9);
+                 }else{
+                 show_404();
+                 }
+             }
+           }
           }
       }
 
