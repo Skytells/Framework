@@ -24,7 +24,7 @@
      // This is important to include in __construct function for each controller you create.
      // To get the required method, functions, engines and etc from the base controller.
      parent::__construct();
-
+    
      // Log some text in the Console (YOU MUST USE 'Skytells\Core\Console' NAMESPACE.)
      # Console::log("The Home Controller has been loaded.");
 
@@ -33,8 +33,6 @@
      # echo Cache::get('foo');
 
      // Now, We want to load the model.
-
-
      # $this->load->model('HomeModel', $this);
      # $Users = $this->HomeModel->getUsers();
      # d($Users);

@@ -12,5 +12,6 @@
 Namespace Skytells;
 Class Foundation {
   static $App;
-
+  static $MVC = ['Method' => null, 'Controller' => null];
+  static $ProhibitedMethods = ['__construct', '__destruct'];
  }

@@ -12,6 +12,9 @@
  use Skytells\UI\View;
  Class Controller {
 
+  private $onLoadEvents = [];
+  private $onEndEvents = [];
+
   /**
    * @method __construct
    */
@@ -37,7 +40,6 @@
          $_GET['lang'] =  str_replace(array('../', 'http', '//', 'www', '/', '__DIR__', 'dirname', '\\'), '', $_GET['lang']);
          $_GET['lang'] = htmlspecialchars($_GET['lang'], ENT_IGNORE, 'utf-8');
          $_SESSION[$SISID] = $_GET['lang'];
-
        }
        // FREE UP RAM.
        $_GET['lang'] = null;
@@ -50,6 +52,10 @@
        flush_cache();
      }
 
+     if (!empty($this->onLoadEvents)) { foreach ($this->onLoadEvents as $Event) {
+       $Event();
+       $Event = null;
+     }}
 
    }
 
@@ -57,6 +63,7 @@
    * @method inject
    */
   public function inject($Type, $File, $to = false, $args = [], $newName = '') {
+    if (Skytells\Core\Runtime::isSecured($this, 'AddAlias')) { return false; }
     Kernel::Inject($Type, $File, $to, $args, $newName);
     return $this;
   }
@@ -65,9 +72,9 @@
    * @method AddAlias
    */
   public function AddAlias($File, $to = false, $args = array(), $newName = '') {
+    if (Skytells\Core\Runtime::isSecured($this, 'AddAlias')) { return false; }
     if (!Contains($File,".php")) { $File = $File.'.php'; }
     $Path =  APP_CONTROLLERS_DIR.'Aliases/'.$File;
-
     if (is_object($to)) {
       require $Path;
       $clName = Load::getClassNameFromFile($Path);
@@ -79,7 +86,7 @@
       $refClass = new ReflectionClass($realClassName);
       $to->$OwnerObject = $refClass->newInstanceArgs($args);
     } else { $to->$OwnerObject = new $realClassName; } }else {require $Path;}
-    return true;
+    return $this;
   }
 
 
@@ -88,7 +95,35 @@
    * @description This method detects the classes called by the controller and load it automatically.
    */
   public function autoload() {
+    if (!Skytells\Core\Runtime::isSecured($this, 'autoload'))
     return Skytells\Ecosystem\Payload::serve();
+  }
+
+
+  public function on($event, $function) {
+    if (!Skytells\Core\Runtime::isSecured($this, 'on')) {
+      switch ($event) {
+        case 'load':
+          if (is_callable($function)) { $this->onLoadEvents[] = $function; $function = null; }
+          return $this;
+          break;
+        case 'end':
+            if (is_callable($function)) { $this->onEndEvents[] = $function; $function = null; }
+            return $this;
+          break;
+        default:
+          return $this;
+          break;
+      }
+      return $this;
+    }
+  }
+
+  public function __destruct() {
+      if (!empty($this->onEndEvents)) { foreach ($this->onEndEvents as $Event) {
+        $Event();
+        $Event = null;
+      }}
   }
 
 

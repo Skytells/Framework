@@ -20,7 +20,6 @@ Class Boot {
 
   static $App;
 
-
   public function __construct($_ROUTER = ''){
       $this->loadModules();
       $this->Powerup();
@@ -139,6 +138,8 @@ Class Boot {
             Skytells\Foundation::$App->bind($_ctrlName, $CNamespace.$_ctrlName);
             $_CTR = ${APP_INSTANCE}->make($CNamespace.$_ctrlName);
             if ($_funcName = Payload::getExplosion($_MVURI, 2)){
+              Skytells\Foundation::$MVC['Method'] = $_funcName;
+              Skytells\Foundation::$MVC['Controller'] = $CNamespace.$_ctrlName;
               if ( Payload::isFunctionExist($CNamespace.$_ctrlName, $_funcName) ){
               $this->mvcroute = explode('/', $_MVURI);
               $arguments = array();
@@ -167,6 +168,8 @@ Class Boot {
              Skytells\Foundation::$App->bind($DEFAULT_CONTROLLER, $CNamespace.$DEFAULT_CONTROLLER);
              $_CTR = ${APP_INSTANCE}->make($CNamespace.$DEFAULT_CONTROLLER);
                if ($_funcName = Payload::getExplosion($_MVURI, 1)){
+                 Skytells\Foundation::$MVC['Method'] = $_funcName;
+                 Skytells\Foundation::$MVC['Controller'] = $DEFAULT_CONTROLLER;
                if ( Payload::isFunctionExist($DEFAULT_CONTROLLER, $_funcName) ){
                  $this->mvcroute = explode('/', $_MVURI);
                  $arguments = array();

@@ -122,18 +122,20 @@ Class Payload {
        }
      }
   public static function isFunctionExist($ClassName, $Function, $ReturnType = "Page") {
-          if ( !method_exists($ClassName, $Function) )
-          {
-              if ($ReturnType == "Page") {
-              if (DEVELOPMENT_MODE === true){
-                throw new  \ErrorException("Error: Requested Function [ ".$Function." ] Does not exist in Controller [ $ClassName ]. ", 9);
-                }else{
-                show_404();
-                }
-              }
-                return false;
-          }
-          return true;
+    if (!method_exists($ClassName, $Function) ) {
+      if ($ReturnType == "Page") {
+        if (DEVELOPMENT_MODE === true){
+          throw new  \ErrorException("Error: Requested Function [ ".$Function." ] Does not exist in Controller [ $ClassName ]. ", 9);
+         }else{ show_404(); }
+        }
+        return false;
+     }
+     if (in_array($Function, \Skytells\Foundation::$ProhibitedMethods)) {
+       if (DEVELOPMENT_MODE === true){
+       throw new  \ErrorException("Security Error: Requested Function [ ".$Function." ] defined as Prohibited Method, Which cannot be accessed from the URL, You're seeing this message because development mode is on", 9);
+      }else{ show_404(); }
+     }
+     return true;
    }
 
   public static function Define($NODE) {
@@ -189,5 +191,8 @@ Class Payload {
       }
       return true;
   }
+
+
+
 
 }

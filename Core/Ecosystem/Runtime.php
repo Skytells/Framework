@@ -22,4 +22,15 @@
      $Framework['Runtime'][ucfirst($TYPE).'s'][] = Array('ProccessID' => $ProccessID, 'isLoaded' => true, 'Name' => $Name, 'Type' => ucfirst($TYPE), 'File' => $FILE, 'Timestamp' => microtime(true));
    }
 
+
+   public static function isSecured($Controller, $Method) {
+     $Controller = null;
+     if (\Skytells\Foundation::$MVC['Method'] == $Method) {
+       if (DEVELOPMENT_MODE === true){
+           throw new  \ErrorException("Security Error: Cannot access method ($Method) since its secured & used by SF itself, You're seeing this message because you're in the development mode.", 8);
+       }else{ show_404(); }
+       return true;
+     }
+     return false;
+   }
  }
