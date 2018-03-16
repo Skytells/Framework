@@ -11,7 +11,7 @@
  */
 Namespace App\Controllers\Aliases;
 use Skytells\Core\Console;
-Class Home extends \MyApp {
+Class Home {
   function __construct() {
     Console::log("The Home Aliase Controller has been loaded.");
   }

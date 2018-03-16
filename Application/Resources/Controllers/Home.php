@@ -24,7 +24,7 @@
      // This is important to include in __construct function for each controller you create.
      // To get the required method, functions, engines and etc from the base controller.
      parent::__construct();
-    
+
      // Log some text in the Console (YOU MUST USE 'Skytells\Core\Console' NAMESPACE.)
      # Console::log("The Home Controller has been loaded.");
 
@@ -47,7 +47,7 @@
     * @route /index
     */
    public function index($args = '') {
-
+     
     //  $this->cache->put('test', 'This is loaded from cache.', 500);
     //  echo $this->cache->get('test');
     // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )
@@ -58,17 +58,19 @@
 
     // Assigning Vars :
     # $this->view->assign('foo', 'bar');
-
     // OR : View::render('index.php', array("foo"=>'bar'));
      # View::build(['test.ui.php' => ['foo' => 'bar']]);
      View::render('index.php', array("foo"=>'bar'));
    }
 
+
+
    /**
-     * for fast routing creation, use (@route {URI_PATH})
-     * @route /Hello
-     * @arguments ['arg1' => 'test']
-     */
+    * @method Hello
+    * for fast routing creation, use (@route {URI_PATH})
+    * @route /Hello
+    * @arguments ['arg1' => 'test']
+    */
    public function Hello() {
       // This function created for demo only.
       // Did you know that you can extend you controller with other child controllers?
@@ -76,6 +78,40 @@
       // the following functions.
       $this->AddAlias('Home', $this);
       echo $this->Home->SayHello();
+   }
+
+
+
+
+   /**
+    * @method diggingDeeper
+    * Digging a little deeper, How to perform a safe event functions?
+    */
+   private function diggingDeeper() {
+     $this->on('load', function() {
+       // Perform some event when the Core-base Constractor Function did executed.
+       // Must be called before (parent::__construct)
+     });
+
+     $this->on('end', function() {
+       // Perform some event when the Core-base Distructor Function did executed.
+     });
+
+     $this->on('load')->perform(function() {
+       // Lets Perform a safe function on the CoreBase Constractor
+       // Here's another way to perform such functions
+       // Must be called before (parent::__construct)
+     });
+
+     $this->on('end')->perform(function() {
+       // Lets Perform a safe function on the CoreBase Distructor
+       // Here's another way to perform such functions
+     });
+
+     $this->perform(function() {
+       // Perform a safe function globally
+     });
+
    }
 
  }

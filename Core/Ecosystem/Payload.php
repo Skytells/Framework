@@ -133,7 +133,8 @@ Class Payload {
      if (in_array($Function, \Skytells\Foundation::$ProhibitedMethods)) {
        if (DEVELOPMENT_MODE === true){
        throw new  \ErrorException("Security Error: Requested Function [ ".$Function." ] defined as Prohibited Method, Which cannot be accessed from the URL, You're seeing this message because development mode is on", 9);
-      }else{ show_404(); }
+     }else{ show_404(); return false; }
+      return false;
      }
      return true;
    }

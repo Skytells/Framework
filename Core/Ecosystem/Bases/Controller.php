@@ -14,6 +14,7 @@
 
   private $onLoadEvents = [];
   private $onEndEvents = [];
+  private $currentEvent = null;
 
   /**
    * @method __construct
@@ -45,9 +46,7 @@
        $_GET['lang'] = null;
        $LANG = null;
        $SISID = null;
-
      }
-
      if (isset($_GET['action']) && $_GET['action'] == 'flushcache') {
        flush_cache();
      }
@@ -63,7 +62,7 @@
    * @method inject
    */
   public function inject($Type, $File, $to = false, $args = [], $newName = '') {
-    if (Skytells\Core\Runtime::isSecured($this, 'AddAlias')) { return false; }
+    if (Skytells\Core\Runtime::isSecured($this, 'inject')) { return false; }
     Kernel::Inject($Type, $File, $to, $args, $newName);
     return $this;
   }
@@ -100,23 +99,56 @@
   }
 
 
-  public function on($event, $function) {
+  public function on($event, $function = null) {
     if (!Skytells\Core\Runtime::isSecured($this, 'on')) {
       switch ($event) {
         case 'load':
-          if (is_callable($function)) { $this->onLoadEvents[] = $function; $function = null; }
+          $this->currentEvent = $event;
+          if (is_callable($function) && $function != null) {
+            $this->onLoadEvents[] = $function; $function = null;
+            $this->currentEvent = null;
+            Skytells\Core\Console::log('An Event Function Injected to the Corebase Constructor to be executed at '.gmdate(LOG_DT_FORMAT));
+          }
           return $this;
           break;
         case 'end':
-            if (is_callable($function)) { $this->onEndEvents[] = $function; $function = null; }
-            return $this;
+          if (is_callable($function) && $function != null) {
+            $this->onEndEvents[] = $function; $function = null;
+            $this->currentEvent = null;
+            Skytells\Core\Console::log('An Event Function Injected to the Corebase Distructor to be executed at '.gmdate(LOG_DT_FORMAT));
+          }
+          return $this;
           break;
         default:
+          $this->currentEvent = null;
           return $this;
           break;
       }
       return $this;
     }
+  }
+
+  public function perform($function) {
+    if (Skytells\Core\Runtime::isSecured($this, 'perform')) { return false; }
+    if ($this->currentEvent == 'load') {
+      if (is_callable($function)) { $this->onLoadEvents[] = $function; $function = null; }
+      $this->currentEvent = null;
+      Skytells\Core\Console::log('An Event Function Injected to the Corebase Constructor to be executed at '.gmdate(LOG_DT_FORMAT));
+      return $this;
+    }
+    elseif ($this->currentEvent == 'end') {
+      if (is_callable($function)) { $this->onEndEvents[] = $function; $function = null; }
+      $this->currentEvent = null;
+        Skytells\Core\Console::log('An Event Function Injected to the CoreBase distructor to be executed at '.gmdate(LOG_DT_FORMAT));
+      return $this;
+    }
+    elseif (!in_array($this->currentEvent, ['load', 'end'])) {
+      if (is_callable($function)) { $function(); $function = null; }
+      $this->currentEvent = null;
+      Skytells\Core\Console::log('An Event Function Performed at '.gmdate(LOG_DT_FORMAT));
+      return $this;
+    }
+    return $this;
   }
 
   public function __destruct() {
