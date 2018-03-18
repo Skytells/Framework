@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.7
+ * @version    3.8
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -47,7 +47,7 @@
     * @route /index
     */
    public function index($args = '') {
-     
+
     //  $this->cache->put('test', 'This is loaded from cache.', 500);
     //  echo $this->cache->get('test');
     // Access this function from ( http://www.domain.com/{Framework_FOLDER}/class:{Home}/func:{index}/ )

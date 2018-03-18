@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.7
+ * @version    3.8
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -22,11 +22,11 @@
   // FOLDER OR THE MAIN (WWW), PLEASE LEAVE IT EMPTY OR FILL IT WITH (!),
   // OTHERWISE:-
   // PLEASE WRITE THE NAME OF THE DIRECTORY YOU INSTALLED SKYTELLS FW ON IT.
-  $Settings["ROOT_PATH"]   = '';
+  $Settings["ROOT_PATH"]   = 'Framework';
 
   // PLEASE WRITE THE BASE URL WITHOUT (HTTP, HTTPS OR WWW) WITHOUT END-SLASHES
   // EXAMPLE: Skytells.org/Framework or Skytells.org
-  $Settings["SITEBASE"]   = 'localhost';
+  $Settings["SITEBASE"]   = 'localhost/Framework';
 
 
   // TURN IT TO (TRUE) TO FORCE USING SECURE PROTOCOL (HTTPS)

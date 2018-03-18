@@ -1,7 +1,6 @@
 <?
 require __DIR__.'/Ecosystem/Loader.php';
 require __DIR__ .'/Kernel/Composer/vendor/autoload.php';
-// require __DIR__.'/Kernel/Config.php';
 error_reporting(0);
 if (DEVELOPMENT_MODE === TRUE && IS_CORE_CLI === FALSE && INTELLISENSE_DEBUGGER === TRUE) {
   $BMST=microtime(TRUE);

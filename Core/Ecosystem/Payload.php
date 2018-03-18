@@ -2,6 +2,29 @@
 Namespace Skytells\Ecosystem;
 Class Payload {
 
+  public static function loadInterfaces() {
+    spl_autoload_register(function($class) {
+      $file = ENV_INTERFACES_DIR.$class.'.php';
+      if (file_exists($file)) {
+        require $file;
+      }
+    });
+  }
+
+  public static function loadBases() {
+    spl_autoload_register(function($class) {
+      if (strpos($class, '\\') !== false) {
+        $class = str_replace('\\', '/', $class);
+        $exp = explode("/",$class);
+        $class = end($exp);
+      }
+      $file = ENV_BASES_DIR.$class.'.php';
+      if (file_exists($file)) {
+
+        require $file;
+      }
+    });
+  }
 
   public static function serve() {
     spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadController']);
@@ -13,7 +36,8 @@ Class Payload {
       if (!class_exists($class)) {
         if (strpos($class, '\\') !== false) {
           $class = str_replace('\\', '/', $class);
-          $class = @end(explode("/",$class));
+          $exp = explode("/",$class);
+          $class = end($exp);
         }
         $exterialFile = ENVCORE.'/Ecosystem/Handlers/'.$class.'.php';
         $InternalPath = BASEPATH.'Application/Misc/Handlers/'.$class.'.php';
@@ -26,7 +50,8 @@ Class Payload {
       if (!class_exists($class)) {
         if (strpos($class, '\\') !== false) {
           $class = str_replace('\\', '/', $class);
-          $class = @end(explode("/",$class));
+          $exp = explode("/",$class);
+          $class = end($exp);
         }
         $exterialFile = ENVCORE.'/Ecosystem/Libraries/'.$class.'.php';
         $InternalPath = BASEPATH.'Application/Misc/Libraries/'.$class.'.php';
@@ -38,15 +63,12 @@ Class Payload {
     return true;
   }
 
-
   public static function loadController($className) {
     $filename = APP_CONTROLLERS_DIR . $className . ".php";
     if (is_readable($filename) && !class_exists($className)) {
         require $filename;
     }
   }
-
-
 
   public static function loadModel($className) {
     $filename = APP_MODELS_DIR . $className . ".php";
@@ -64,7 +86,6 @@ Class Payload {
     }
   }
 
-
   public static function loadEloquent($className) {
     $filename = APP_MODELS_DIR .'/Eloquents/'. $className . ".php";
     if (is_readable($filename) && !class_exists($className)) {
@@ -81,17 +102,18 @@ Class Payload {
     }
   }
 
-
   public static function Autoload($Directories) {
       foreach ($Directories as $dir) {
-          foreach(glob($dir .'*.php') as $class) {
+          foreach(glob($dir .'*.php', GLOB_NOSORT) as $class) {
               require $class;
           }
       }
   }
+
   public static function loadConfigManager() {
     require COREDIRNAME.'/Kernel/Config.php';
   }
+
   public static function isClassExist($ClassName, $ReturnType = "Page") {
         if ( !class_exists($ClassName) )
         {
@@ -121,6 +143,7 @@ Class Payload {
          return false;
        }
      }
+
   public static function isFunctionExist($ClassName, $Function, $ReturnType = "Page") {
     if (!method_exists($ClassName, $Function) ) {
       if ($ReturnType == "Page") {
@@ -141,10 +164,9 @@ Class Payload {
 
   public static function Define($NODE) {
     global $Routes, $Settings, $Firewall;
-
     switch ($NODE) {
       case 'ROUTES':
-        foreach ($Routes["CONFIG"] as $Key => $Val) { define("ROUTER_CONFIG_". $Key, $Val); }
+        foreach ($Routes['CONFIG'] as $Key => $Val) { define('ROUTER_CONFIG_'. $Key, $Val); }
         break;
       case 'SETTINGS':
         foreach ($Settings as $Key => $Val) { define($Key, $Val); }
@@ -158,7 +180,6 @@ Class Payload {
     }
   }
 
-
   public static function resolvePreloaded() {
     global $_Preloaded;
     if (!empty($_Preloaded['Handlers'])) {
@@ -171,7 +192,6 @@ Class Payload {
       foreach ($_Preloaded['Libraries'] as $_handler) { \Load::library($_handler); }
     }
   }
-
 
   /**
    * @method ResolveProvider

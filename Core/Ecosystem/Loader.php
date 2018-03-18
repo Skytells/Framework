@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.7
+ * @version    3.8
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -26,7 +26,7 @@
       try {
           $path = ENVCORE.'/Ecosystem/Handlers/';
           $InternalPath = BASEPATH.'Application/Misc/Handlers/';
-          if (!is_dir($path)){ throw new \Exception("The Handlers Folder does not exist in the main Application dir.", 90); return false; }
+          //if (!is_dir($path)){ throw new \Exception("The Handlers Folder does not exist in the main Application dir.", 90); return false; }
           if (!Contains($File, '.php')){ $File = $File.".php"; }
           $TruePath = $path.$File;
           if (!file_exists($TruePath)){
@@ -54,9 +54,8 @@
       catch (Exception $e) { throw new \Exception("Error Processing [Handler] On Loader: " .$e->getMessage(), 1); }
     }
 
-
 		public static function model($File, $setOwner = false, $args = false, $newName = "") {
-    
+
 			$path = BASEPATH.'/Application/Resources/Models/';
       if (!is_dir($path)){ throw new \Exception("The Models Folder does not exist in the main Application dir.", 90); return false; }
       if (!Contains($File, '.php')){ $File = $File.".php"; }
@@ -79,7 +78,6 @@
      // ----------------------------------------------------------------
 		 Runtime::Report('model', $className, $TruePath);
 		}
-
 
     public static function library($File, $setOwner = false, $args = false, $newName = "") {
 			$path = ENVCORE.'/Ecosystem/Libraries/';
@@ -123,8 +121,6 @@
 			require $TruePath;
 		 Runtime::Report('helper', $File, $TruePath);
 		}
-
-
 
     public static function driver($File, $setOwner = false, $args = false, $newName = "") {
 			$path = ENVCORE.'/Ecosystem/Drivers/';
