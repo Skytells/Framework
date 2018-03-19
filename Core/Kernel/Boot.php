@@ -69,7 +69,6 @@ Class Boot {
    * This method loads the internal provider which used by the framework's ecosystem.
    */
   private static function InternalProviders($Container) {
-
     global $OXCache;
     if ($OXCache['ENABLED'] === TRUE) {
     $Container->singleton('cache', function() use($Container) {
@@ -100,7 +99,7 @@ Class Boot {
   private function Powerup($Args = array()) {
     global $Routes, $SF_Modules;
     Router::map('GET|POST', "[*:".ROUTER_CONFIG_DEFAULT_ROUTE_PARAM."]",  function($__MVCallback){
-      if (isset($__MVCallback) && !empty($__MVCallback) && $__MVCallback != ""){
+      if (isset($__MVCallback) && !empty($__MVCallback)){
         $_MVURI = $__MVCallback;
         $CNamespace = (empty(APP_NAMESPACE)) ? '' : APP_NAMESPACE."\\";
         $HomePage = Payload::getExplosion($_MVURI, 1);
@@ -140,6 +139,7 @@ Class Boot {
             if ($_funcName = Payload::getExplosion($_MVURI, 2)){
               Skytells\Foundation::$MVC['Method'] = $_funcName;
               Skytells\Foundation::$MVC['Controller'] = $CNamespace.$_ctrlName;
+              Payload::isMethodAllowed($_funcName);
               if ( Payload::isFunctionExist($CNamespace.$_ctrlName, $_funcName) ){
               $this->mvcroute = explode('/', $_MVURI);
               $arguments = array();
@@ -170,6 +170,7 @@ Class Boot {
                if ($_funcName = Payload::getExplosion($_MVURI, 1)){
                  Skytells\Foundation::$MVC['Method'] = $_funcName;
                  Skytells\Foundation::$MVC['Controller'] = $DEFAULT_CONTROLLER;
+                 Payload::isMethodAllowed($_funcName);
                if ( Payload::isFunctionExist($DEFAULT_CONTROLLER, $_funcName) ){
                  $this->mvcroute = explode('/', $_MVURI);
                  $arguments = array();

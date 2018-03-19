@@ -248,7 +248,7 @@
 
   function getTotalCached()
    {
-     $files = glob(APP_STORAGE_DIR.'/Cache/*');
+     $files = glob(APP_STORAGE_DIR.'/Cache/*', GLOB_NOSORT);
      $i = 0;
      foreach($files as $file){
        if(is_file($file) && !Contains($file, "index.html") && !Contains($file, "log.txt"))
