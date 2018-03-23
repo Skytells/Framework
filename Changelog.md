@@ -12,3 +12,8 @@ Thanks
 - Magic Events Added
 - MagicLoader Added
 - Smart Routing Added
+
+# SF v3.8
+- Easyfy Helper Added
+- Random Handler Added
+- Core fixes

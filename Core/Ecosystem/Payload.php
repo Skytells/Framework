@@ -65,14 +65,14 @@ Class Payload {
 
   public static function loadController($className) {
     $filename = APP_CONTROLLERS_DIR . $className . ".php";
-    if (!class_exists($className)) {
+    if (!class_exists($className) && file_exists($filename)) {
         require $filename;
     }
   }
 
   public static function loadModel($className) {
     $filename = APP_MODELS_DIR . $className . ".php";
-    if (!class_exists($className)) {
+    if (!class_exists($className) && file_exists($filename)) {
         require $filename;
         \Skytells\Core\Runtime::Report('model', $className, $filename);
     }
@@ -80,7 +80,7 @@ Class Payload {
 
   public static function loadAliase($className) {
     $filename = APP_CONTROLLERS_DIR.'/Aliases/' . $className . ".php";
-    if (!class_exists($className)) {
+    if (!class_exists($className) && file_exists($filename)) {
         require $filename;
         \Skytells\Core\Runtime::Report('aliase', $className, $filename);
     }
@@ -88,7 +88,7 @@ Class Payload {
 
   public static function loadEloquent($className) {
     $filename = APP_MODELS_DIR .'/Eloquents/'. $className . ".php";
-    if (!class_exists($className)) {
+    if (!class_exists($className) && file_exists($filename)) {
         require $filename;
         \Skytells\Core\Runtime::Report('eloquent', $className, $filename);
     }
@@ -96,7 +96,7 @@ Class Payload {
 
   public static function loadMigration($className) {
     $filename = APP_MODELS_DIR .'/Migrations/' . $className . ".php";
-    if (!class_exists($className)) {
+    if (!class_exists($className) && file_exists($filename)) {
         require $filename;
         \Skytells\Core\Runtime::Report('migration', $className, $filename);
     }

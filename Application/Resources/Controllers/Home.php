@@ -31,7 +31,7 @@
      // use Skytells\Support\Facades\Cache; to enable Oxide Cache
      # Cache::store('file')->put('foo', 'bar', 100);
      # echo Cache::get('foo');
-
+    
      // Now, We want to load the model.
      # $this->load->model('HomeModel', $this);
      # $Users = $this->HomeModel->getUsers();
