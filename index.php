@@ -20,7 +20,7 @@
   require ENV_ECOSYSTEM_DIR.'/Cache.php';
   $Ca = new Cache(); $Ca->start(); }
   Router::Init();
-  $ROOT_PATH = (ROOT_PATH == '') ? '/' : '/'.ROOT_PATH;
+  $ROOT_PATH = (ROOT_PATH == '') ? '' : '/'.ROOT_PATH;
   Router::setBasePath($ROOT_PATH);
   forceSSLCheck(); $Core = new Boot();
   $match = Router::match();
