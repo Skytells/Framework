@@ -64,3 +64,4 @@
 
      #  Router::map('GET|POST', "/new_route", function($args) { Boot::Controller('Home', 'index', $args); });
      #  Router::assign('/testAssignment', 'Home@index', ['arg1', 'arg2']);
+     #  Router::assign(['/route1', '/route2'], 'Home@index', ['arg1', 'arg2']);
