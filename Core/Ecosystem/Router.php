@@ -47,6 +47,7 @@
 				}
 			public static function Init($routes = array(), $basePath = '', $matchTypes = array() ){
 				Router::addRoutes($routes);
+
 				Router::setBasePath($basePath);
 				Router::addMatchTypes($matchTypes);
 			}
@@ -76,6 +77,7 @@
 			}
 			foreach($routes as $route) {
 				call_user_func_array(array('Router', 'map'), $route);
+
 			}
 		}
 		/**
@@ -114,19 +116,42 @@
 			}
 			return;
 		}
+		public static function endsWith($haystack, $needle)
+		{
+		    $length = strlen($needle);
+		    if ($length == 0) {
+		        return true;
+		    }
 
+		    return (substr($haystack, -$length) === $needle);
+		}
 		public static function assign($route, $Target, $methodArgs = false, $RequestMethod = 'GET|POST')  {
-			Router::map($RequestMethod, $route, function() use($Target, $methodArgs){
-
-				if (strpos($Target, '@') !== false) {
-					$Target = explode('@', $Target);
-					if ($methodArgs !== false) {
-						Boot::Controller($Target[0], $Target[1], $methodArgs);
-					}else {
-						Boot::Controller($Target[0], $Target[1]);
-					}
+			if (is_array($route)) {
+				foreach ($route as $r) {
+					Router::map($RequestMethod, $r, function() use($Target, $methodArgs){
+						if (strpos($Target, '@') !== false) {
+							$Target = explode('@', $Target);
+							if ($methodArgs !== false) {
+								Boot::Controller($Target[0], $Target[1], $methodArgs);
+							}else {
+								Boot::Controller($Target[0], $Target[1]);
+							}
+						}
+					});
 				}
-			});
+			}else{
+				Router::map($RequestMethod, $route, function() use($Target, $methodArgs){
+
+					if (strpos($Target, '@') !== false) {
+						$Target = explode('@', $Target);
+						if ($methodArgs !== false) {
+							Boot::Controller($Target[0], $Target[1], $methodArgs);
+						}else {
+							Boot::Controller($Target[0], $Target[1]);
+						}
+					}
+				});
+			}
 
 		}
 		/**
