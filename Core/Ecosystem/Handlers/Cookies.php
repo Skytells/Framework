@@ -11,15 +11,15 @@
  * @see The Framework's changelog to be always up to date.
  */
  Namespace Skytells\Handlers;
-  Class Cookies
-  {
+  Class Cookies {
+    
     public static function instance() {
         return new Cookies();
       }
     function __construct() {
      }
 
-    public static function set($Key, $Val, $time, $path = null) {
+    public static function set($Key, $Val, $time, $path = "/") {
 
         global $_COOKIE;
         if ($path == null){
@@ -37,11 +37,9 @@
       $Val = $_COOKIE[$Key];
         if ($Protection == true) {
         $Val = htmlspecialchars($Val, ENT_QUOTES, 'UTF-8');
-        if (is_object($db) && get_class($db) == 'mysqli') {
-           $Val = $db->real_escape_string($value);
-        }
-
-        $Val = stripSlashesDeep($Val);
+          if (is_object($db) && get_class($db) == 'mysqli') {
+             $Val = $db->real_escape_string($Val);
+          }
         }
       return $Val;
     }
