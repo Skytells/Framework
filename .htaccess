@@ -20,6 +20,7 @@
     Order allow,deny
     Deny from all
 </Files>
+
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css text/php         application/x-javascript application/javascript
 </IfModule>

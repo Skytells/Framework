@@ -4,7 +4,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.8
+ * @version    3.9
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -13,7 +13,7 @@
   $ENV_STARTUP_TIME=microtime(TRUE);
   $ENVIRONMENT_CONFIG['ENVIRONMENT_PATH'] = "Core";
   $ENVIRONMENT_CONFIG['APPLICATION_PATH'] = "Application";
-  define(BASEPATH, __DIR__.'/', TRUE);
+  define("BASEPATH", __DIR__.'/', TRUE);
   define("IS_CORE_CLI", FALSE);
   require BASEPATH.$ENVIRONMENT_CONFIG['ENVIRONMENT_PATH']."/Global.php";
   if (CACHE_SYS === true) {

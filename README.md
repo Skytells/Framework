@@ -1,7 +1,7 @@
 # Skytells Framework for PHP
 Version 3.7 ( Last Release Version )
 
-Version 3.8 ( Current Development Version )
+Version 3.9 ( Current Development Version )
 
 ![alt tag](https://image.ibb.co/fhYdn6/Screen_Shot_2017_12_20_at_7_39_34_PM.png)
 
@@ -15,9 +15,9 @@ Powered by : Skytells, Inc.
 
 ## Important
 
-Please refer to the [Release Notes](http://developers.skytells.net/framework/release-notes/) for any future updates.
+Please refer to the [Release Notes](https://developers.skytells.net/framework/release-notes/) for any future updates.
 
-Also, Please see the ( <a href='http://developers.skytells.net/framework/'>Framework Guide</a> ) to learn how to use Skytells FW.
+Also, Please see the ( <a href='https://developers.skytells.net/framework/'>Framework Guide</a> ) to learn how to use Skytells FW.
 
 
 
@@ -88,13 +88,13 @@ $ > composer require skytells/framework
 ```
 
 ##### Configuring Framework.
-Please See <a href='http://developers.skytells.net/framework/configuration/'>Configuration manual for more information</a>
+Please See <a href='https://developers.skytells.net/framework/configuration/'>Configuration manual for more information</a>
 
 
 
 ## Framework Guide ( Manual )
 Please refer to the official manual to use this framework correctly.
-<a href='http://developers.skytells.net/framework/'>Framework Guide</a>
+<a href='https://developers.skytells.net/framework/'>Framework Guide</a>
 
 ## Websites Built with Skytells Framework.
 

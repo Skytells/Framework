@@ -16,4 +16,5 @@ Thanks
 # SF v3.8
 - Easyfy Helper Added
 - Random Handler Added
+- Path Helper Added
 - Core fixes

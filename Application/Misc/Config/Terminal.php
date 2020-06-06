@@ -30,7 +30,6 @@ $CLI_CONFIG["HOME_DIRECTORY"] = '';
 
 
 
-
 /**
 *-------------------------- [ CLI COMMAND LINE CONFIG ] --------------------------------------\
 * Here you can add you own commands to the CLI Core, Each command must be registered to

@@ -3,7 +3,7 @@
  * Skytells PHP Framework --------------------------------------------------*
  * @category   Web Development ( Programming )
  * @package    Skytells PHP Framework
- * @version    3.8
+ * @version    3.9
  * @copyright  2007-2018 Skytells, Inc. All rights reserved.
  * @license    MIT | https://www.skytells.net/us/terms .
  * @author     Dr. Hazem Ali ( fb.com/Haz4m )
@@ -12,8 +12,7 @@
  Namespace Skytells\Handlers;
   Class Http {
 
-    function __construct() {
-    }
+    function __construct() { }
 
     /**
      * Determine if this is a secure HTTPS connection

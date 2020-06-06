@@ -62,7 +62,6 @@
         <div class="flex-center position-ref full-height">
 
                 <div class="top-right links">
-
                         <a href="<?=Base();?>">Home</a>
                         <a href="https://developers.skytells.net/framework">Documentation</a>
 
