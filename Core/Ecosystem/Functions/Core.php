@@ -190,6 +190,22 @@
          '/win16/i'              =>  'Windows 3.11',
          '/macintosh|mac os x/i' =>  'Mac OS X',
          '/mac_powerpc/i'        =>  'Mac OS 9',
+         '/mac os x 10.0/i'      =>  'Mac OS X Cheetah',
+         '/mac os x 10.1/i'      =>  'Mac OS X Puma',
+         '/mac os x 10.2/i'      =>  'Mac OS X Jaguar',
+         '/mac os x 10.3/i'      =>  'Mac OS X Panther',
+         '/mac os x 10.4/i'      =>  'Mac OS X Tiger',
+         '/mac os x 10.5/i'      =>  'Mac OS X Leopard',
+         '/mac os x 10.6/i'      =>  'Mac OS X Snow Leopard',
+         '/mac os x 10.7/i'      =>  'Mac OS X Lion',
+         '/mac os x 10.8/i'      =>  'Mac OS X Mountain Lion',
+         '/mac os x 10.9/i'      =>  'Mac OS X Mavericks',
+         '/mac os x 10.10/i'      =>  'Mac OS X Yosemite',
+         '/mac os x 10.11/i'      =>  'Mac OS X El Capitan',
+         '/mac os x 10.12/i'      =>  'macOS Sierra',
+         '/mac os x 10.13/i'      =>  'macOS High Sierra',
+         '/mac os x 10.14/i'      =>  'macOS Mojave',
+         '/mac os x 10.15/i'      =>  'macOS Catalina',
          '/linux/i'              =>  'Linux',
          '/ubuntu/i'             =>  'Ubuntu',
          '/iphone/i'             =>  'iPhone',
@@ -197,7 +213,8 @@
          '/ipad/i'               =>  'iPad',
          '/android/i'            =>  'Android',
          '/blackberry/i'         =>  'BlackBerry',
-         '/webos/i'              =>  'Mobile'
+         '/webos/i'              =>  'Mobile',
+         '/bot|crawl|curl|dataprovider|search|get|spider|find|java|majesticsEO|google|yahoo|teoma|contaxe|yandex|libwww-perl|facebookexternalhit/i' => 'Bot'
      );
      foreach($os_array as $regex => $value) {
          if(preg_match($regex, $_SERVER['HTTP_USER_AGENT'])) {
@@ -214,8 +231,23 @@
   * @return string
   */
  function getIP() {
-     /* handle CloudFlare IP addresses */
-     return (isset($_SERVER["HTTP_CF_CONNECTING_IP"])?$_SERVER["HTTP_CF_CONNECTING_IP"]:$_SERVER['REMOTE_ADDR']);
+   $ipaddress = '';
+   if (getenv('HTTP_CLIENT_IP'))
+       $ipaddress = getenv('HTTP_CLIENT_IP');
+   else if(getenv('HTTP_X_FORWARDED_FOR'))
+       $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+   else if(getenv('HTTP_X_FORWARDED'))
+       $ipaddress = getenv('HTTP_X_FORWARDED');
+   else if(getenv('HTTP_FORWARDED_FOR'))
+       $ipaddress = getenv('HTTP_FORWARDED_FOR');
+   else if(getenv('HTTP_FORWARDED'))
+      $ipaddress = getenv('HTTP_FORWARDED');
+   else if(getenv('REMOTE_ADDR'))
+       $ipaddress = getenv('REMOTE_ADDR');
+   else 
+       $ipaddress = '0.0.0.0';
+       
+  return $ipaddress;
  }
 
 
