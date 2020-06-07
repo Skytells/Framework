@@ -2,12 +2,12 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>
-
     RewriteEngine On
     RewriteRule ^assets/(.*)$ Application/Public/assets/$1 [L]
     RewriteRule ^public/(.*)$ Application/Public/$1 [L]
 
-    # Redirect Trailing Slashes...
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
     # Handle Front Controller...

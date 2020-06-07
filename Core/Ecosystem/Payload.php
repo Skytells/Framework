@@ -127,18 +127,18 @@ Class Payload {
         return true;
    }
 
-  public static function getExplosion($ptr, $id, $trim = true)
+  public static function getExplosion($ptr, $id, $trim = true, $canEndWithSlashes = false)
      {
        if (empty($ptr)){ return false; }
        $__MVURI = explode('/', $ptr);
        if (isset($__MVURI[$id]) && !empty($__MVURI[$id])){
-         $value = $__MVURI[$id];
+           $value = $__MVURI[$id];
            $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
            $value = strip_tags($value);
            $value = stripslashes($value);
            $value = ($trim == true) ? ltrim($value, '/') : $value;
            $value = ($trim == true) ? rtrim($value, '/') : $value;
-         return $value;
+           return $value;
        }else {
          return false;
        }

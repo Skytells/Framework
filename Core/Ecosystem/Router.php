@@ -47,7 +47,6 @@
 				}
 			public static function Init($routes = array(), $basePath = '', $matchTypes = array() ){
 				Router::addRoutes($routes);
-
 				Router::setBasePath($basePath);
 				Router::addMatchTypes($matchTypes);
 			}
@@ -107,6 +106,8 @@
 		 */
 		public static function map($method, $route, $target, $name = null) {
 			Router::$routes[] = array($method, $route, $target, $name);
+			Router::$routes[] = array($method, $route, $target, $name);
+
 			if($name) {
 				if(isset(Router::$namedRoutes[$name])) {
 					throw new \Exception("Can not redeclare route '{$name}'");

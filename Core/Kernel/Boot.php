@@ -127,7 +127,7 @@ Class Boot {
             spl_autoload_register(['Skytells\Ecosystem\Payload', 'loadController']);
             if (Payload::isClassExist($CNamespace.$_ctrlName, 'bool')) {
             $ParentClass = get_parent_class($CNamespace.$_ctrlName);
-            if ($ParentClass != "Controller") {  show_401(); }
+            if ($ParentClass != "Controller") { show_401(); }
             ${APP_INSTANCE} = new Skytells\Container\Container;
             Skytells\Foundation::$App = ${APP_INSTANCE};
             Container::setInstance(Skytells\Foundation::$App);
@@ -153,8 +153,8 @@ Class Boot {
                 }
               }
              Runtime::Report('Controller', $_ctrlName, APP_CONTROLLERS_DIR.$_ctrlName.".php");
-           }else {
-             if (ROUTER_CONFIG_AUTO_RESOLVE_HCM === true) {
+           }else if (ROUTER_CONFIG_AUTO_RESOLVE_HCM === true) {
+
              // If Class Controller is not Exist,
              // Try to Resolve the captured method and bind it to the default controller
              $DEFAULT_CONTROLLER = ROUTER_CONFIG_DEFAULT_CONTROLLER;
@@ -177,8 +177,8 @@ Class Boot {
                  foreach ($this->mvcroute as $key => $val) { if ($key > 1 && !empty($val)) { $arguments[$key] = $val; } }
                   call_user_func_array(array($_CTR, $_funcName), $arguments);
                }
-              Runtime::Report('Controller', $DEFAULT_CONTROLLER, APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php");
-             }
+               Runtime::Report('Controller', $DEFAULT_CONTROLLER, APP_CONTROLLERS_DIR.$DEFAULT_CONTROLLER.".php");
+              }
              }else {
                if (DEVELOPMENT_MODE === true){
                  $_funcName = Payload::getExplosion($_MVURI, 1);
@@ -186,7 +186,7 @@ Class Boot {
                  }else{ show_404(); }
              }
            }
-          }
+
       }
 
     });

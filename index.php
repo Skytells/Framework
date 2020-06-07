@@ -25,7 +25,7 @@
   forceSSLCheck(); $Core = new Boot();
   $match = Router::match();
   if( $match && is_callable( $match['target'] ) ) { call_user_func_array( $match['target'], $match['params'] ); }
-  else { show_404(); }
+  else {  show_404(); }
   if (CACHE_SYS === true) { $Ca->end(); }
   $ENV_END_TIME = microtime(true) - $ENV_STARTUP_TIME;
   DevTools();

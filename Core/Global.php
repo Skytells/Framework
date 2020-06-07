@@ -23,7 +23,6 @@
  foreach(glob(APP_MISC_DIR.'/Config/*.php', GLOB_NOSORT) as $file) { require $file; }
  require __DIR__.'/Kernel/Foundation.php';
  require __DIR__.'/Kernel/Boot.php';
- #  if (count($_Autoload) > 0) { Payload::Autoload($_Autoload); }
   Payload::Define('ROUTES');
   Payload::Define('SETTINGS');
   Payload::Autoload(Array(ENV_FUNCTIONS_DIR));
