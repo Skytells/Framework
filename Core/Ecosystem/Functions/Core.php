@@ -265,14 +265,7 @@
 
 
  function toObject($array) {
-    $object = new stdClass();
-    foreach ($array as $key => $value) {
-        if (is_array($value)) {
-            $value = toObject($value);
-        }
-        $object->$key = $value;
-    }
-    return $object;
+    return json_decode(json_encode($array));
   }
 
 
