@@ -35,12 +35,20 @@ Use Skytells\Core\Runtime;
   * @method assign
   * @return TRUE.
   */
-  public static function assign($key, $value) {
+  public static function assign($key, $value = false) {
     try {
       if (!isset($key)) { throw new \Exception("Error assigning variable: You must bypass the variable.", 1); }
-      if (!isset($value)) { throw new \Exception("Error assigning variable: You must bypass the values.", 1); }
-      View::$OxParses = array_merge(View::$OxParses, array($key => $value));
-      return true;
+      if (is_array($key) || is_object($key)) {
+        if (is_object($key) && json_decode($key) !== false) {
+          $key = json_decode($key, true);
+        }
+        View::$OxParses = array_merge(View::$OxParses, $key);
+        return true;
+      }else {
+        if (!isset($value) || $value == false) { throw new \Exception("Error assigning variable: You must bypass the values.", 1); }
+        View::$OxParses = array_merge(View::$OxParses, array($key => $value));
+        return true;
+      }
     } catch (Exception $e) { throw new \ErrorException("Error Assigning variables: " . $e->getMessage(), 1); }
   }
 
