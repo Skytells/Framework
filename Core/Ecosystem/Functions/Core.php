@@ -127,6 +127,17 @@
     fclose($file);
  }
 
+function datetime($format = 'Y-m-d H:i:s', $Customized = false) {
+   if ($Customized != false) {
+       return gmdate("Y-m-d H:i:s",@strtotime($Customized));
+   }
+   return gmdate($format);
+ }
+
+ function getAgent() {
+   global $_SERVER;
+   return $_SERVER['HTTP_USER_AGENT'];
+ }
 
  function forceSSLCheck() {
    if (FORCE_SSL === TRUE) {
