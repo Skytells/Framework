@@ -217,6 +217,7 @@ function datetime($format = 'Y-m-d H:i:s', $Customized = false) {
          '/mac os x 10.13/i'      =>  'macOS High Sierra',
          '/mac os x 10.14/i'      =>  'macOS Mojave',
          '/mac os x 10.15/i'      =>  'macOS Catalina',
+         '/mac os x 10.16/i'      =>  'macOS Big Sur',
          '/linux/i'              =>  'Linux',
          '/ubuntu/i'             =>  'Ubuntu',
          '/iphone/i'             =>  'iPhone',
