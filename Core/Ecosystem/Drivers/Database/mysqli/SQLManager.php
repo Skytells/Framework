@@ -595,7 +595,7 @@ Class SQLManager
             $columns = '*';
         }
 
-        $column = is_array($columns) ? implode(', ', $columns) : $columns;
+        $column = is_array($columns) ? @implode(', ', $columns) : $columns;
 
         if (strpos($tableName, '.') === false) {
             $this->_tableName = self::$prefix . $tableName;
@@ -603,7 +603,7 @@ Class SQLManager
             $this->_tableName = $tableName;
         }
 
-        $this->_query = 'SELECT ' . implode(' ', $this->_queryOptions) . ' ' .
+        $this->_query = 'SELECT ' . @implode(' ', $this->_queryOptions) . ' ' .
             $column . " FROM " . $this->_tableName;
         $stmt = $this->_buildQuery($numRows);
 
@@ -1100,7 +1100,7 @@ Class SQLManager
                 $customFields[$key] = preg_replace("/[^-a-z0-9\.\(\),_` ]+/i", '', $value);
             }
 
-            $orderByField = 'FIELD (' . $orderByField . ', "' . implode('","', $customFields) . '")';
+            $orderByField = 'FIELD (' . $orderByField . ', "' . @implode('","', $customFields) . '")';
         }
 
         $this->_orderBy[$orderByField] = $orderbyDirection;
@@ -1372,7 +1372,7 @@ Class SQLManager
             return;
         }
 
-        $this->_query = $operation . " " . implode(' ', $this->_queryOptions) . " INTO " . self::$prefix . $tableName;
+        $this->_query = $operation . " " . @implode(' ', $this->_queryOptions) . " INTO " . self::$prefix . $tableName;
         $stmt = $this->_buildQuery(null, $insertData);
         $status = $stmt->execute();
         $this->_stmtError = $stmt->error;
